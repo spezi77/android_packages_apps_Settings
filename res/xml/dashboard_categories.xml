@@ -71,6 +71,36 @@
 
     </dashboard-category>
 
+
+    <!-- spezi77 -->
+    <dashboard-category
+            android:id="@+id/spezi77_section"
+            android:title="@string/header_category_spezi77" >
+
+        <!-- Toolbox -->
+        <dashboard-tile
+            android:id="@+id/toolbox_settings"
+            android:icon="@drawable/ic_settings_toolbox"
+            android:title="@string/toolbox_settings" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.spezi77.toolbox"
+            android:targetClass="com.spezi77.toolbox.Toolbox" />
+        </dashboard-tile>
+
+        <!-- Updater -->
+        <dashboard-tile
+            android:id="@+id/updater_settings"
+            android:icon="@drawable/ic_settings_updater"
+            android:title="@string/updater_settings" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.spezi77.updater"
+            android:targetClass="com.spezi77.updater.Updater" />
+        </dashboard-tile>
+
+    </dashboard-category>
+
     <!-- DEVICE -->
     <dashboard-category
             android:id="@+id/device_section"
