@@ -81,6 +81,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
     private static final String CATEGORY_NAVBAR = "navigation_bar";
 
+    private static final String TRACKBALL_WAKE_TOGGLE = "pref_trackball_wake_toggle";
+
     // Available custom actions to perform on a key press.
     // Must match values for KEY_HOME_LONG_PRESS_ACTION in:
     // frameworks/base/core/java/android/provider/Settings.java
@@ -125,6 +127,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     private Handler mHandler;
     private Context mContext;
+    private CheckBoxPreference mTrackballWake;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -213,6 +216,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } else {
             prefScreen.removePreference(powerCategory);
         }
+
+	mTrackballWake = (CheckBoxPreference) prefScreen.findPreference(TRACKBALL_WAKE_TOGGLE);
+	mTrackballWake.setChecked(Settings.System.getInt(resolver, Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
 
         if (hasHomeKey) {
             if (!res.getBoolean(R.bool.config_show_homeWake)) {
@@ -408,7 +414,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mHomeLongPressAction) {
+	if (preference == mHomeLongPressAction) {
             handleActionListChange(mHomeLongPressAction, newValue,
                     Settings.System.KEY_HOME_LONG_PRESS_ACTION);
             return true;
@@ -569,6 +575,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     Toast.LENGTH_LONG).show();
 
             return true;
+	}else if (preference == mTrackballWake) {
+	    boolean value = mTrackballWake.isChecked();
+	    Settings.System.putInt(getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, value ? 1 : 0);
+	    return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
