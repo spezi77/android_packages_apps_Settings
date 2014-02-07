@@ -4919,4 +4919,8 @@
 
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
+    
+    <!-- Preference label trackball wake -->
+    <string name="pref_trackball_wake_toggle_title">Trackball wake</string>
+    <string name="pref_trackball_wake_toggle_summary">Trackball press wakes device</string>
 </resources>
