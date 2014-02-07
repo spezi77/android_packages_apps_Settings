@@ -1840,6 +1840,8 @@
 
         <activity android:name=".slim.themes.ThemeSettings" />
 
+        <activity android:name=".slim.fragments.PieButtonFragment" />
+
         <activity android:name=".util.ShowBuildProp" />
 
         <activity android:name=".profiles.NFCProfile"

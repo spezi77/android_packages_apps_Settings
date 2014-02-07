@@ -1303,4 +1303,14 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="pie_menu_entries" translatable="false">
+        <item>@string/pie_menu_enable</item>
+        <item>@string/pie_menu_disable</item>
+    </string-array>
+
+    <string-array name="pie_menu_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
 </resources>
