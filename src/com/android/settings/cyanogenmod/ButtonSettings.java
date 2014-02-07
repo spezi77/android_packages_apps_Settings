@@ -60,6 +60,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
     private static final String CATEGORY_POWER_BUTTON = "power_key";
 
+    private static final String TRACKBALL_WAKE_TOGGLE = "pref_trackball_wake_toggle";
+
     // Available custom actions to perform on a key press.
     // Must match values for KEY_HOME_LONG_PRESS_ACTION in:
     // frameworks/base/core/java/android/provider/Settings.java
@@ -96,6 +98,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private ListPreference mVolumeKeyCursorControl;
     private CheckBoxPreference mSwapVolumeButtons;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
+    private CheckBoxPreference mTrackballWake;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,6 +131,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_CAMERA);
         final PreferenceCategory volumeCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_VOLUME);
+
+	mTrackballWake = (CheckBoxPreference) prefScreen.findPreference(TRACKBALL_WAKE_TOGGLE);
+	mTrackballWake.setChecked(Settings.System.getInt(resolver, Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
 
         if (hasHomeKey) {
             if (!res.getBoolean(R.bool.config_show_homeWake)) {
@@ -362,6 +368,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             mCameraMusicControls.setEnabled(!isCameraWakeEnabled);
             mCameraSleepOnRelease.setEnabled(isCameraWakeEnabled);
             return true;
+	} else if (preference == mTrackballWake) {
+	    boolean value = mTrackballWake.isChecked();
+	    Settings.System.putInt(getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, value ? 1 : 0);
+	    return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);

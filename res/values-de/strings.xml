@@ -2045,4 +2045,9 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Foto aufnehmen"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Foto aus Galerie auswählen"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+
+    <!-- Preference label trackball wake -->
+    <string name="pref_trackball_wake_toggle_title">Trackball wake</string>
+    <string name="pref_trackball_wake_toggle_summary">Trackball Betätigung weckt das Gerät</string>
+
 </resources>

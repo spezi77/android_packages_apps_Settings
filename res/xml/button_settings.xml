@@ -22,6 +22,11 @@
         android:title="@string/button_backlight_title"
         android:dialogTitle="@string/button_backlight_title"
         android:persistent="false" />
+	
+   <!-- Add trackball wake -->
+   <CheckBoxPreference android:key="pref_trackball_wake_toggle"
+        android:title="@string/pref_trackball_wake_toggle_title"
+        android:summary="@string/pref_trackball_wake_toggle_summary" />
 
     <!-- Device Specific Bluetooth Input settings -->
     <Preference
