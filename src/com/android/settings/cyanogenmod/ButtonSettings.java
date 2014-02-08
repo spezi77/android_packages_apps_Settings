@@ -266,7 +266,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {if (preference == mHomeLongPressAction) {
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
 	if (preference == mHomeLongPressAction) {
             handleActionListChange(mHomeLongPressAction, newValue,
                     Settings.System.KEY_HOME_LONG_PRESS_ACTION);
@@ -321,7 +321,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             mCameraMusicControls.setEnabled(!isCameraWakeEnabled);
             mCameraSleepOnRelease.setEnabled(isCameraWakeEnabled);
             return true;
-	}else if (preference == mTrackballWake) {
+	} else if (preference == mTrackballWake) {
 	    boolean value = mTrackballWake.isChecked();
 	    Settings.System.putInt(getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, value ? 1 : 0);
 	    return true;
