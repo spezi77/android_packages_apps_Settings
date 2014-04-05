@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -102,6 +103,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mTrackballWake;
     private CheckBoxPreference mDisableNavigationKeys;
 
+    private Handler mHandler;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +140,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
 	mTrackballWake = (CheckBoxPreference) prefScreen.findPreference(TRACKBALL_WAKE_TOGGLE);
 	mTrackballWake.setChecked(Settings.System.getInt(resolver, Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
+
+        mHandler = new Handler();
 
         // Force Navigation bar related options
         mDisableNavigationKeys = (CheckBoxPreference) findPreference(DISABLE_NAV_KEYS);
@@ -442,8 +447,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 	    Settings.System.putInt(getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, value ? 1 : 0);
 	    return true;
         } else if (preference == mDisableNavigationKeys) {
+            mDisableNavigationKeys.setEnabled(false);
             writeDisableNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
             updateDisableNavkeysOption();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mDisableNavigationKeys.setEnabled(true);
+                }
+            }, 1000);
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);

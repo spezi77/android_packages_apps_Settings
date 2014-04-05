@@ -19,6 +19,8 @@ package com.android.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +34,8 @@ import android.preference.PreferenceScreen;
 import android.telephony.MSimTelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.android.settings.deviceinfo.msim.MSimStatus;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -116,7 +120,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
 
         if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
             findPreference(KEY_STATUS).getIntent().setClassName(
-                    "com.android.settings","com.android.settings.deviceinfo.MSimStatus");
+                    getActivity().getPackageName(), MSimStatus.class.getName());
         }
 
         // Remove selinux information if property is not present
@@ -154,8 +158,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
                 PROPERTY_EQUIPMENT_ID);
 
         // Remove Baseband version if wifi-only device
-        if (Utils.isWifiOnly(getActivity())
-                || (MSimTelephonyManager.getDefault().isMultiSimEnabled())) {
+        if (Utils.isWifiOnly(getActivity())) {
             getPreferenceScreen().removePreference(findPreference(KEY_BASEBAND_VERSION));
         }
 
@@ -447,7 +450,13 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         String packageName=matcher.find()?matcher.group(1):null;
         if(packageName != null) {
             try {
-                getPackageManager().getPackageInfo(packageName, 0);
+                PackageInfo pi = getPackageManager().getPackageInfo(packageName,
+                        PackageManager.GET_ACTIVITIES);
+                if (!pi.applicationInfo.enabled) {
+                    Log.e(LOG_TAG,"package "+packageName+" is disabled, hiding preference.");
+                    getPreferenceScreen().removePreference(preference);
+                    return true;
+                }
             } catch (NameNotFoundException e) {
                 Log.e(LOG_TAG,"package "+packageName+" not installed, hiding preference.");
                 getPreferenceScreen().removePreference(preference);
