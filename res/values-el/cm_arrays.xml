@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string-array name="wifi_countrycode_entries">
     <item>Ηνωμένες Πολιτείες</item>
     <item>Καναδάς, Ταϊβάν</item>
@@ -41,11 +41,6 @@
   <string-array name="entries_screentimeout_widget">
     <item>15δ | 1λ | 5λ</item>
     <item>30δ | 2λ | 5λ</item>
-  </string-array>
-  <string-array name="data_usage_cycle_length">
-    <item>Ημερησίως</item>
-    <item>Κάθε εβδομάδα</item>
-    <item>Κάθε μήνα</item>
   </string-array>
   <string-array name="data_usage_cycle_weekdays">
     <item>Κυριακή</item>
