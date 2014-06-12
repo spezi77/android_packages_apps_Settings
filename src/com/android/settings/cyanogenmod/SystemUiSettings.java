@@ -42,14 +42,14 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
     private static final String CATEGORY_EXPANDED_DESKTOP = "expanded_desktop_category";
-    private static final String CATEGORY_NAVBAR = "navigation_bar";
+    private static final String CATEGORY_NAVBAR = "navigation_bar_options";
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";    
     private static final String CUSTOM_RECENT_MODE = "custom_recent_mode";
     private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
 
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;    
-    private CheckBoxPreference mRecentsCustom;
+    private ListPreference mRecentsCustom;
     private CheckBoxPreference mNavigationBarLeftPref;
 
     @Override
@@ -67,10 +67,11 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         // Navigation bar left
         mNavigationBarLeftPref = (CheckBoxPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
 
-        boolean enableRecentsCustom = Settings.System.getBoolean(getContentResolver(), Settings.System.CUSTOM_RECENT, false);
-
-        mRecentsCustom = (CheckBoxPreference) findPreference(CUSTOM_RECENT_MODE);
-        mRecentsCustom.setChecked(enableRecentsCustom);
+        mRecentsCustom = (ListPreference) findPreference(CUSTOM_RECENT_MODE);
+        long recent_state = Settings.System.getLong(getContentResolver(),
+                Settings.System.CUSTOM_RECENT, 0);
+        mRecentsCustom.setValue(String.valueOf(recent_state));
+        mRecentsCustom.setSummary(mRecentsCustom.getEntry());
         mRecentsCustom.setOnPreferenceChangeListener(this);
 
         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
@@ -90,7 +91,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
 
                 if (!Utils.isPhone(getActivity())) {
 		    // Hide navigation bar category
-                    PreferenceScreen navCategory = (PreferenceScreen) findPreference(CATEGORY_NAVBAR);
+                    PreferenceCategory navCategory =
+                            (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
                     navCategory.removePreference(mNavigationBarLeftPref);
                 }
             } else {
@@ -116,16 +118,14 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
             updateExpandedDesktop(value ? 2 : 0);
             return true;
         } else if (preference == mRecentsCustom) { // Enable||disbale Slim Recent
-            boolean value = (Boolean) objValue;
-
-            Settings.System.putBoolean(getActivity().getContentResolver(),
-                    Settings.System.CUSTOM_RECENT, value);
-
-            mRecentsCustom.setChecked(value);
-
-            openSlimRecentsWarning();
-
-            Helpers.restartSystemUI();
+            int val = Integer.parseInt((String) objValue);
+            int index = mRecentsCustom.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_RECENT, val);
+            mRecentsCustom.setSummary(mRecentsCustom.getEntries()[index]);
+            if(index == 2){
+                 openSlimRecentsWarning();
+            }
             return true;
         }
 

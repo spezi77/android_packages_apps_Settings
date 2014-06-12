@@ -234,41 +234,30 @@
     <string name="ad_enable_title">Enable</string>
     <string name="ad_enable_summary_on">Active display enabled</string>
     <string name="ad_enable_summary_off">Active display disabled</string>
-    <string name="ad_bypass_title">Bypass mode</string>
-    <string name="ad_bypass_summary">Pocket mode will launch the lockscreen when no notifications exist</string>
     <string name="ad_text_title">Notification text</string>
     <string name="ad_text_summary">Show the notification text around the ring.</string>
-    <string name="ad_content_title">Custom notification view</string>
-    <string name="ad_content_summary">Use active display style for notification details</string>
-    <string name="ad_annoying_title">Less frequent notification</string>
-    <string name="ad_annoying_summary">Limit the notification to once per time period</string>
-    <string name="ad_double_tap_title">Double tap to sleep</string>
-    <string name="ad_double_tap_summary">Turn screen off with double tap</string>
-    <string name="ad_all_notifications_title">Show ongoing</string>
-    <string name="ad_all_notifications_summary">Show non-clearable notifications</string>
+    <string name="ad_all_notifications_title">All notifications</string>
+    <string name="ad_all_notifications_summary">Show all notifications including ongoing, non-clearable notifications.</string>
     <string name="ad_hide_low_priority_title">Hide low priority</string>
-    <string name="ad_hide_low_priority_summary">Hide notifications marked as low priority</string>
+    <string name="ad_hide_low_priority_summary">Hide low priority notifications such as those from Google Now.</string>
     <string name="ad_pocket_mode_title">Pocket mode</string>
-    <string name="ad_pocket_mode_summary">Show pending notifications after taking the device out of your pocket</string>
-    <string name="ad_redisplay_title">Re-display notifications</string>
+    <string name="ad_pocket_mode_summary">Show active display notifications when you take the device out of your pocket.</string>
+    <string name="ad_redisplay_title">Redisplay notifications</string>
     <string name="ad_timeout_title">Display timeout</string>
-    <string name="ad_threshold_title">Proximity time threshold</string>
-    <string name="ad_threshold_summary">Time the proximity sensor must be covered before active display is shown</string>
+    <string name="ad_turnoff_mode_title">Turn off display</string>
+    <string name="ad_turnoff_mode_summary">Turn off display if the device gets pocketed again and was turned on by Active Display.</string>
+    <string name="ad_threshold_title">Threshold to proximity</string>
     <string name="ad_sunlight_mode_title">Sunlight mode</string>
-    <string name="ad_sunlight_mode_summary">Invert colors in bright environment</string>
-    <string name="ad_turnoff_mode_title">Auto-sleep</string>
-    <string name="ad_turnoff_mode_summary">Put to sleep after woken by pocket mode and returned to the pocket</string>
-    <string name="ad_customizations_title">Advanced settings</string>
-    <string name="ad_excluded_apps_title">Excluded apps</string>
-    <string name="ad_excluded_apps_summary">No notifications will be shown for these apps</string>
-    <string name="ad_privacy_apps_title">Privacy mode</string>
-    <string name="ad_privacy_apps_summary">No details will be shown for notifications from these apps</string>
-    <string name="ad_brightness_title">Display brightness</string>
-    <string name="ad_brightness_summary">Used on manual brightness control</string>
+    <string name="ad_sunlight_mode_summary">Invert the colors when in areas with bright light such as direct sunlight.</string>
+    <string name="ad_customizations_title">Customizations</string>
+    <string name="ad_excluded_apps_title">Excluded applications</string>
+    <string name="ad_excluded_apps_summary">Excluded applications will not show up in active display.</string>
+    <string name="ad_brightness_title">Notification brightness</string>
+    <string name="ad_brightness_summary">Brightness level for displaying notifications\n when automatic brightness is not enabled.</string>
     <string name="ad_show_date_title">Show date</string>
     <string name="ad_show_date_summary">Show the date above the clock</string>
     <string name="ad_show_ampm_title">Show AM/PM</string>
-    <string name="ad_show_ampm_summary">Show AM/PM indicator when using the 12-hour time format</string>
+    <string name="ad_show_ampm_summary">Show AM/PM indicator next to time when using 12hour format</string>
     <string name="ad_redisplay_never">Never</string>
     <string name="ad_redisplay_1m">1 minute</string>
     <string name="ad_redisplay_5m">5 minutes</string>
@@ -289,9 +278,11 @@
     <string name="ad_threshold_3s">3 seconds</string>
     <string name="ad_threshold_4s">4 seconds</string>
     <string name="ad_threshold_5s">5 seconds</string>
-    <string name="ad_pocket_mode_off">Off</string>
-    <string name="ad_pocket_mode_notifications">Notifications only</string>
-    <string name="ad_pocket_mode_always">Always</string>
+    <string name="pocket_mode_off">Disabled</string>
+    <string name="pocket_mode_lockscreen">Show Lockscreen notifications</string>
+    <string name="pocket_mode_active">Turn on Active Display</string>
+    <string name="ad_quiet_hours_title">Quiet hours</string>
+    <string name="ad_quiet_hours_summary">Observe quiet hours settings</string>
 
     <!-- Low battery warning policy -->
     <string name="pref_low_battery_warning_policy_title">Low battery warning</string>
@@ -479,6 +470,7 @@
     <string name="group_applications">Applications</string>
 
     <!-- Navigation bar -->
+    <string name="navigation_bar_category">Navigation bar</string>
     <string name="navigation_bar_left_title">Left handed mode</string>
     <string name="navigation_bar_left_summary">Place the navigation bar on the left side of the screen in landscape mode</string>
     <string name="enable_navigation_bar_title">Enable navigation bar</string>
@@ -1017,8 +1009,11 @@
     <string name="aosb_gps_settings_summary">Modify gps.conf to specific country</string>
 
     <!-- Custom Recent Settings -->
-    <string name="custom_recent_title">Enable Slim Recents</string>
-    <string name="custom_recent_summary">Tick this box to switch between Slim/AOSB RecentApps</string>
+    <string name="custom_recent_title">Switch Between Recents</string>
+    <string name="custom_recent_summary">Tick this list to switch between Stock/AOSB/Slim Recents</string>
+    <string name="stock_recent_title">Stock Android Recents</string>
+    <string name="aosb_recent_title">AOSB Recents</string>
+    <string name="slim_recent_title">Slim Recents</string>
 
     <!-- Kernel Tweaker -->
     <string name="kernel_tweaker_title">Kernel Tweaker</string>
@@ -1066,5 +1061,73 @@
     <string name="power_menu_onthego_title">On-The-Go Mode</string>
     <string name="power_menu_onthego_summary">Show the camera overlay under all windows</string>
 
+    <!-- Statusbar Second Clock -->
+    <string name="clock_use_second">Use second clock</string>
+    <string name="clock_use_second_summary">Show second in clock</string>
+
+    <!-- Lock Gesture settings -->
+    <!-- Security & location settings screen, setting option name -->
+    <string name="lockgesture_change_lock_pattern_label">Change unlock gesture</string>
+    <!-- Security & location settings screen, change unlock gesture screen instruction when the user chooses "Change unlock gesture". We first ask the user toe nter the current pattern, and this is the message seen -->
+    <string name="lockgesture_change_lock_pin_label">Change unlock PIN</string>
+    <!-- Security & location settings screen, change unlock gesture screen instruction when the user chooses "Change unlock gesture". We first ask the user toe nter the current pattern, and this is the message seen -->
+    <string name="lockgesture_need_to_unlock">Confirm saved gesture</string>
+    <!-- Do not translate. -->
+    <string name="lockgesture_need_to_unlock_footer" />
+    <!-- Security & location settings screen, change unlock gesture screen instruction if user draws incorrect pattern -->
+    <string name="lockgesture_need_to_unlock_wrong">Try again:</string>
+    <!-- Do not translate. -->
+    <string name="lockgesture_need_to_unlock_wrong_footer" />
+    <!-- Security & location settings screen, change unlock gesture screen instruction on top of screen. This si when they are supposed to draw a new unlock pattern (for example, if they are changing their unlock patterns)..-->
+    <string name="lockgesture_recording_intro_header">Draw an unlock gesture:</string>
+    <!-- Security & location settings screen, change unlock gesture screen hint on bottom of screen. We are telling them to press the menu button to see more options or help. -->
+    <string name="lockgesture_recording_intro_footer">Press Menu for help.</string>
+    <!-- Security & location settings screen, change unlock gesture screen instruction on top of screen while drawing pattern -->
+    <string name="lockgesture_recording_inprogress">Release finger when done.</string>
+    <!-- Security & location settings screen, change unlock gesture screen message on top of screen after drawing pattern -->
+    <string name="lockgesture_pattern_entered_header">Gesture recorded.</string>
+    <!-- Security & location settings screen, change unlock gesture screen instruction on top of screen to confirm pattern -->
+    <string name="lockgesture_need_to_confirm">Draw gesture again to confirm:</string>
+    <string name="lockgesture_pattern_confirmed_header">Your new unlock gesture:</string>
+    <!-- Security & location settings screen, change unlock gesture screen button, on bottom of screen. After they draw a gesture and release their finger, we display the pattern so they remember. When they are ready to draw it once again to confirm it, they press this button. -->
+    <string name="lockgesture_confirm_button_text">Confirm</string>
+    <!-- Security & location settings screen, change unlock gesture screen button, on bottom of screen. After they draw a gesture and release their finger, we display the pattern so they remember. If they are nto satisfied with this pattern, they click this button to redraw the pattern. -->
+    <string name="lockgesture_restart_button_text">Redraw</string>
+    <!-- Security & location settings screen, change unlock gesture screen button, on bottom of screen. If they are supposed to enter their current gesture before being able to draw another one, and they screw up, they hit this button to try again -->
+    <string name="lockgesture_retry_button_text">Retry</string>
+    <!-- Security & location settings screen, change unlock gesture screen button, on bottom of screen. Once they draw a new gesture and confirm it by drawing it again, they press this button to exit -->
+    <string name="lockgesture_continue_button_text">Continue</string>
+    <!-- Security & location settings screen, unlock screen activity title -->
+    <string name="lockgesture_settings_title">Unlock gesture</string>
+    <!-- Security & location settings screen, setting check box title if the unlock pattern MUST be drawn everytime they turn on the screen -->
+    <string name="lockgesture_settings_enable_title">Require gesture</string>
+    <!-- Security & location settings screen, setting summary for the checkbox "Require pattern" -->
+    <string name="lockgesture_settings_enable_summary">Must draw gesture to unlock screen</string>
+   <!-- Security & location settings screen, setting check box title. This setting controls whether a visible gesture is drawn as the user moves his finger around while drawing the unlock pattern. If checked, this line is drawn. If unchecked, there is nothing drawn so the user does not reveal his pattern while he unlocks the phone.-->
+    <string name="lockgesture_settings_enable_visible_pattern_title">Make gesture visible</string>
+    <!-- Security & location settings screen, setting check box title. This controls whether the device locks immediately when the power button is pressed. [CHAR LIMIT=28]-->
+    <string name="lockgesture_settings_enable_power_button_instantly_locks">Power button instantly locks</string>
+    <!-- Security & location settings screen, setting option name when user has never set an unlock gesture -->
+    <string name="lockgesture_settings_choose_lock_pattern">Set unlock gesture</string>
+    <!-- Security & location settings screen, setting option name when user has previously set an unlock gesture and wants to change to a new pattern -->
+    <string name="lockgesture_settings_change_lock_pattern">Change unlock gesture</string>
+    <!-- Security & location settings screen, the help instructions (an animation) caption -->
+    <string name="lockgesture_settings_help_how_to_record">How to draw an unlock gesture</string>
+    <!-- Security & location settings screen, change unlock gesture screen instruction on top of screen after too many incorrect attempts -->
+    <string name="lockgesture_too_many_failed_confirmation_attempts_header">Too many incorrect attempts!</string>
+    <!-- Security & location settings screen, change unlock gesture screen countdown hint on bottom of screen after too many incorrect attempts -->
+    <string name="lockgesture_too_many_failed_confirmation_attempts_footer">Try again in <xliff:g id="number">%d</xliff:g> seconds.</string>
+    <!-- Toast shown if setting gesture was successful -->
+    <string name="lockpassword_gesture_set_toast">Gesture has been set</string>
+    <!-- Header on gesture confirm screen [CHAR LIMIT=30] -->
+    <string name="lockpassword_confirm_your_gesture_header">Confirm your gesture</string>
+    <!-- Header on first screen of choose gesture flow [CHAR LIMIT=30] -->
+    <string name="lockpassword_choose_your_gesture_header">Draw your gesture</string>
+    <!-- Title for preference that guides the user through creating an unlock gesture [CHAR LIMIT=22] -->
+    <string name="unlock_set_unlock_gesture_title">Gesture</string>
+    <!-- Title for preference that guides the user through creating an unlock gesture [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_gesture_summary">Low security, experimental</string>
+    <!-- Summary for "Configure lockscreen" when security gesture is enabled [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_gesture">Gesture</string>
 
 </resources>

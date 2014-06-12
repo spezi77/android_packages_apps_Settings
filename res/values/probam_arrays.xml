@@ -378,9 +378,9 @@
 
     <!-- Activ display pocket mode -->
     <string-array name="ad_pocket_mode_entries" translatable="false">
-        <item>@string/ad_pocket_mode_off</item>
-        <item>@string/ad_pocket_mode_notifications</item>
-        <item>@string/ad_pocket_mode_always</item>
+        <item>@string/pocket_mode_off</item>
+        <item>@string/pocket_mode_lockscreen</item>
+        <item>@string/pocket_mode_active</item>
     </string-array>
 
     <string-array name="ad_pocket_mode_values" translatable="false">
@@ -1245,4 +1245,18 @@
         <item>@string/peek_wake_20seconds</item>
         <item>@string/peek_wake_30seconds</item>
     </string-array>
+
+    <!-- Custom Recent Settings -->
+    <string-array name="custom_recent_entries" translatable="false">
+        <item>@string/stock_recent_title</item>
+        <item>@string/aosb_recent_title</item>
+        <item>@string/slim_recent_title</item>
+    </string-array>
+
+    <string-array name="custom_recent_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>
