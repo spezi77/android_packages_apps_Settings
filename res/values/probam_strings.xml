@@ -285,6 +285,8 @@
     <string name="pocket_mode_active">Turn on Active Display</string>
     <string name="ad_quiet_hours_title">Quiet hours</string>
     <string name="ad_quiet_hours_summary">Observe quiet hours settings</string>
+    <string name="ad_double_tap_title">Double tap to sleep</string>
+    <string name="ad_double_tap_summary">Turn screen off with double tap</string>
 
     <!-- Low battery warning policy -->
     <string name="pref_low_battery_warning_policy_title">Low battery warning</string>
@@ -986,6 +988,7 @@
     <string name="battery_saver_network_gsm_title">GSM Networks</string>
     <string name="battery_saver_network_cdma_title">CDMA Networks</string>
     <string name="battery_saver_system_title">System options</string>
+    <string name="title_tile_batterysaver">PowerSaver mode</string>
 
     <!-- Toast Animation -->
     <string name="toast_animation_title">Toast Animation</string>
@@ -1132,4 +1135,9 @@
     <!-- Summary for "Configure lockscreen" when security gesture is enabled [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_gesture">Gesture</string>
 
+    <!--Blacklist peek and floating mode-->
+    <string name="blacklist_button_title">Blacklist</string>
+    <string name="peek_blacklist_label">Blacklist from Peek</string>
+    <string name="floating_blacklist_label">Blacklist from Floating Mode</string>
+    <string name="hover_blacklist_label">Blacklist from Hover</string>
 </resources>
