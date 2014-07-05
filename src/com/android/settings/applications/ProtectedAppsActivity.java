@@ -32,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ProtectedAppsActivity extends Activity {
     private static final int REQ_ENTER_PATTERN = 1;
+    private static final int REQ_RESET_PATTERN = 2;
 
     private ListView mListView;
 
@@ -147,6 +148,8 @@ public class ProtectedAppsActivity extends Activity {
                         break;
                 }
                 break;
+            case REQ_RESET_PATTERN:
+                mWaitUserAuth = true;
         }
     }
 
@@ -172,17 +175,10 @@ public class ProtectedAppsActivity extends Activity {
     }
 
     private void resetLock() {
-        // Clear out the saved pattern lock
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.remove(LockPatternActivity.PATTERN_LOCK_PROTECTED_APPS);
-        editor.commit();
-
-        // Reset this activity
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+        mWaitUserAuth = false;
+        Intent lockPattern = new Intent(LockPatternActivity.RECREATE_PATTERN, null,
+                this, LockPatternActivity.class);
+        startActivityForResult(lockPattern, REQ_RESET_PATTERN);
     }
 
     private List<AppEntry> refreshApps() {
@@ -252,6 +248,8 @@ public class ProtectedAppsActivity extends Activity {
         @Override
         protected void onPreExecute() {
             mDialog.setMessage(getResources().getString(R.string.saving_protected_components));
+            mDialog.setCancelable(false);
+            mDialog.setCanceledOnTouchOutside(false);
             mDialog.show();
         }
 
@@ -273,12 +271,8 @@ public class ProtectedAppsActivity extends Activity {
                     components += cn.flattenToShortString() + "|";
                 }
 
-                ProtectedAppsReceiver.protectedAppComponents(components.split("\\|"),
-                        appList.protect, mContext);
-                ProtectedAppsReceiver.updateSettingsSecure(components.split("\\|"),
-                        appList.protect, mContext);
-                ProtectedAppsReceiver.notifyProtectedChanged(components,
-                        appList.protect, mContext);
+                ProtectedAppsReceiver.protectedAppComponentsAndNotify
+                        (components, appList.protect, mContext);
             }
 
             return null;

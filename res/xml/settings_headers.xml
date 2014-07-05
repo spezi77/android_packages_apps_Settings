@@ -134,6 +134,13 @@
         android:icon="@drawable/ic_aosb_halo" 
         android:title="@string/halo_settings_title" />
 
+    <!-- Hover -->
+    <header
+        android:id="@+id/hover_settings"
+        android:icon="@drawable/ic_settings_hover"
+        android:fragment="com.android.settings.crdroid.HoverSettings"
+        android:title="@string/hover_settings_title" />
+
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />
@@ -165,6 +172,16 @@
         android:fragment="com.android.settings.deviceinfo.Memory"
         android:icon="@drawable/ic_settings_storage"
         android:title="@string/storage_settings" />
+
+    <!-- Partition info -->
+    <header
+        android:icon="@drawable/ic_tab_selected_sdcard"
+        android:title="@string/partition_info_title">
+        <intent
+            android:action="com.android.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.PartitionInfo" />
+    </header>
 
     <!-- Battery -->
     <header
@@ -200,14 +217,6 @@
         android:id="@+id/manufacturer_settings">
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
-
-    <!-- Other device controls -->
-    <header
-        android:id="@+id/more_device_settings"
-        android:title="@string/more_device_controls_title"
-        android:breadCrumbTitle="@string/more_device_settings_title"
-        android:fragment="com.android.settings.cyanogenmod.MoreDeviceSettings"
-        android:icon="@drawable/empty_icon" />
 
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"

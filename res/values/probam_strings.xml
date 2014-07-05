@@ -3,6 +3,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- General strings -->
+    <string name="ok">OK</string>
     <string name="reset">Reset</string>
     <string name="enabled">Enabled</string>
     <string name="attention">Attention</string>
@@ -11,6 +12,7 @@
     <string name="additional_options_title">Additional options</string>
     <string name="reset_message">Reset all entries to default?</string>
     <string name="style_title">Style</string>
+    <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="probam_changelog_title">AOSB Changelogs</string>
     <string name="note">NOTE</string>
@@ -1014,8 +1016,10 @@
     <string name="aosb_gps_settings_summary">Modify gps.conf to specific country</string>
 
     <!-- Custom Recent Settings -->
+    <string name="custom_recent_cat">Recent Customizer</string>
     <string name="custom_recent_title">Switch Between Recents</string>
     <string name="custom_recent_summary">Tick this list to switch between Stock/AOSB/Slim Recents</string>
+    <string name="custom_recents_options">Recent Tweaks Options</string>
     <string name="stock_recent_title">Stock Android Recents</string>
     <string name="aosb_recent_title">AOSB Recents</string>
     <string name="slim_recent_title">Slim Recents</string>
@@ -1140,4 +1144,87 @@
     <string name="peek_blacklist_label">Blacklist from Peek</string>
     <string name="floating_blacklist_label">Blacklist from Floating Mode</string>
     <string name="hover_blacklist_label">Blacklist from Hover</string>
+
+    <!--HTC Recent Style-->
+    <string name="htc_recent_style_title">HTC Style with Reflection Effect</string>
+    <string name="htc_recent_style_summary">tick this box for enable HTC style instead of iOS flat</string>
+
+    <!-- Lockscreen style settings -->
+    <string name="lockscreen_style_reset_message">Reset all lockscreen colors?</string>
+    <string name="lockscreen_icon_title">Lock handle icon</string>
+    <string name="lockscreen_lock_icon_custom">Custom icon</string>
+    <string name="lockscreen_lock_icon_default">Default icon</string>
+    <string name="lockscreen_colorize_handle_title">Colorize custom handle</string>
+    <string name="lockscreen_colorize_handle_summary">Lock color will be set to your custom image</string>
+    <string name="lockscreen_style_title">Theme style</string>
+    <string name="lockscreen_frame_color_title">Frame color</string>
+    <string name="lockscreen_frame_color_summary">Color of the widget and unlock frames</string>
+    <string name="lockscreen_lock_color_title">Lock color</string>
+    <string name="lockscreen_lock_color_summary">Color of the lock handles</string>
+    <string name="lockscreen_dots_color_title">Dots color</string>
+    <string name="lockscreen_dots_color_summary">Color of the glowpad dots</string>
+    
+    <!-- Slims Strings (Temporary) -->
+    <string name="shortcut_image_not_valid">The chosen app did not return a valid icon or does not support image cropping. Use another app.</string>
+
+    <!-- Partition Info -->
+    <string name="partition_info_title">Partition info</string>
+    <string name="partition_info_system">/system</string>
+    <string name="partition_info_data">/data</string>
+    <string name="partition_info_cache">/cache</string>
+    <string name="partition_info_sdcard">/sdcard (FAT)</string>
+    <string name="partition_info_sdext">/sd-ext (EXT)</string>
+    <string name="partition_info_used_of">/</string>
+
+    <!-- Hover settings -->
+    <string name="hover_settings_title">Hover</string>
+    <string name="hover_require_fullscreen_mode_title">Require Fullscreen-Mode</string>
+    <string name="hover_require_fullscreen_mode_summary">Only show up when StatusBar is hidden</string>
+    <string name="hover_exclude_low_priority_title">Exclude low priority</string>
+    <string name="hover_exclude_low_priority_summary">Exclude notifications marked as low priority</string>
+    <string name="hover_exclude_non_clearable_title">Exclude non-clearable</string>
+    <string name="hover_exclude_non_clearable_summary">Exclude not dismissable notifications</string>
+
+    <!-- Hover long fade out delay -->
+    <string name="hover_long_fadeout_title">Hover notification time</string>
+    <string name="hover_long_fadeout_3seconds">3 seconds</string>
+    <string name="hover_long_fadeout_5seconds">5 seconds (default)</string>
+    <string name="hover_long_fadeout_7seconds">7 seconds</string>
+    <string name="hover_long_fadeout_10seconds">10 seconds</string>
+    <string name="hover_long_fadeout_15seconds">15 seconds</string>
+
+    <!-- Hover exclude topmost app -->
+    <string name="hover_exclude_topmost_title">Exclude topmost app</string>
+    <string name="hover_exclude_topmost_summary">Exclude notifications from the app running in foreground</string>
+
+    <!-- Lockscreen Torch settings -->
+    <string name="lockscreen_glowpad_torch_title">Slider torch</string>
+    <string name="lockscreen_glowpad_torch_summary">Double-tap and hold the slider to start torch</string>
+
+    <!-- Notification Reminders -->
+    <string name="noti_reminder_category">Notification reminder</string>
+    <string name="noti_reminder_enable_title">Enable notification reminder</string>
+    <string name="noti_reminder_sound_title">Notify sound</string>
+    <string name="noti_reminder_sound_looping">Until dismissed</string>
+    <string name="noti_reminder_ringtone">Notify ringtone</string>
+    <string name="noti_reminder_interval">Flip interval</string>
+    <string name="noti_reminder_interval_1s">1 second</string>
+    <string name="noti_reminder_interval_1dot5s">1.5 seconds</string>
+    <string name="noti_reminder_interval_2s">2 seconds</string>
+    <string name="noti_reminder_interval_2dot5s">2.5 seconds</string>
+    <string name="noti_reminder_interval_3s">3 seconds</string>
+    <string name="noti_reminder_interval_3dot5s">3.5 second</string>
+    <string name="noti_reminder_interval_4s">4 seconds</string>
+
+    <!-- Bubble Recents -->
+    <string name="bubble_recent_title">About Bubble</string>
+    <string name="bubble_recent_summary">that enables dynamic callback to check last call detail on a single click OR open the contact card when you click it twice (double tap), switch between the modes set CallLogs OR Starred contacts in recents.</string>
+    <string name="bubble_mode_title">Recent Bubble Mode</string>
+    <string name="bubble_recent_disable">Disable Recent Bubble</string>
+    <string name="bubble_recent_fav">Starred Mode</string>
+    <string name="bubble_recent_star">Call Logs Mode</string>
+	
+    <!-- fast charge + otouch tiles  -->
+    <string name="title_tile_fast_charge">Fast charge</string>
+    <string name="title_tile_otouch">O-Touch</string>
 </resources>
