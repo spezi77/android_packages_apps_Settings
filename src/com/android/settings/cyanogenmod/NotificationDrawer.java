@@ -48,6 +48,7 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
     private ListPreference mCollapseOnDismiss;
     private CheckBoxPreference mStatusBarCustomHeader;
     private CheckBoxPreference mFullScreenDetection;
+    private Preference mHeadsUp;
 
     CheckBoxPreference mReminder;
     ListPreference mReminderMode;
@@ -59,7 +60,8 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.notification_drawer);
-        PreferenceScreen prefScreen = getPreferenceScreen();
+
+        mHeadsUp = findPreference(Settings.System.HEADS_UP_NOTIFICATION);
 
         // Notification drawer
         int collapseBehaviour = Settings.System.getInt(getContentResolver(),
@@ -115,6 +117,16 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
         mReminderRingtone.setSummary(alert.getTitle(getActivity()));
         mReminderRingtone.setOnPreferenceChangeListener(this);
         mReminderRingtone.setEnabled(mode != 0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        boolean headsUpEnabled = Settings.System.getInt(
+                getContentResolver(), Settings.System.HEADS_UP_NOTIFICATION, 0) == 1;
+        mHeadsUp.setSummary(headsUpEnabled
+                ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {

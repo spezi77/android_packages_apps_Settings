@@ -110,6 +110,25 @@
         android:title="@string/aosb_tweaks_title">
 
 	   <PreferenceScreen
+		android:key="interface_voice_tts"
+		android:icon="@drawable/ic_settings_driving"
+		android:title="@string/voice_tts_title"
+		android:fragment="com.android.settings.aicp.TtsNotification" />
+
+	   <PreferenceScreen
+		android:id="@+id/wakelock_blocker"
+		android:layout="@layout/preference_wakelockblocker"
+		android:icon="@drawable/ic_settings_wakelock_blocker"
+		android:title="@string/wakelock_blocker"
+		android:fragment="com.android.settings.du.WakeLockBlocker" />
+
+	   <PreferenceScreen
+		android:id="@+id/weather"
+		android:title="@string/weather_settings_title"
+		android:icon="@drawable/ic_aicp_weather"
+		android:fragment="com.android.settings.aicp.Weather" />
+
+	   <PreferenceScreen
 		android:key="screen_recorder"
 		android:icon="@drawable/ic_aosb_recorder"
 		android:title="@string/screen_recorder_title"
@@ -184,6 +203,58 @@
                 android:title="@string/expanded_desktop_system_bars_visibility"
                 android:summary="@string/expanded_desktop_system_bars_visibility_summary"
                 android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="category_app_circle_bar"
+        android:title="@string/category_app_circle_bar_title">
+
+        <CheckBoxPreference
+            android:key="enable_app_circle_bar"
+            android:title="@string/app_circle_bar_title"
+            android:summary="@string/app_circle_bar_summary" />
+
+        <com.android.settings.crdroid.AppMultiSelectListPreference
+            android:key="app_circle_bar_included_apps"
+            android:persistent="false"
+            android:title="@string/app_circle_bar_included_apps_title"
+            android:summary="@string/app_circle_bar_included_apps_summary"
+            android:dependency="enable_app_circle_bar" />
+
+        <com.android.settings.crdroid.SeekBarPreferenceChOS
+            android:key="trigger_width"
+            android:title="@string/trigger_width_title"
+            android:summary="@string/trigger_width_summary"
+            android:defaultValue="4"
+            android:max="64"
+            settings:min="4"
+            settings:unitsLeft=""
+            settings:unitsRight="px"
+            android:dependency="enable_app_circle_bar" />
+
+        <com.android.settings.crdroid.SeekBarPreferenceChOS
+            android:key="trigger_top"
+            android:title="@string/trigger_top_title"
+            android:summary="@string/trigger_top_summary"
+            android:defaultValue="0"
+            android:max="99"
+            settings:min="0"
+            settings:unitsLeft=""
+            settings:unitsRight="%"
+            android:dependency="enable_app_circle_bar" />
+
+        <com.android.settings.crdroid.SeekBarPreferenceChOS
+            android:key="trigger_bottom"
+            android:title="@string/trigger_bottom_title"
+            android:summary="@string/trigger_bottom_summary"
+            android:defaultValue="100"
+            android:max="100"
+            settings:min="1"
+            settings:unitsLeft=""
+            settings:unitsRight="%"
+            android:dependency="enable_app_circle_bar" />
 
     </PreferenceCategory>
 
