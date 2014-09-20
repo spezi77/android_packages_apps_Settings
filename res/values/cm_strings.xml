@@ -107,6 +107,7 @@
     <!-- Search -->
     <string name="settings_search_action_bar_button">Search</string>
     <string name="settings_search_autocompleteview_hint">Search settings</string>
+    <string name="settings_search_loading_text">Loading search data\u2026</string>
 
     <!-- Profile Config screen PreferenceGroup titles -->
     <string name="profile_connectionoverrides_title">Connection overrides</string>
@@ -126,6 +127,8 @@
     <string name="profile_trigger_connect">On connect</string>
     <string name="profile_trigger_disconnect">On disconnect</string>
     <string name="profile_trigger_notrigger">No trigger</string>
+    <string name="profile_trigger_a2dp_connect">On A2DP connect</string>
+    <string name="profile_trigger_a2dp_disconnect">On A2DP disconnect</string>
 
     <!-- Profile Settings sound modes labels -->
     <string name="sound_mode">Notification mode</string>
@@ -230,6 +233,10 @@
     <string name="adaptive_backlight_title">Adaptive backlight</string>
     <string name="adaptive_backlight_summary">Dynamically adjust the brightness of the display\'s backlight to maximize battery life while maintaining usability</string>
 
+    <!-- Sunlight readability enhancement screen -->
+    <string name="sunlight_enhancement_title">Sunlight enhancement</string>
+    <string name="sunlight_enhancement_summary">Enhance display brightness and readability under bright sunlight</string>
+
     <!-- Color enhancement settings screen -->
     <string name="color_enhancement_title">Color enhancement</string>
     <string name="color_enhancement_summary">Dynamically enhance the color of the display</string>
@@ -274,6 +281,10 @@
     <string name="battery_light_medium_color_title">Charging</string>
     <string name="battery_light_full_color_title">Fully charged</string>
 
+    <!-- Protected apps lockpattern reset button -->
+    <string name="lockpattern_reset_button">Reset pattern</string>
+    <string name="lockpattern_settings_reset_summary">Enter primary email account and associated password to reset pattern lock</string>
+
     <!-- Sizes for pattern lockscreen -->
     <string name="lock_pattern_size_3" translatable="false">3x3</string>
     <string name="lock_pattern_size_4" translatable="false">4x4</string>
@@ -288,6 +299,8 @@
     <!-- Screen security -->
     <string name="screen_security_category">Screen security</string>
     <string name="screen_security_summary">View or change lock screen security settings</string>
+    <string name="unlock_scramble_pin_layout_title">Scramble layout</string>
+    <string name="unlock_scramble_pin_layout_summary">Scramble PIN layout when unlocking device</string>
     <string name="unlock_menu_unlock_title">Menu unlock</string>
     <string name="unlock_menu_unlock_summary">Pressing the menu button unlocks the device</string>
     <string name="unlock_home_unlock_title">Home unlock</string>
@@ -465,7 +478,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Advanced reboot options -->
     <string name="advanced_reboot_title">Advanced reboot</string>
-    <string name="advanced_reboot_summary">When unlocked, include options in the power menu for rebooting into recovery or bootloader</string>
+    <string name="advanced_reboot_summary">When unlocked, include options in the power menu for rebooting into recovery, bootloader or performing a soft reboot</string>
 
     <string name="app_security_title">App security</string>
 
@@ -623,13 +636,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="kill_app_longpress_back_summary">Kill the foreground app by long pressing the back button</string>
 
     <!-- Change Log strings -->
-    <string name="changelog_title">View changelog</string>
+    <string name="changelog_title">Changelog</string>
     <string name="changelog_loading">Loading changelog\u2026</string>
     <string name="changelog_error">Unable to load changelog</string>
     <string name="changelog_unknown">Unknown</string>
     <string name="changelog_version">Version</string>
 
-    <string name="contributor_cloud_title">View contributors</string>
+    <string name="contributor_cloud_title">Contributors</string>
 
     <!-- CM Updater -->
     <string name="cmupdate_settings_title">CyanogenMod updates</string>
@@ -689,6 +702,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="blacklist_regex_summary">Use . as a wildcard and * for repetition. E.g. 123.* blocks numbers starting with 123 and .*123.* blocks numbers containing 123</string>
     <string name="blacklist_policy_block_calls">Block incoming calls</string>
     <string name="blacklist_policy_block_messages">Block incoming messages</string>
+    <string name="blacklist_bad_number_add">Unable to add invalid number to blacklist</string>
 
     <!-- Blacklist management -->
     <string name="add_blacklist_number">Add number</string>
@@ -745,9 +759,18 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- tap-to-wake -->
     <string name="double_tap_to_wake_title">Double-tap to wake</string>
 
+    <!-- tap-to-sleep -->
+    <string name="double_tap_to_sleep_title">Double-tap to sleep</string>
+    <string name="double_tap_to_sleep_summary">Double tap status bar or lock screen slider to put the device to sleep</string>
+
+    <!-- Proximity wake -->
+    <string name="proximity_wake_title">Prevent accidental wake-up</string>
+    <string name="proximity_wake_summary">Check the proximity sensor prior to waking up screen</string>
+
     <!-- Quick access ribbon -->
     <string name="category_quick_access">Quick Access ribbon</string>
     <string name="title_quick_access">Show in drawer</string>
+    <string name="title_quick_access_size">Size of ribbon bar</string>
     <string name="title_quick_access_linked">Linked layout</string>
     <string name="summary_quick_access_linked">Use the same tiles and layout as the Quick Settings panel</string>
 
@@ -910,7 +933,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="hardware_keys_action_search">Search assistant</string>
     <string name="hardware_keys_action_voice_search">Voice search</string>
     <string name="hardware_keys_action_in_app_search">In-app search</string>
-    <string name="hardware_keys_action_launch_camera">Launch Camera</string>
+    <string name="hardware_keys_action_launch_camera">Launch camera</string>
+    <string name="hardware_keys_action_last_app">Last app</string>
     <string name="power_end_call_title">End call</string>
     <string name="power_end_call_summary">Pressing the power button will end the current call</string>
     <string name="button_wake_title">Wake up</string>
@@ -958,7 +982,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Status bar -->
     <string name="status_bar_title">Status bar</string>
-    <string name="status_bar_show_clock_title">Show clock</string>
+    <string name="status_bar_clock_title">Clock style</string>
+    <string name="status_bar_clock_style_default">Default</string>
+    <string name="status_bar_clock_style_center">Center</string>
+    <string name="status_bar_clock_style_hidden">Hidden</string>
     <string name="status_bar_battery_title">Battery status style</string>
     <string name="status_bar_style_icon_portrait">Icon portrait</string>
     <string name="status_bar_style_icon_landscape">Icon landscape</string>
@@ -974,7 +1001,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_toggle_info">Not available while automatic brightness is enabled</string>
     <string name="status_bar_notif_count_title">Show notification count</string>
     <string name="status_bar_notif_count_summary">Display the number of pending notifications</string>
-    <string name="status_bar_double_tap_to_sleep_title">Double-tap to sleep</string>
 
     <!-- Development shortcut -->
     <string name="development_shortcut_title">Development shortcut</string>
@@ -1010,8 +1036,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="menu_stats_reset">Reset</string>
 
     <!-- CM Legal -->
-    <string name="cmlicense_title">CyanogenMod Legal</string>
-    <string name="settings_cmlicense_activity_title">CyanogenMod Legal</string>
+    <string name="cmlicense_title">CyanogenMod legal</string>
+    <string name="settings_cmlicense_activity_title">CyanogenMod legal</string>
     <string name="settings_cmlicense_activity_unreachable">You don\'t have a data connection. To view this information now, go to %s from any computer connected to the Internet.</string>
 
     <!-- Stylus Icon -->
@@ -1047,6 +1073,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Whether to display IME switcher notifcation -->
     <string name="ime_switcher_notify">Selector notification</string>
     <string name="ime_switcher_notify_summary">Display input method selector notification</string>
+
+    <!-- High touch sensitivity -->
+    <string name="high_touch_sensitivity_title">High touch sensitivity</string>
+    <string name="high_touch_sensitivity_summary">Increase touchscreen sensitivity so it can be used while wearing gloves</string>
 
     <!-- App ops -->
     <string name="app_ops_summaries_coarse_location">coarse location</string>
@@ -1237,21 +1267,78 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="protected_apps">Protected apps</string>
     <string name="saving_protected_components">Saving component state\u2026</string>
 
+    <string name="pa_login_username_hint">Username (email)</string>
+    <string name="pa_login_password_hint">Password</string>
+    <string name="pa_login_submit_button">Sign in</string>
+    <string name="pa_login_checking_password">Checking account\u2026</string>
+    <string name="pa_login_incorrect_login">Login was incorrect</string>
+
     <!-- Stay Awake while plugged in -->
     <string name="keep_screen_on_summary_cm">Screen will never sleep while plugged in</string>
 
-    <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
+    <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable developer options -->
     <plurals name="show_dev_countdown_cm">
-        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from enabling development settings.</item>
-        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from enabling development settings.</item>
+        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from enabling developer options.</item>
+        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from enabling developer options.</item>
     </plurals>
-    <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
-    <string name="show_dev_on_cm">You have enabled development settings!</string>
+    <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer options are enabled -->
+    <string name="show_dev_on_cm">You have enabled developer options!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
-    <string name="show_dev_already_cm">No need, you have already enabled development settings.</string>
+    <string name="show_dev_already_cm">No need, you have already enabled developer options.</string>
 
     <!-- Setting checkbox title for Whether to enable Android debugging support on the phone. -->
     <string name="enable_adb_cm">Android debugging</string>
     <!-- Setting checkbox summary for Whether to enable Android debugging support on the phone -->
     <string name="enable_adb_summary_cm">Enable the Android Debug Bridge (adb) interface</string>
+
+    <string name="spam_added_title">Added <xliff:g id="time_since" example="5 minutes ago">%1$s</xliff:g></string>
+    <string name="spam_last_blocked_title">Last blocked <xliff:g id="time_since" example="5 minutes ago">%1$s</xliff:g> (total: <xliff:g id="count" example="2 times">%2$s</xliff:g>)</string>
+    <string name="block_notifications_title">Filter notifications</string>
+    <string name="block_notifications_summary">Manage ignored notifications and filters</string>
+    <!-- Keep the referenced menu string consistent with status_bar_notification_spam_item_title in frameworks/base/packages/SystemUI -->
+    <string name="no_filters_title">No filters set. To filter a notification, long press it and choose \'Ignore messages like this\'.</string>
+
+    <!-- Storage menu, label for usb storage -->
+    <string name="usb_eject">Unmount USB storage</string>
+    <string name="usb_eject_summary">Unmount the USB storage so you can safely remove it</string>
+    <string name="usb_insert_summary">Insert USB storage for mounting</string>
+    <string name="usb_mount">Mount USB storage</string>
+    <string name="usb_mount_summary"></string>
+    <string name="usb_format">Erase USB storage</string>
+    <string name="usb_format_summary">Erases all data on the USB storage, such as music and photos</string>
+    <string name="dlg_confirm_usb_unmount_title">Unmount USB storage?</string>
+    <string name="dlg_confirm_usb_unmount_text">If you unmount the USB storage, some apps you are using will stop and may be unavailable until you remount the USB storage.</string>
+    <string name="dlg_error_usb_unmount_title"></string>
+    <string name="dlg_error_usb_unmount_text">Couldn\'t unmount USB storage. Try again later.</string>
+    <string name="usb_unmount_inform_text">USB storage will be unmounted.</string>
+    <string name="usb_ejecting_title">Unmounting USB storage</string>
+    <string name="usb_ejecting_summary">USB storage unmount in progress</string>
+    <string name="usb_media_format_title">Erase USB storage</string>
+    <string name="usb_media_format_summary">Erases all data in USB storage</string>
+    <string name="usb_media_format_desc">Erase all USB storage? You will lose <b>all</b> stored data!</string>
+    <string name="usb_media_format_button_text">Erase USB storage</string>
+    <string name="usb_media_format_final_desc">Erase the USB storage, deleting all files stored there? You can\'t reverse this action!</string>
+    <string name="usb_media_format_gesture_explanation">You need to draw your unlock pattern to confirm that you want to erase the USB storage.</string>
+
+    <!-- Storage menu, label for SD card  -->
+    <string name="sd_eject">Unmount SD card</string>
+    <string name="sd_eject_summary">Unmount the SD card so you can safely remove it</string>
+    <string name="sd_insert_summary">Insert an SD card for mounting</string>
+    <string name="sd_mount">Mount SD card</string>
+    <string name="sd_mount_summary"></string>
+    <string name="sd_format">Erase SD card</string>
+    <string name="sd_format_summary">Erases all data on the SD card, such as music and photos</string>
+    <string name="dlg_confirm_sd_unmount_title">Unmount SD card?</string>
+    <string name="dlg_confirm_sd_unmount_text">If you unmount the SD card, some apps you are using will stop and may be unavailable until you remount the SD card.</string>
+    <string name="dlg_error_sd_unmount_title"></string>
+    <string name="dlg_error_sd_unmount_text">Couldn\'t unmount SD card. Try again later.</string>
+    <string name="sd_unmount_inform_text">SD card will be unmounted.</string>
+    <string name="sd_ejecting_title">Unmounting SD card</string>
+    <string name="sd_ejecting_summary">SD card unmount in progress</string>
+    <string name="sd_media_format_title">Erase SD card</string>
+    <string name="sd_media_format_summary">Erases all data on the SD card</string>
+    <string name="sd_media_format_desc">Erase the SD card? You will lose <b>all</b> data on the card!</string>
+    <string name="sd_media_format_button_text">Erase SD card</string>
+    <string name="sd_media_format_final_desc">Erase the SD card, deleting all files stored there? You can\'t reverse this action!</string>
+    <string name="sd_media_format_gesture_explanation">You need to draw your unlock pattern to confirm that you want to erase the SD card.</string>
 </resources>

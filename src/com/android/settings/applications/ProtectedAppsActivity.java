@@ -3,15 +3,17 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,10 +69,13 @@ public class ProtectedAppsActivity extends Activity {
                 ComponentName cn = mAppsAdapter.getItem(position).componentName;
                 ArrayList<ComponentName> componentsList = new ArrayList<ComponentName>();
                 componentsList.add(cn);
-                boolean protect = !mListView.isItemChecked(position);
+                boolean state = mListView.isItemChecked(position)
+                        ? PackageManager.COMPONENT_PROTECTED_STATUS
+                        : PackageManager.COMPONENT_VISIBLE_STATUS;
 
-                AppProtectList list = new AppProtectList(componentsList, protect);
-                StoreComponentProtectedStatus task = new StoreComponentProtectedStatus(ProtectedAppsActivity.this);
+                AppProtectList list = new AppProtectList(componentsList, state);
+                StoreComponentProtectedStatus task =
+                         new StoreComponentProtectedStatus(ProtectedAppsActivity.this);
                 task.execute(list);
             }
         });
@@ -111,19 +116,19 @@ public class ProtectedAppsActivity extends Activity {
         super.onPause();
 
         // Don't stick around
-        if (mWaitUserAuth){
+        if (mWaitUserAuth) {
             finish();
         }
     }
 
     private void restoreCheckedItems() {
         AppsAdapter listAdapter = (AppsAdapter) mListView.getAdapter();
+        PackageManager pm = getPackageManager();
 
         for (int i = 0; i < listAdapter.getCount(); i++) {
             AppEntry info = listAdapter.getItem(i);
             try {
-                if (getPackageManager().getActivityInfo(info.componentName, 0)
-                        .applicationInfo.protect) {
+                if (pm.getActivityInfo(info.componentName, 0).applicationInfo.protect) {
                     mListView.setItemChecked(i, true);
                     mProtect.add(info.componentName);
                 }
@@ -169,7 +174,25 @@ public class ProtectedAppsActivity extends Activity {
             mListView.setItemChecked(i, false);
         }
 
-        AppProtectList list = new AppProtectList(componentsList, true);
+        // Check to see if any components that have been protected that aren't present in
+        // the ListView. This can happen if there are components which have been protected
+        // but do not respond to the queryIntentActivities for Launcher Category
+        ContentResolver resolver = getContentResolver();
+        String hiddenComponents = Settings.Secure.getString(resolver,
+                Settings.Secure.PROTECTED_COMPONENTS);
+
+        if (hiddenComponents != null && !hiddenComponents.equals("")) {
+            for (String flattened : hiddenComponents.split("\\|")) {
+                ComponentName cmp = ComponentName.unflattenFromString(flattened);
+
+                if (!componentsList.contains(cmp)) {
+                    componentsList.add(cmp);
+                }
+            }
+        }
+
+        AppProtectList list = new AppProtectList(componentsList,
+                PackageManager.COMPONENT_VISIBLE_STATUS);
         StoreComponentProtectedStatus task = new StoreComponentProtectedStatus(this);
         task.execute(list);
     }
@@ -211,28 +234,27 @@ public class ProtectedAppsActivity extends Activity {
     }
 
     private final class AppEntry {
-
         public final ComponentName componentName;
         public final String title;
 
         public AppEntry(ResolveInfo info) {
-            componentName = new ComponentName(info.activityInfo.packageName, info.activityInfo.name);
+            ActivityInfo aInfo = info.activityInfo;
+            componentName = new ComponentName(aInfo.packageName, aInfo.name);
             title = info.loadLabel(mPackageManager).toString();
         }
     }
 
     private final class AppProtectList {
-
         public final ArrayList<ComponentName> componentNames;
-        public final boolean protect;
+        public final boolean state;
 
-        public AppProtectList(ArrayList<ComponentName> componentNames, boolean protect) {
+        public AppProtectList(ArrayList<ComponentName> componentNames, boolean state) {
             this.componentNames = new ArrayList<ComponentName>();
             for (ComponentName cn : componentNames) {
                 this.componentNames.add(cn.clone());
             }
 
-            this.protect = protect;
+            this.state = state;
         }
     }
 
@@ -265,14 +287,8 @@ public class ProtectedAppsActivity extends Activity {
         @Override
         protected Void doInBackground(final AppProtectList... args) {
             for (AppProtectList appList : args) {
-                String components = "";
-
-                for (ComponentName cn : appList.componentNames) {
-                    components += cn.flattenToShortString() + "|";
-                }
-
-                ProtectedAppsReceiver.protectedAppComponentsAndNotify
-                        (components, appList.protect, mContext);
+                ProtectedAppsReceiver.updateProtectedAppComponentsAndNotify(mContext,
+                        appList.componentNames, appList.state);
             }
 
             return null;
@@ -292,6 +308,11 @@ public class ProtectedAppsActivity extends Activity {
         }
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
     public class AppsAdapter extends ArrayAdapter<AppEntry> {
 
         private final LayoutInflater mInflator;
@@ -307,8 +328,7 @@ public class ProtectedAppsActivity extends Activity {
 
             mInflator = LayoutInflater.from(context);
 
-            // set the default icon till the actual app icon is loaded in async
-            // task
+            // set the default icon till the actual app icon is loaded in async task
             mDefaultImg = context.getResources().getDrawable(android.R.mipmap.sym_def_app_icon);
             mIcons = new ConcurrentHashMap<String, Drawable>();
         }
@@ -373,12 +393,12 @@ public class ProtectedAppsActivity extends Activity {
             protected Void doInBackground(AppEntry... apps) {
                 for (AppEntry app : apps) {
                     try {
-                        if (mIcons.containsKey(app.componentName.getPackageName())) {
+                        String packageName = app.componentName.getPackageName();
+                        if (mIcons.containsKey(packageName)) {
                             continue;
                         }
-                        Drawable icon = mPackageManager.getApplicationIcon(app.componentName
-                                .getPackageName());
-                        mIcons.put(app.componentName.getPackageName(), icon);
+                        Drawable icon = mPackageManager.getApplicationIcon(packageName);
+                        mIcons.put(packageName, icon);
                         publishProgress();
                     } catch (PackageManager.NameNotFoundException e) {
                         // ignored; app will show up with default image

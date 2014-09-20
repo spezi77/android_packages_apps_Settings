@@ -40,12 +40,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
-import android.os.ResultReceiver;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -78,6 +75,8 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accessibility.ToggleGlobalGesturePreferenceFragment;
+import com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
@@ -89,6 +88,8 @@ import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.cyanogenmod.ButtonSettings;
 import com.android.settings.cyanogenmod.LockscreenInterface;
+import com.android.settings.cyanogenmod.NavBar;
+import com.android.settings.cyanogenmod.NavRing;
 import com.android.settings.cyanogenmod.PerformanceSettings;
 import com.android.settings.cyanogenmod.StatusBar;
 import com.android.settings.cyanogenmod.NotificationDrawer;
@@ -96,6 +97,7 @@ import com.android.settings.cyanogenmod.superuser.PolicyNativeFragment;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.headsup.HeadsUpSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -108,10 +110,12 @@ import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintServiceSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.privacyguard.PrivacyGuardPrefs;
 import com.android.settings.profiles.AppGroupConfig;
 import com.android.settings.profiles.ProfileConfig;
 import com.android.settings.profiles.ProfileEnabler;
 import com.android.settings.profiles.ProfilesSettings;
+import com.android.settings.quicksettings.QuickSettingsTiles;
 import com.android.settings.search.SettingsAutoCompleteTextView;
 import com.android.settings.search.SearchPopulator;
 import com.android.settings.search.SettingsSearchFilterAdapter;
@@ -170,7 +174,6 @@ public class Settings extends PreferenceActivity
     private Header mCurrentHeader;
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
-    private SettingsSearchFilterAdapter mSearchAdapter;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -240,6 +243,11 @@ public class Settings extends PreferenceActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // We only want to inflate the search menu item in the top-level activity
+        if (getClass() != Settings.class) {
+            return false;
+        }
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.settings_search, menu);
         mSearchItem = menu.findItem(R.id.action_search);
@@ -265,41 +273,17 @@ public class Settings extends PreferenceActivity
             }
         });
 
-        new PopulateSearchSettingsTask().execute();
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.MATCH_PARENT);
 
-        ActionBar.LayoutParams layout = new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-        mSearchBar.setLayoutParams(layout);
+        mSearchBar.setLayoutParams(layoutParams);
         mSearchBar.setHint(R.string.settings_search_autocompleteview_hint);
         mSearchBar.setThreshold(1);
+        mSearchBar.setSingleLine(true);
         mSearchBar.setOnItemClickListener(this);
+        mSearchBar.setAdapter(new SettingsSearchFilterAdapter(this));
+
         return true;
-    }
-
-    private class PopulateSearchSettingsTask extends
-            AsyncTask<Void, Void, ArrayList<SearchInfo>> {
-        @Override
-        protected ArrayList<SearchInfo> doInBackground(Void... param) {
-            return SearchPopulator.loadSearchData(Settings.this);
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<SearchInfo> infos) {
-            mSearchAdapter = new SettingsSearchFilterAdapter(Settings.this,
-                    R.layout.settings_search_complete_view, infos);
-            mSearchBar.setAdapter(mSearchAdapter);
-        }
-    };
-
-    private class SearchNotifier extends ResultReceiver {
-        public SearchNotifier(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            new PopulateSearchSettingsTask().execute();
-        }
     }
 
     @Override
@@ -307,8 +291,6 @@ public class Settings extends PreferenceActivity
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
-
-        startPopulatingSearchData();
 
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
@@ -350,14 +332,15 @@ public class Settings extends PreferenceActivity
             });
         }
 
-        // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
-        if (onIsMultiPane()) {
-            getActionBar().setDisplayHomeAsUpEnabled(false);
-            getActionBar().setHomeButtonEnabled(false);
-        }
-
         mActionBar = getActionBar();
-        mActionBar.setDisplayShowCustomEnabled(true);
+        if (mActionBar != null) {
+            // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
+            if (onIsMultiPane()) {
+                mActionBar.setDisplayHomeAsUpEnabled(false);
+                mActionBar.setHomeButtonEnabled(false);
+            }
+            mActionBar.setDisplayShowCustomEnabled(true);
+        }
     }
 
     @Override
@@ -430,8 +413,12 @@ public class Settings extends PreferenceActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mSearchBar.clearFocus();
-        mSearchItem.collapseActionView();
+        if (mSearchBar != null) {
+            mSearchBar.clearFocus();
+        }
+        if (mSearchItem != null) {
+            mSearchItem.collapseActionView();
+        }
     }
 
     @Override
@@ -582,12 +569,6 @@ public class Settings extends PreferenceActivity
                 }
             }
         }
-    }
-
-    private void startPopulatingSearchData() {
-        Intent i = new Intent(this, SearchPopulator.class);
-        i.putExtra(SearchPopulator.EXTRA_NOTIFIER, new SearchNotifier(new Handler()));
-        startService(i);
     }
 
     @Override
@@ -973,16 +954,20 @@ public class Settings extends PreferenceActivity
         mSearchBar.clearFocus();
         mSearchItem.collapseActionView();;
 
-        final InputMethodManager imm =
-                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mSearchBar.getWindowToken(), 0);
-
         if (info.level == 0) {
+            Bundle args = info.header.fragmentArguments;
+            if (args == null) {
+                args = info.header.fragmentArguments = new Bundle();
+            }
+            if (info.key != null && !args.containsKey(SearchPopulator.EXTRA_PREF_KEY)) {
+                args.putString(SearchPopulator.EXTRA_PREF_KEY, info.key);
+            }
             onHeaderClick(info.header, 0);
         } else {
             Intent i = new Intent(this, SubSettings.class);
             i.putExtra(EXTRA_SHOW_FRAGMENT, info.fragment);
             i.putExtra(EXTRA_SHOW_FRAGMENT_TITLE, info.parentTitle);
+            i.putExtra(SearchPopulator.EXTRA_PREF_KEY, info.key);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         }
@@ -1214,8 +1199,10 @@ public class Settings extends PreferenceActivity
                     String accType = header.extras.getString(
                             ManageAccountsSettings.KEY_ACCOUNT_TYPE);
                     Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
-                    setHeaderIcon(holder, icon);
+                    updateIconLayout(holder, true);
+                    holder.icon.setImageDrawable(icon);
                 } else {
+                    updateIconLayout(holder, false);
                     holder.icon.setImageResource(header.iconRes);
                 }
                 holder.title.setText(header.getTitle(getContext().getResources()));
@@ -1228,13 +1215,16 @@ public class Settings extends PreferenceActivity
                 }
             }
 
-        private void setHeaderIcon(HeaderViewHolder holder, Drawable icon) {
+        private void updateIconLayout(HeaderViewHolder holder, boolean forceDefaultSize) {
             ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
-            lp.width = getContext().getResources().getDimensionPixelSize(
-                    R.dimen.header_icon_width);
+            if (forceDefaultSize) {
+                lp.width = getContext().getResources().getDimensionPixelSize(
+                        R.dimen.header_icon_width);
+            } else {
+                lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            }
             lp.height = lp.width;
             holder.icon.setLayoutParams(lp);
-            holder.icon.setImageDrawable(icon);
         }
 
         public void resume() {
@@ -1263,19 +1253,6 @@ public class Settings extends PreferenceActivity
             revert = true;
         }
 
-        // a temp hack while we prepare to switch
-        // to the new theme chooser.
-        if (header.id == R.id.theme_settings) {
-            try {
-                Intent intent = new Intent();
-                intent.setClassName("com.tmobile.themechooser", "com.tmobile.themechooser.ThemeChooser");
-                startActivity(intent);
-                return;
-            } catch(ActivityNotFoundException e) {
-                 // Do nothing, we will launch the submenu
-            }
-        }
-
         super.onHeaderClick(header, position);
 
         if (revert && mLastHeader != null) {
@@ -1287,7 +1264,9 @@ public class Settings extends PreferenceActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        mSearchItem.collapseActionView();
+        if (mSearchItem != null) {
+            mSearchItem.collapseActionView();
+        }
         // Override the fragment title for Wallpaper settings
         int titleRes = pref.getTitleRes();
         if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
