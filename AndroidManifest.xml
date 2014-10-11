@@ -370,9 +370,22 @@
             </intent-filter>
         </activity>
 
-        <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
+        <activity android:name="Settings$WifiApSettingsActivity"
+                android:label="@string/wifi_tether_checkbox_text"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.WifiApSettings" />
+        </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".wifi.WifiApSettings"
-                android:targetActivity="Settings">
+                android:parentActivityName="Settings$TetherSettingsActivity"
+                android:targetActivity="Settings$WifiApSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1830,19 +1843,6 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/profiles_settings" />
         </activity-alias>
-
-        <activity android:name=".profiles.ProfileConfig" />
-
-        <activity android:name=".profiles.AppGroupList" />
-
-        <activity android:name=".profiles.AppGroupConfig" />
-
-        <activity android:name=".profiles.ProfileGroupConfig" />
-
-        <activity android:name=".profiles.WifiTriggers" />
-
-        <activity android:name=".profiles.NFCProfileWriter"
-                android:parentActivityName="Settings$ProfilesSettingsActivity" />
 
         <activity android:name=".profiles.NFCProfileSelect" />
 
