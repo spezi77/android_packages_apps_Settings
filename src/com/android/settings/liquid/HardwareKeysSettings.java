@@ -87,6 +87,8 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
     private static final String KEYS_CAMERA_WAKE = "keys_camera_press";
     private static final String KEYS_CAMERA_PEAK = "keys_camera_peak";
     private static final String KEYS_CAMERA_MUSIC = "keys_camera_music";
+    
+    private static final String TRACKBALL_WAKE_TOGGLE = "pref_trackball_wake_toggle";
 
     private static final int DLG_SHOW_WARNING_DIALOG = 0;
     private static final int DLG_SHOW_ACTION_DIALOG  = 1;
@@ -122,6 +124,8 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mCameraWake;
     private CheckBoxPreference mCameraSleepOnRelease;
     private CheckBoxPreference mCameraMusicControls;
+    
+     private CheckBoxPreference mTrackballWake;
 
     private boolean mCheckPreferences;
     private Map<String, String> mKeySettings = new HashMap<String, String>();
@@ -363,6 +367,10 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
         if (!backlight.isButtonSupported() && !backlight.isKeyboardSupported()) {
             prefs.removePreference(backlight);
         }
+	
+	mTrackballWake = (CheckBoxPreference)
+		prefs.findPreference(TRACKBALL_WAKE_TOGGLE);
+	mTrackballWake.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
 
         mCheckPreferences = true;
         return prefs;
@@ -471,6 +479,10 @@ public class HardwareKeysSettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) newValue;
             Settings.System.putInt(getContentResolver(), Settings.System.HARDWARE_KEY_REBINDING,
                     value ? 1 : 0);
+	}else if (preference == mTrackballWake) {
+	    boolean value = (Boolean) newValue;
+	    Settings.System.putInt(getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN,
+		value ? 1 : 0);
             return true;
         }
         return false;
