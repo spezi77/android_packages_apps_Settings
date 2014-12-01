@@ -157,6 +157,13 @@
                 android:defaultValue="false"
                 android:key="double_tap_wake_gesture"
                 android:title="@string/double_tap_to_wake_title" />
+		
+	<!-- Add trackball wake -->
+	<CheckBoxPreference
+		android:key="pref_trackball_wake_toggle"
+		android:title="@string/pref_trackball_wake_toggle_title"
+		android:summary="@string/pref_trackball_wake_toggle_summary"
+		android:defaultValue="true" />
 
         </PreferenceCategory>
 

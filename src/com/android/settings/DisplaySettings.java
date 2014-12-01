@@ -91,6 +91,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SUNLIGHT_ENHANCEMENT = "sunlight_enhancement";
     private static final String KEY_COLOR_ENHANCEMENT = "color_enhancement";
     private static final String KEY_TAP_TO_WAKE = "double_tap_wake_gesture";
+    private static final String TRACKBALL_WAKE_TOGGLE = "pref_trackball_wake_toggle";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -121,6 +122,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mColorEnhancement;
     private CheckBoxPreference mTapToWake;
     private Preference mScreenOffGestures;
+    private CheckBoxPreference mTrackballWake;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -299,6 +301,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (counter == 2) {
             prefSet.removePreference(mWakeUpOptions);
         }
+	
+	//Trackball wake
+	mTrackballWake = (CheckBoxPreference)
+	    prefSet.findPreference(TRACKBALL_WAKE_TOGGLE);
+	mTrackballWake.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
 
         // respect device default configuration
         // true fades while false animates
@@ -594,6 +601,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             return ColorEnhancement.setEnabled(mColorEnhancement.isChecked());
         } else if (preference == mTapToWake) {
             return TapToWake.setEnabled(mTapToWake.isChecked());
+	} else if (preference == mTrackballWake) {
+	    boolean value = mTrackballWake.isChecked();
+	    Settings.System.putInt(getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN,
+		    value ? 1 : 0);
+	    return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
