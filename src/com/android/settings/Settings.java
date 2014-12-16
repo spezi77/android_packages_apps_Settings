@@ -40,6 +40,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
@@ -113,10 +114,10 @@ import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintServiceSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.privacyguard.PrivacyGuardPrefs;
-import com.android.settings.profiles.AppGroupConfig;
-import com.android.settings.profiles.ProfileConfig;
+import com.android.settings.profiles.NFCProfileTagCallback;
 import com.android.settings.profiles.ProfileEnabler;
 import com.android.settings.profiles.ProfilesSettings;
+import com.android.settings.profiles.triggers.NfcTriggerFragment;
 import com.android.settings.quicksettings.QuickSettingsTiles;
 import com.android.settings.search.SettingsAutoCompleteTextView;
 import com.android.settings.search.SearchPopulator;
@@ -159,7 +160,6 @@ public class Settings extends PreferenceActivity
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
-    private static final String EXTRA_DISABLE_SEARCH = "settings:disable_search";
 
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
@@ -167,11 +167,11 @@ public class Settings extends PreferenceActivity
     private static final String VOICE_WAKEUP_PACKAGE_NAME = "com.cyanogenmod.voicewakeup";
     private static final String GESTURE_SETTINGS_PACKAGE_NAME = "com.cyanogenmod.settings";
 
+    private static final String THEME_CHOOSER_CATEGORY = "cyngn.intent.category.APP_THEMES";
+
     static final int DIALOG_ONLY_ONE_HOME = 1;
 
     private static boolean sShowNoHomeNotice = false;
-
-    private boolean mDisableSearchIcon = false;
 
     private String mFragmentClass;
     private int mTopLevelHeaderId;
@@ -212,7 +212,7 @@ public class Settings extends PreferenceActivity
             R.id.notification_bar_settings,
             R.id.lock_screen_settings,
             R.id.smartcontrol_settings,
-            R.id.privacy_settings_cyanogenmod,
+            R.id.privacy_settings_mokee,
             R.id.button_settings
     };
 
@@ -229,6 +229,8 @@ public class Settings extends PreferenceActivity
     private ActionBar mActionBar;
     private MenuItem mSearchItem;
     private SettingsAutoCompleteTextView mSearchBar;
+
+    private NFCProfileTagCallback mNfcProfileCallback;
 
     private boolean mBatteryPresent = true;
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -249,6 +251,11 @@ public class Settings extends PreferenceActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // We only want to inflate the search menu item in the top-level activity
+        if (getClass() != Settings.class) {
+            return false;
+        }
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.settings_search, menu);
         mSearchItem = menu.findItem(R.id.action_search);
@@ -284,7 +291,6 @@ public class Settings extends PreferenceActivity
         mSearchBar.setOnItemClickListener(this);
         mSearchBar.setAdapter(new SettingsSearchFilterAdapter(this));
 
-        mSearchItem.setVisible(!mDisableSearchIcon);
         return true;
     }
 
@@ -292,10 +298,6 @@ public class Settings extends PreferenceActivity
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
-        }
-
-        if (getIntent().hasExtra(EXTRA_DISABLE_SEARCH) != onIsMultiPane()) {
-            mDisableSearchIcon = getIntent().getBooleanExtra(EXTRA_DISABLE_SEARCH, false);
         }
 
         mAuthenticatorHelper = new AuthenticatorHelper();
@@ -338,14 +340,15 @@ public class Settings extends PreferenceActivity
             });
         }
 
-        // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
-        if (onIsMultiPane()) {
-            getActionBar().setDisplayHomeAsUpEnabled(false);
-            getActionBar().setHomeButtonEnabled(false);
-        }
-
         mActionBar = getActionBar();
-        mActionBar.setDisplayShowCustomEnabled(true);
+        if (mActionBar != null) {
+            // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
+            if (onIsMultiPane()) {
+                mActionBar.setDisplayHomeAsUpEnabled(false);
+                mActionBar.setHomeButtonEnabled(false);
+            }
+            mActionBar.setDisplayShowCustomEnabled(true);
+        }
     }
 
     @Override
@@ -418,8 +421,12 @@ public class Settings extends PreferenceActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mSearchBar.clearFocus();
-        mSearchItem.collapseActionView();
+        if (mSearchBar != null) {
+            mSearchBar.clearFocus();
+        }
+        if (mSearchItem != null) {
+            mSearchItem.collapseActionView();
+        }
     }
 
     @Override
@@ -490,7 +497,8 @@ public class Settings extends PreferenceActivity
         com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
         com.android.settings.quicksettings.QuickSettingsTiles.class.getName(),
         com.android.settings.cyanogenmod.QuietHours.class.getName(),
-        ThemeSettings.class.getName()
+        ThemeSettings.class.getName(),
+        com.android.settings.wifi.WifiApSettings.class.getName()
     };
 
     @Override
@@ -551,8 +559,15 @@ public class Settings extends PreferenceActivity
 
     @Override
     public void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+            Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            if (mNfcProfileCallback != null) {
+                mNfcProfileCallback.onTagRead(detectedTag);
+            }
+            return;
+        }
 
+        super.onNewIntent(intent);
         // If it is not launched from history, then reset to top-level
         if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0) {
             if (mFirstHeader != null && !onIsHidingHeaders() && onIsMultiPane()) {
@@ -662,35 +677,12 @@ public class Settings extends PreferenceActivity
                 BluetoothSettings.class.getName().equals(fragmentName) ||
                 DreamSettings.class.getName().equals(fragmentName) ||
                 ProfilesSettings.class.getName().equals(fragmentName) ||
-                ProfileConfig.class.getName().equals(fragmentName) ||
-                AppGroupConfig.class.getName().equals(fragmentName) ||
                 HomeSettings.class.getName().equals(fragmentName) ||
                 LocationSettings.class.getName().equals(fragmentName) ||
                 ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName) ||
                 PrintSettingsFragment.class.getName().equals(fragmentName) ||
                 PrintServiceSettingsFragment.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_UI_OPTIONS, ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
-            // Should also disable the search options here to not confuse
-            // the end user
-            intent.putExtra(EXTRA_DISABLE_SEARCH, true);
-        } else if (ApplicationSettings.class.getName().equals(fragmentName) ||
-                DataUsageSummary.class.getName().equals(fragmentName) ||
-                QuickSettingsTiles.class.getName().equals(fragmentName) ||
-                HeadsUpSettings.class.getName().equals(fragmentName) ||
-                PowerUsageSummary.class.getName().equals(fragmentName) ||
-                ThemeSettings.class.getName().equals(fragmentName) ||
-                ManageApplications.class.getName().equals(fragmentName) ||
-                NavBar.class.getName().equals(fragmentName) ||
-                NavRing.class.getName().equals(fragmentName) ||
-                PaymentSettings.class.getName().equals(fragmentName) ||
-                CaptionPropertiesFragment.class.getName().equals(fragmentName) ||
-                ToggleScreenMagnificationPreferenceFragment.class.getName().equals(fragmentName) ||
-                ToggleGlobalGesturePreferenceFragment.class.getName().equals(fragmentName) ||
-                PrivacyGuardPrefs.class.getName().equals(fragmentName) ||
-                DevelopmentSettings.class.getName().equals(fragmentName) ||
-                WifiDisplaySettings.class.getName().equals(fragmentName)) {
-            // Should force disable search options
-            intent.putExtra(EXTRA_DISABLE_SEARCH, true);
         }
         intent.setClass(this, SubSettings.class);
     }
@@ -788,7 +780,12 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.development_settings
                     || id == R.id.performance_settings) {
-                if (!showDev) {
+                boolean removePreference = !showDev;
+                if (!removePreference && id == R.id.performance_settings) {
+                    final Resources res = getResources();
+                    removePreference = res.getBoolean(R.bool.config_hidePerformanceSettings);
+                }
+                if (removePreference) {
                     target.remove(i);
                 }
             } else if (id == R.id.account_add) {
@@ -1223,8 +1220,10 @@ public class Settings extends PreferenceActivity
                     String accType = header.extras.getString(
                             ManageAccountsSettings.KEY_ACCOUNT_TYPE);
                     Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
-                    setHeaderIcon(holder, icon);
+                    updateIconLayout(holder, true);
+                    holder.icon.setImageDrawable(icon);
                 } else {
+                    updateIconLayout(holder, false);
                     holder.icon.setImageResource(header.iconRes);
                 }
                 holder.title.setText(header.getTitle(getContext().getResources()));
@@ -1237,13 +1236,16 @@ public class Settings extends PreferenceActivity
                 }
             }
 
-        private void setHeaderIcon(HeaderViewHolder holder, Drawable icon) {
+        private void updateIconLayout(HeaderViewHolder holder, boolean forceDefaultSize) {
             ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
-            lp.width = getContext().getResources().getDimensionPixelSize(
-                    R.dimen.header_icon_width);
+            if (forceDefaultSize) {
+                lp.width = getContext().getResources().getDimensionPixelSize(
+                        R.dimen.header_icon_width);
+            } else {
+                lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            }
             lp.height = lp.width;
             holder.icon.setLayoutParams(lp);
-            holder.icon.setImageDrawable(icon);
         }
 
         public void resume() {
@@ -1272,16 +1274,15 @@ public class Settings extends PreferenceActivity
             revert = true;
         }
 
-        // a temp hack while we prepare to switch
-        // to the new theme chooser.
+        // Launch the theme chooser if it supports the cyngn.intent.category.APP_THEMES category.
         if (header.id == R.id.theme_settings) {
+            Intent intent = new Intent(Intent.ACTION_MAIN)
+                    .addCategory(THEME_CHOOSER_CATEGORY);
             try {
-                Intent intent = new Intent();
-                intent.setClassName("com.tmobile.themechooser", "com.tmobile.themechooser.ThemeChooser");
                 startActivity(intent);
                 return;
-            } catch(ActivityNotFoundException e) {
-                 // Do nothing, we will launch the submenu
+            } catch (ActivityNotFoundException e) {
+                // do nothing so the theme settings to be displayed
             }
         }
 
@@ -1296,7 +1297,9 @@ public class Settings extends PreferenceActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        mSearchItem.collapseActionView();
+        if (mSearchItem != null) {
+            mSearchItem.collapseActionView();
+        }
         // Override the fragment title for Wallpaper settings
         int titleRes = pref.getTitleRes();
         if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
@@ -1334,6 +1337,10 @@ public class Settings extends PreferenceActivity
         mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, accounts);
         invalidateHeaders();
+    }
+
+    public void setNfcProfileCallback(NFCProfileTagCallback callback) {
+        mNfcProfileCallback = callback;
     }
 
     public static void requestHomeNotice() {
@@ -1409,4 +1416,6 @@ public class Settings extends PreferenceActivity
     public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
     public static class PowerSaverSettingsActivity extends Settings { /* empty */ }
     public static class ThemeSettingsActivity extends Settings { /* empty */ }
+    public static class WifiApSettingsActivity extends Settings { /* empty */ }
+    public static class LockscreenInterfaceActivity extends Settings { /* empty */ }
 }

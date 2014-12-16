@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -32,15 +33,20 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.settings.R;
 import com.android.settings.cyanogenmod.ProtectedAccountView;
+import com.android.settings.cyanogenmod.ProtectedAccountView.OnNotifyAccountReset;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 
-public class LockPatternActivity extends Activity {
+public class LockPatternActivity extends Activity implements OnNotifyAccountReset {
     public static final String PATTERN_LOCK_PROTECTED_APPS = "pattern_lock_protected_apps";
     public static final String RECREATE_PATTERN = "recreate_pattern_lock";
+    public static final String ACTION_BROADCAST_RESULT = "com.android.settings.applications.LockPatternActivity.ACTION_BROADCAST_RESULT";
+
+    // used for incoming and outgoing broadcast intents
+    public static final String EXTRA_BROADCAST_RESULT = "broadcast_result";
 
     private static final int MIN_PATTERN_SIZE = 4;
     private static final int MAX_PATTERN_RETRY = 5;
@@ -60,7 +66,9 @@ public class LockPatternActivity extends Activity {
     int mRetry = 0;
 
     boolean mCreate;
+    boolean mRetryPattern = true;
     boolean mConfirming = false;
+    boolean mBroadcastResult = false;
 
     Runnable mCancelPatternRunnable = new Runnable() {
         public void run() {
@@ -74,6 +82,7 @@ public class LockPatternActivity extends Activity {
                 } else {
                     mPatternLockHeader.setText(getResources()
                             .getString(R.string.lockpattern_recording_intro_header));
+                    mCancel.setText(getResources().getString(R.string.cancel));
                 }
             } else {
                 mPatternLockHeader.setText(getResources()
@@ -85,8 +94,15 @@ public class LockPatternActivity extends Activity {
     View.OnClickListener mCancelOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if (mCreate && !mConfirming && !mRetryPattern) {
+                // Retry
+                mRetryPattern = true;
+                resetPatternState(true);
+                return;
+            }
             setResult(RESULT_CANCELED);
             finish();
+            maybeSendBroadcast(false);
         }
     };
 
@@ -105,6 +121,7 @@ public class LockPatternActivity extends Activity {
                 finish();
             } else {
                 mConfirming = true;
+                mCancel.setText(getResources().getString(R.string.cancel));
                 mLockPatternView.clearPattern();
 
                 mPatternLockHeader.setText(getResources().getString(
@@ -117,6 +134,7 @@ public class LockPatternActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         if (!mCreate) {
             menu.add(0, MENU_RESET, 0, R.string.lockpattern_reset_button)
                     .setIcon(R.drawable.ic_lockscreen_ime)
@@ -132,9 +150,8 @@ public class LockPatternActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_RESET:
-
                 if (mAccountView.getVisibility() == View.VISIBLE) {
-                    switchToPattern();
+                    switchToPattern(false);
                 } else {
                     switchToAccount();
                 }
@@ -144,7 +161,15 @@ public class LockPatternActivity extends Activity {
         }
     }
 
-    private void switchToPattern() {
+    @Override
+    public void onNotifyAccountReset() {
+        switchToPattern(true);
+    }
+
+    private void switchToPattern(boolean reset) {
+        if (reset) {
+            resetPatternState(false);
+        }
         mPatternLockHeader.setText(getResources()
                 .getString(R.string.lockpattern_settings_enable_summary));
         mItem.setIcon(R.drawable.ic_lockscreen_ime);
@@ -165,15 +190,8 @@ public class LockPatternActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patternlock);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String pattern = prefs.getString(PATTERN_LOCK_PROTECTED_APPS, null);
-        mCreate = pattern == null;
-        if (RECREATE_PATTERN.equals(getIntent().getAction())) {
-            mCreate = true;
-        }
-
-        if (pattern != null) {
-            mPatternHash = Base64.decode(pattern, Base64.DEFAULT);
+        if (getIntent() != null) {
+            mBroadcastResult = getIntent().getBooleanExtra(EXTRA_BROADCAST_RESULT, false);
         }
 
         mPatternLockHeader = (TextView) findViewById(R.id.pattern_lock_header);
@@ -181,23 +199,57 @@ public class LockPatternActivity extends Activity {
         mCancel.setOnClickListener(mCancelOnClickListener);
         mContinue = (Button) findViewById(R.id.pattern_lock_btn_continue);
         mContinue.setOnClickListener(mContinueOnClickListener);
-        if (mCreate) {
-            mContinue.setEnabled(false);
-            mPatternLockHeader.setText(getResources().getString(R.string.lockpattern_recording_intro_header));
-        } else {
-            mCancel.setVisibility(View.GONE);
-            mContinue.setVisibility(View.GONE);
-            mPatternLockHeader.setText(getResources().getString(R.string.lockpattern_settings_enable_summary));
-        }
 
         mAccountView = (ProtectedAccountView) findViewById(R.id.lock_account_view);
+        mAccountView.setOnNotifyAccountResetCb(this);
         mLockPatternView = (LockPatternView) findViewById(R.id.lock_pattern_view);
+
+        resetPatternState(false);
 
         //Setup Pattern Lock View
         mLockPatternView.setSaveEnabled(false);
         mLockPatternView.setFocusable(false);
         mLockPatternView.setOnPatternListener(new UnlockPatternListener());
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (!isFinishing()) {
+            maybeSendBroadcast(false);
+        }
+    }
+
+    private void resetPatternState(boolean clear) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String pattern = prefs.getString(PATTERN_LOCK_PROTECTED_APPS, null);
+        mCreate = pattern == null || RECREATE_PATTERN.equals(getIntent().getAction())
+                || clear;
+
+        mPatternHash = null;
+        if (pattern != null) {
+            mPatternHash = Base64.decode(pattern, Base64.DEFAULT);
+        }
+
+        mContinue.setEnabled(!mCreate);
+        mCancel.setVisibility(mCreate ? View.VISIBLE : View.GONE);
+        mCancel.setText(getResources().getString(R.string.cancel));
+        mContinue.setVisibility(mCreate ? View.VISIBLE : View.GONE);
+        mPatternLockHeader.setText(mCreate
+                ? getResources().getString(R.string.lockpattern_recording_intro_header)
+                : getResources().getString(R.string.lockpattern_settings_enable_summary));
+        mLockPatternView.clearPattern();
+
+        invalidateOptionsMenu();
+    }
+
+    private void maybeSendBroadcast(boolean result) {
+        if (mBroadcastResult) {
+            Intent broadcastResult = new Intent(ACTION_BROADCAST_RESULT);
+            broadcastResult.putExtra(EXTRA_BROADCAST_RESULT, result);
+            sendBroadcast(broadcastResult);
+        }
     }
 
     private class UnlockPatternListener implements LockPatternView.OnPatternListener {
@@ -223,6 +275,9 @@ public class LockPatternActivity extends Activity {
 
                     mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Wrong);
                     mLockPatternView.postDelayed(mCancelPatternRunnable, PATTERN_CLEAR_TIMEOUT_MS);
+                    mCancel.setText(getResources()
+                            .getString(R.string.lockpattern_retry_button_text));
+                    mRetryPattern = false;
                     return;
                 }
 
@@ -244,6 +299,10 @@ public class LockPatternActivity extends Activity {
                     }
                 } else {
                     //Save pattern, user needs to redraw to confirm
+                    mCancel.setText(getResources()
+                            .getString(R.string.lockpattern_retry_button_text));
+                    mRetryPattern = false;
+
                     mPatternHash = patternToHash(pattern);
 
                     mPatternLockHeader.setText(getResources().getString(
@@ -255,6 +314,7 @@ public class LockPatternActivity extends Activity {
                 if (Arrays.equals(mPatternHash, patternToHash(pattern))) {
                     setResult(RESULT_OK);
                     finish();
+                    maybeSendBroadcast(true);
                 } else {
                     mRetry++;
                     mPatternLockHeader.setText(getResources().getString(

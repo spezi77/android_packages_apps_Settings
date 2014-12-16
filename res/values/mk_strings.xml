@@ -93,8 +93,10 @@
     <string name="ad_pocket_mode_always">Always</string>
 
     <!-- About version and support -->
-    <string name="mod_support" formatted="false">Community support</string>
-    <string name="mod_support_default" formatted="false">Unknown</string>
+    <string name="mokee_version">MoKee version</string>
+    <string name="mokee_version_default">Unknown</string>
+    <string name="mokee_support">Community support</string>
+    <string name="mokee_support_default">Unknown</string>
 
     <!-- ListView animation -->
     <string name="listview_animation_title">ListView animation</string>
@@ -143,10 +145,6 @@
     <!-- Other Settings Category -->
     <string name="other_category">Other settings</string>
 
-    <!-- Proximity work-around -->
-    <string name="is_inaccurate_proximity_title">Inaccurate proximity</string>
-    <string name="is_inaccurate_proximity_summary">Work-around for inaccurate proximity sensors: this will force phone to turn on the screen after the call has ended.</string>
-
     <!-- show carrier label  and custom -->
     <string name="show_status_bar_carrier_title">Status bar carrier</string>
     <string name="show_status_bar_carrier_summary">Show carrier in status bar</string>
@@ -157,9 +155,10 @@
     <!-- show network speed -->
     <string name="show_network_speed_title">Network speed</string>
     <string name="show_network_speed_summary">Show network speed in status bar</string>
-    <string name="status_bar_traffic_style_hidden">Hide</string>
-    <string name="status_bar_traffic_style_rx">Display download only</string>
-    <string name="status_bar_traffic_style_rxtx">Display upload and download</string>
+    <string name="status_bar_network_traffic_style_disable">Disabled</string>
+    <string name="status_bar_network_traffic_style_up">Outgoing</string>
+    <string name="status_bar_network_traffic_style_down">Incoming</string>
+    <string name="status_bar_network_traffic_style_all">Outgoing and incoming</string>
 
     <!-- Screen recorder -->
     <string name="power_menu_screenrecord_title">Screen record</string>
@@ -384,7 +383,7 @@
     <string name="excluded_apps_summary">Excluded applications will not show up as lockscreen notifications</string>
 
     <!-- Active Display And Lockscreen Notifications Lock -->
-    <string name="ad_or_ln">%1$s already enabled, turn off it please.</string>
+    <string name="ad_or_ln">%1$s already enabled, please turn it off first</string>
 
     <!-- Hide overflow button -->
     <string name="hide_overflow_button_title">Hide action overflow</string>
@@ -402,5 +401,102 @@
     <string name="sweepwake_off">Off</string>
     <string name="sweepwake_all">Sweep to wake and sleep</string>
     <string name="sweepwake_sleep_only">Sweep to sleep only</string>
+
+    <!-- Translator strings -->
+    <string name="translator_title">Translators</string>
+    <string name="translator_error">Unable to load translators</string>
+
+    <!-- Privacy Settings Header item -->
+    <string name="privacy_settings_mokee_title">Privacy</string>
+
+    <!-- Waiver -->
+    <string name="mokee_waiver_title">Waiver</string>
+    <string name="mokee_waiver_body">Changing this setting may be against your state or government laws.\n\nIn selecting \'OK\' below, you acknowledge this warning and waive, indemnify and hold harmless MoKee OpenSource and its contributors from all legal liabilities.</string>
+
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="mokee_runtime_warning_title">Warning</string>
+    <string name="mokee_runtime_warning_message">ART is not officially supported by MoKee OpenSource as it is highly experimental and has the potential to cause instability, crashes, data loss or prevent the proper boot of your device. Visit &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; for more information.&lt;br/&gt;&lt;br/&gt;We request you do not file bug reports if you have enabled ART as your runtime.&lt;br/&gt;&lt;br/&gt;Are you sure you want to reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+
+    <!-- Dynamic system bars -->
+    <string name="dynamic_system_bars_title">Dynamic system bars</string>
+    <string name="dynamic_status_bar_title">Dynamic status bar</string>
+    <string name="dynamic_status_bar_summary">Automatically update the background of the status bar (Turn screen off and on again if does not apply)</string>
+    <string name="dynamic_navigation_bar_title">Dynamic navigation bar</string>
+    <string name="dynamic_navigation_bar_summary">Automatically update the background of the navigation bar</string>
+    <string name="dynamic_system_bars_gradient_title">System bar gradient</string>
+    <string name="dynamic_system_bars_gradient_summary">Overlay a gradient on the system bars</string>
+    <string name="dynamic_status_bar_filter_title">Darker status bar</string>
+    <string name="dynamic_status_bar_filter_summary">Overlay a darkening filter on the status bar</string>
+
+    <!-- PA Pie -->
+    <string name="pie_control_title">PIE</string>
+    <string name="pa_pie_title">PIE</string>
+    <string name="pa_pie_controls">Enable</string>
+    <string name="pa_pie_controls_summary">Enables PIE but disables navigation bar if any</string>
+    <string name="pa_pie_gravity_title">Gravity</string>
+    <string name="pa_pie_gravity_top">Top</string>
+    <string name="pa_pie_gravity_bottom">Bottom</string>
+    <string name="pa_pie_gravity_right">Right</string>
+    <string name="pa_pie_gravity_left">Left</string>
+    <string name="pa_pie_mode_title">Style</string>
+    <string name="pa_pie_mode_bare">Bare</string>
+    <string name="pa_pie_mode_quick">Quick</string>
+    <string name="pa_pie_mode_default">Default</string>
+    <string name="pa_pie_mode_slow">Slow</string>
+    <string name="pa_pie_size_title">Size</string>
+    <string name="pa_pie_size_small">Small</string>
+    <string name="pa_pie_size_default">@string/pa_pie_mode_default</string>
+    <string name="pa_pie_size_large">Large</string>
+    <string name="pa_pie_size_gigantic">Gigantic</string>
+    <string name="pa_pie_size_monster">Monster</string>
+    <string name="pa_pie_color_title">Color settings</string>
+    <string name="pa_pie_color_style_title">Use custom color</string>
+    <string name="pa_pie_background_title">Background color</string>
+    <string name="pa_pie_select_title">Selection color</string>
+    <string name="pa_pie_outlines_title">Outlines color</string>
+    <string name="pa_pie_status_clock_title">Clock color</string>
+    <string name="pa_pie_status_title">Status color</string>
+    <string name="pa_pie_chevron_left_title">Left chevron color</string>
+    <string name="pa_pie_chevron_right_title">Right chevron color</string>
+    <string name="pa_pie_juice_title">Battery juice color</string>
+    <string name="pa_pie_button_color">Button color</string>
+    <string name="pa_pie_button_color_title">Buttons color</string>
+    <string name="pa_pie_gap_title">Item gap</string>
+    <string name="pa_pie_angle_title">Angle</string>
+    <string name="pa_pie_angle_none">None (old)</string>
+    <string name="pa_pie_angle_small">Small</string>
+    <string name="pa_pie_angle_big">Normal (default)</string>
+    <string name="pa_pie_angle_huge">Big</string>
+    <string name="pa_pie_angle_super">Huge</string>
+    <string name="pa_pie_gap_none">None</string>
+    <string name="pa_pie_gap_small">Small</string>
+    <string name="pa_pie_gap_big">Big (default)</string>
+    <string name="pa_pie_gap_huge">Huge</string>
+    <string name="pa_pie_center_title">Middle alignment</string>
+    <string name="pa_pie_center_summary">Center PIE on the trigger edge</string>
+    <string name="pa_pie_power_title">Sleep button</string>
+    <string name="pa_pie_power_summary">Add a sleep button to PIE</string>
+    <string name="pa_pie_search_title">Search button</string>
+    <string name="pa_pie_search_summary">Enable search button on PIE controls</string>
+    <string name="pa_pie_trigger_title">Trigger area</string>
+    <string name="pa_pie_trigger_small">@string/pa_pie_size_small</string>
+    <string name="pa_pie_trigger_normal">Normal</string>
+    <string name="pa_pie_trigger_big">@string/pa_pie_gap_big</string>
+    <string name="pa_pie_trigger_huge">Huge</string>
+    <string name="pa_pie_notifications_title">Enable chevron targets</string>
+    <string name="pa_pie_notifications_summary">Enabling this will let the notification panel and Quick Settings tiles become available when swiping</string>
+    <string name="pa_pie_menu_title">Always show menu button</string>
+    <string name="pa_pie_menu_summary">Whether or not the menu button should always be shown, even when its not needed</string>
+    <string name="pa_color_pie_reset_message">Reset all colors to default?</string>
+    <string name="reset">Reset</string>
+    <string name="pa_pie_disable">Disable PIE first in order to use this</string>
+    <string name="pa_pie_disable_nav">Disable nav bar first in order to use this</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#ff000000</string>
 
 </resources>

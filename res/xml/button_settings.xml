@@ -40,6 +40,11 @@
         android:summary="@string/hide_overflow_button_summary"
         android:defaultValue="false" />
 
+    <PreferenceScreen
+        android:key="pa_pie_control"
+        android:title="@string/pa_pie_title"
+        android:fragment="com.android.settings.mokee.Pie" />
+
     <!-- Device Specific Bluetooth Input settings -->
     <Preference
         android:key="bluetooth_input_settings">
@@ -83,6 +88,12 @@
                 android:key="navigation_bar"
                 android:fragment="com.android.settings.cyanogenmod.NavBar"
                 android:title="@string/navigation_bar_title" />
+
+        <ListPreference
+            android:key="navigation_recents_long_press"
+            android:dialogTitle="@string/navigation_bar_recents_title"
+            android:title="@string/navigation_bar_recents_title"
+            android:persistent="false" />
 
         <PreferenceScreen
                 android:key="navigation_ring"

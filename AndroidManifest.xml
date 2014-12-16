@@ -74,14 +74,19 @@
     <uses-permission android:name="android.permission.CHANGE_PHONE_BLACKLIST" />
 
     <!-- MOKEE PUSH PERMISSION START -->
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <permission android:name="com.android.settings.permission.JPUSH_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.android.settings.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <!-- MOKEE PUSH PERMISSION END -->
 
     <!-- MOKEE HELPER PERMISSION START -->
     <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- MOKEE HELPER PERMISSION END -->
 
     <permission
@@ -114,7 +119,7 @@
             android:name=".mokee.MoKeeApplication"
             android:icon="@mipmap/ic_launcher_settings"
             android:taskAffinity=""
-            android:theme="@style/Theme.Settings.Holo"
+            android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
             android:supportsRtl="true">
@@ -382,9 +387,22 @@
             </intent-filter>
         </activity>
 
-        <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
+        <activity android:name="Settings$WifiApSettingsActivity"
+                android:label="@string/wifi_tether_checkbox_text"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.WifiApSettings" />
+        </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".wifi.WifiApSettings"
-                android:targetActivity="Settings">
+                android:parentActivityName="Settings$TetherSettingsActivity"
+                android:targetActivity="Settings$WifiApSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1837,19 +1855,6 @@
                 android:resource="@id/profiles_settings" />
         </activity-alias>
 
-        <activity android:name=".profiles.ProfileConfig" />
-
-        <activity android:name=".profiles.AppGroupList" />
-
-        <activity android:name=".profiles.AppGroupConfig" />
-
-        <activity android:name=".profiles.ProfileGroupConfig" />
-
-        <activity android:name=".profiles.WifiTriggers" />
-
-        <activity android:name=".profiles.NFCProfileWriter"
-                android:parentActivityName="Settings$ProfilesSettingsActivity" />
-
         <activity android:name=".profiles.NFCProfileSelect" />
 
         <activity android:name=".profiles.NFCProfile"
@@ -1869,7 +1874,14 @@
 
         <activity android:name=".ApnEditor" />
 
-        <activity android:name=".cyanogenmod.LockscreenInterface" />
+        <activity android:name="Settings$LockscreenInterfaceActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.cyanogenmod.LockscreenInterface" />
+            <intent-filter>
+                <action android:name="android.settings.LOCKSCREEN_INTERFACE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".notificationlight.NotificationLightSettings" />
 
@@ -1878,6 +1890,8 @@
         <activity android:name=".cyanogenmod.StatusBar" />
 
         <activity android:name=".cyanogenmod.NotificationDrawer" />
+
+        <activity android:name=".cyanogenmod.SpamList" />
 
          <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
         <activity android:name="Settings$BlacklistSettingsActivity"
@@ -1931,6 +1945,7 @@
         <activity android:name=".mokee.ChangeLog" />
         <activity android:name=".mokee.ContributorsCloud" />
         <activity android:name=".mokee.SmartControl" />
+        <activity android:name=".mokee.DSBSettings" />
         <activity android:name="Settings$PowerSaverSettingsActivity"
                   android:label="@string/power_saver_settings_title"
                   android:taskAffinity=""
@@ -1999,6 +2014,8 @@
 
         <service android:name="com.mokee.helper.service.UpdateCheckService" />
 
+        <service android:name="com.mokee.helper.service.DownloadCompleteIntentService" />
+
         <receiver android:name="com.mokee.helper.receiver.UpdateCheckReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -2010,6 +2027,7 @@
             <intent-filter>
                 <action android:name="com.mokee.mkupdater.action.DOWNLOAD_COMPLETED" />
                 <action android:name="com.mokee.mkupdater.action.START_DOWNLOAD" />
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
         </receiver>
 
@@ -2167,7 +2185,7 @@
         <activity android:name=".applications.ProtectedAppsActivity"
                   android:label="@string/protected_apps"
                   android:excludeFromRecents="true"
-                  android:configChanges="orientation">
+                  android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name=".applications.ProtectedAppsActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2176,11 +2194,25 @@
 
         <activity android:name=".applications.LockPatternActivity"
                   android:label="@string/protected_apps"
+                  android:windowSoftInputMode="stateHidden|adjustResize"
                   android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name=".applications.LockPatternActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <!-- PA Pie -->
+        <activity android:name="Settings$PieActivity"
+                android:label="@string/pa_pie_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mokee.Pie" />
         </activity>
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
@@ -2237,6 +2269,57 @@
         <!-- MOKEE ANONYMOUS STATISTICS END -->
 
         <!-- MOKEE PUSH SERVICE START -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true" >
+             <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <category android:name="com.android.settings" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+
         <receiver android:name=".mkpush.PushingServiceManager"
             android:label="PushingServiceManager" >
             <intent-filter>
@@ -2245,52 +2328,17 @@
         </receiver>
 
         <receiver android:name=".mkpush.PushingMessageReceiver"
-            android:label="PushingMessageReceiver" >
+            android:label="PushingMessageReceiver"
+            android:enabled="true" >
             <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
-                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <category android:name="com.android.settings" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".mkpush.PushingService"
-            android:label="PushingService"
-            android:enabled="true"
-            android:exported="false">
-        </service>
-
-        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
-            android:process=":mokeepushservice" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
-                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
-            </intent-filter>
-        </receiver>
-
-        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
-            android:process=":mokeepushservice" >
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.METHOD" />
-                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package" />
-            </intent-filter>                   
-        </receiver>    
-
-        <service android:name="com.baidu.android.pushservice.PushService"
-            android:exported="true"
-            android:process=":mokeepushservice"
-            android:label="MoKeePushService" >
-            <intent-filter >
-                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE"/>
-            </intent-filter>
-        </service>
-
-        <meta-data android:name="api_key" android:value="MRTYpHDAzBM5D3pfhkj9V9Gh" />
+        <meta-data android:name="JPUSH_CHANNEL" android:value="default"/>
+        <meta-data android:name="JPUSH_APPKEY" android:value="d1c78fa87f8836f81ed6f329" />
         <!-- MOKEE PUSH SERVICE END -->
 
         <!-- MOKEE DONATE START -->
@@ -2301,6 +2349,53 @@
         <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
         <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" />
         <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" />
+
+        <activity
+            android:name="com.wanpu.pay.PayView"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoPluginLoadingActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoOrderDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoPayResultActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoWebViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.payeco.android.plugin.PayecoRiskControlActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.unionpay.uppay.PayActivityEx"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.unionpay.uppay.PayActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UPPay" />
+
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
         <!-- MOKEE DONATE END -->
 
         <!-- Watch for ContactsContract.Profile changes and update the user's photo.  -->

@@ -735,7 +735,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     /* package */ static boolean isRootForAppsEnabled() {
         int value = SystemProperties.getInt(ROOT_ACCESS_PROPERTY, 1);
-        return value == 1 || value == 3;
+        boolean daemonState = SystemProperties.get("init.svc.su_daemon", "absent").equals("running");
+        return daemonState && (value == 1 || value == 3);
     }
 
     private void writeRootAccessOptions(Object newValue) {
@@ -1451,7 +1452,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                     mKeepScreenOn.isChecked() ?
-                    (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
+                    (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB | BatteryManager.BATTERY_PLUGGED_WIRELESS) : 0);
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();
         } else if (preference == mAllowMockLocation) {
@@ -1529,10 +1530,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                             oldRuntimeValue, newRuntimeValue));
                 } else {
                     builder.setMessage(Html.fromHtml(context.getResources().getString(
-                            R.string.custom_runtime_warning_message,
+                            R.string.mokee_runtime_warning_message,
                             oldRuntimeValue, newRuntimeValue)));
                     builder.setTitle(context.getResources().getString(
-                            R.string.custom_runtime_warning_title));
+                            R.string.mokee_runtime_warning_title));
                 }
                 builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
                     @Override
