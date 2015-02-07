@@ -89,7 +89,8 @@
         </dashboard-tile>
 
         <!-- Updater -->
-        <dashboard-tile
+        <!--
+	<dashboard-tile
             android:id="@+id/updater_settings"
             android:icon="@drawable/ic_settings_updater"
             android:title="@string/updater_settings" >
@@ -98,6 +99,7 @@
             android:targetPackage="com.spezi77.updater"
             android:targetClass="com.spezi77.updater.Updater" />
         </dashboard-tile>
+	-->
 
     </dashboard-category>
 
