@@ -166,8 +166,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
-    private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
-
     private static final String HEADS_UP_TICKER_EXP_KEY = "heads_up_ticker_exp";
 
     private static final int RESULT_DEBUG_APP = 1000;
@@ -246,8 +244,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private PreferenceScreen mProcessStats;
     
-
-    private SwitchPreference mAdvancedReboot;
     private SwitchPreference mHeadsUpTicker;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
@@ -321,7 +317,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
-        mAdvancedReboot = findAndInitSwitchPref(ADVANCED_REBOOT_KEY);
         mHeadsUpTicker = findAndInitSwitchPref(HEADS_UP_TICKER_EXP_KEY);
 
 
@@ -330,8 +325,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
-            disableForUser(mQuickBoot);
-            disableForUser(mAdvancedReboot);
             disableForUser(mHeadsUpTicker);
         }
 
@@ -605,8 +598,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateSimulateColorSpace();
         updateUseNuplayerOptions();
         updateUSBAudioOptions();
-        updateAdvancedRebootOptions();
-        updateRootAccessOptions();
         updateHeadsUpTickerOptions();
     }
 
@@ -624,6 +615,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void updateAdvancedRebootOptions() {
         mAdvancedReboot.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.ADVANCED_REBOOT, 0) != 0);
+=======
+>>>>>>> dac9891... Revert "GlobalActions: Bring back old goodies [2/2]"
     }
 
     private void resetHeadsUpTickerOptions() {
@@ -654,7 +647,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         resetDebuggerOptions();
         writeLogdSizeOption(null);
         resetUseNuplayerOptions();
-        resetAdvancedRebootOptions();
         resetHeadsUpTickerOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
@@ -1567,8 +1559,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeUseNuplayerOptions();
         } else if (preference == mUSBAudio) {
             writeUSBAudioOptions();
-        } else if (preference == mAdvancedReboot) {
-            writeAdvancedRebootOptions();
         } else if (preference == mHeadsUpTicker) {
             writeHeadsUpTickerOptions();
         } else {

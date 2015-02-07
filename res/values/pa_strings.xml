@@ -31,10 +31,6 @@
     <!-- Sound & notification > Other sounds: Title for the option enabling sound on volume slide adjust. [CHAR LIMIT=30] -->
     <string name="volume_adjust_sound_title">Volume slider sound</string>
 
-    <!-- Advanced reboot options -->
-    <string name="advanced_reboot_title">Advanced reboot</string>
-    <string name="advanced_reboot_summary">When unlocked, include options in the power menu for rebooting into recovery or bootloader</string>
-
     <!-- Notifications as heads-up -->
     <string name="zen_heads_up_toggle_title">Heads-up notifications</string>
     <string name="zen_heads_up_toggle_summary">Allows incoming notifications that support the heads-up mode to be displayed at the top.</string>
