@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-
-   Copyright 2013 The ParanoidAndroid Project
+   Copyright 2013,2014, The ParanoidAndroid Project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -36,6 +35,13 @@
     <string name="advanced_reboot_title">Advanced reboot</string>
     <string name="advanced_reboot_summary">When unlocked, include options in the power menu for rebooting into recovery or bootloader</string>
 
+    <!-- Notifications as heads-up -->
+    <string name="zen_heads_up_toggle_title">Heads-up notifications</string>
+    <string name="zen_heads_up_toggle_summary">Allows incoming notifications that support the heads-up mode to be displayed at the top.</string>
+    <!-- Heads-up ticker enabled setting, experimental. -->
+    <string name="heads_up_ticker_exp_title">Enable heads-up ticker check</string>
+    <string name="heads_up_ticker_exp_summary">When a notification is not noisy check if ticker is not null and show it. Grouped notifications are still half-broken, see hangouts.</string>
+
     <!-- Security > Quick unlock on keyguard -->
     <string name="quick_unlock_title">Quick unlock</string>
     <string name="quick_unlock_summary">When enabled you will not need to confirm your lockscreen password or PIN, it will automatically unlock when right PIN or password is entered</string>
@@ -56,4 +62,23 @@
     <string name="root_access_adb">ADB only</string>
     <string name="root_access_all">Apps and ADB</string>
     
+    <!--User preferences settings-->
+    <string name="personalization">Personalization</string>
+    <string name="reset_user_preferences_title">Reset preferences</string>
+    <string name="reset_user_preferences_summary">Restores user interface preferences to default values</string>
+    <string name="reset_user_preferences_dialog">Are you sure you want to reset your preferences?</string>
+
+    <!-- Gestures -->
+    <string name="gesture_title">Gestures</string>
+
+    <!-- Per app controls for LP keyguard notifications -->
+    <string name="app_notification_show_on_keyguard_title">Show on lockscreen</string>
+    <string name="app_notification_show_on_keyguard_summary">Show notifications from this app on the lockscreen</string>
+    <string name="app_notification_no_ongoing_on_keyguard_title">Disable ongoing on lockscreen</string>
+    <string name="app_notification_no_ongoing_on_keyguard_summary">Never show ongoing notifications from this app on the lockscreen</string>
+
+    <!-- Hardware tunables - Vibrator intensity -->
+    <string name="vibrator_intensity_title">Vibrator intensity</string>
+    <string name="vibrator_warning">Values higher than %1$d are not recommended</string>
+
 </resources>
