@@ -100,7 +100,6 @@ import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.ZenModeSettings;
-import com.android.settings.paranoid.GestureSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
@@ -235,8 +234,7 @@ public class SettingsActivity extends Activity
             R.id.print_settings,
             R.id.nfc_payment_settings,
             R.id.home_settings,
-            R.id.dashboard,
-            R.id.gesture_settings
+            R.id.dashboard
     };
 
     private static final String[] ENTRY_FRAGMENTS = {
@@ -300,8 +298,7 @@ public class SettingsActivity extends Activity
             AppNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             QuickLaunchSettings.class.getName(),
-            ApnSettings.class.getName(),
-            GestureSettings.class.getName()
+            ApnSettings.class.getName()
     };
 
 
@@ -1129,7 +1126,8 @@ public class SettingsActivity extends Activity
                 DashboardTile tile = category.getTile(n);
                 boolean removeTile = false;
                 id = (int) tile.id;
-                if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
+                if (id == R.id.operator_settings || id == R.id.manufacturer_settings
+                        || id == R.id.device_specific_gesture_settings) {
                     if (!Utils.updateTileToSpecificActivityFromMetaDataOrRemove(this, tile)) {
                         removeTile = true;
                     }
