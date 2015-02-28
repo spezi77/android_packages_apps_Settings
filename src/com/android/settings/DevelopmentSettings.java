@@ -592,24 +592,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateHeadsUpTickerOptions();
     }
 
-    private void resetAdvancedRebootOptions() {
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.ADVANCED_REBOOT, 0);
-    }
-
-    private void writeAdvancedRebootOptions() {
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.ADVANCED_REBOOT,
-                mAdvancedReboot.isChecked() ? 1 : 0);
-    }
-
-    private void updateAdvancedRebootOptions() {
-        mAdvancedReboot.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
-                Settings.Secure.ADVANCED_REBOOT, 0) != 0);
-=======
->>>>>>> dac9891... Revert "GlobalActions: Bring back old goodies [2/2]"
-    }
-
     private void resetHeadsUpTickerOptions() {
         Settings.System.putInt(getActivity().getContentResolver(),
                 Settings.System.HEADS_UP_TICKER_ENABLED, 0);
