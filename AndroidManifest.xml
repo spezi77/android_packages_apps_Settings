@@ -72,6 +72,7 @@
     <uses-permission android:name="android.permission.CHANGE_PRIVACY_GUARD_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_BLACKLIST" />
     <uses-permission android:name="android.permission.CHANGE_PHONE_BLACKLIST" />
+    <uses-permission android:name="com.cyanogen.permission.REQUEST_KILL_SWITCH_OP" />
 
     <permission
         android:name="android.permission.REQUEST_SUPERUSER"
@@ -1875,7 +1876,14 @@
 
         <activity android:name=".cyanogenmod.ContributorsCloud" />
 
-        <activity android:name=".cyanogenmod.LockscreenInterface" />
+        <activity android:name="Settings$LockscreenInterfaceActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.cyanogenmod.LockscreenInterface" />
+            <intent-filter>
+                <action android:name="android.settings.LOCKSCREEN_INTERFACE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".notificationlight.NotificationLightSettings" />
 
