@@ -272,6 +272,11 @@
             android:title="@string/immediately_destroy_activities"
             android:summary="@string/immediately_destroy_activities_summary"/>
 
+        <CheckBoxPreference
+            android:key="allow_signature_fake"
+            android:title="@string/allow_signature_fake"
+            android:summary="@string/allow_signature_fake_summary"/>
+
         <ListPreference
             android:key="select_runtime"
             android:title="@string/select_runtime_title"
