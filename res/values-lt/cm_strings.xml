@@ -1034,4 +1034,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
   <string name="no_triggers_configured">Nėra sukonfigūruotų jungiklių. Bakstelėkite norėdami pridėti daugiau.</string>
   <string name="no_triggers_configured_nfc">Bakstelėkite norėdami nustatyti naują NFC jungiklį.</string>
   <string name="sound_ringtone_multisim_options">Pakeisti numatytuosius skambėjimo tonus</string>
+  <string name="lock_to_cyanogen_title">Įrenginio apsauga</string>
+  <string name="lock_to_cyanogen_summary">Reikalauti „Cyanogen“ OS paskyros slaptažodžio net ir po gamyklinių nustatymų iš naujo</string>
+  <string name="lock_to_cyanogen_create_account_msg">Jūsų įrenginys naudoja „Cyanogen“ OS paskyros slaptažodį, kad apsaugotų įrenginį net ir po gamyklinių nustatymų iš naujo. Jums reikės sukurti „Cyanogen“ OS paskyrą.</string>
+  <string name="lock_to_cyanogen_disable_msg">Neleidžiant šios funkcijos, vartotojai neturintys leidimo galės nustatyti iš naujo telefono gamyklinius nustatymus jei jis pavogiamas. Jūsų asmeniniai duomenys gali būti neapsaugoti. Ar norite neleisti šios funkcijos?</string>
+  <string name="lock_to_cyanogen_master_clear_warning">Įrenginio apsauga yra įgalinta. Prašome neleisti, kad galėtumėte tęsti savo įrenginio nustatymą iš naujo.</string>
 </resources>

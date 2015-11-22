@@ -669,10 +669,10 @@
   <string name="camera_wake_summary">按相机键唤醒设备</string>
   <string name="camera_sleep_on_release_title">屏幕窥探</string>
   <string name="camera_sleep_on_release_summary">仅当按钮被按下的时候，半按将会保持屏幕点亮</string>
-  <string name="camera_music_controls_title">相机键音乐控制</string>
+  <string name="camera_music_controls_title">播放控制</string>
   <string name="camera_music_controls_summary">屏幕关闭时，长按相机键将播放/暂停当前的音乐</string>
   <string name="volume_wake_summary">按音量键唤醒设备</string>
-  <string name="volbtn_music_controls_title">音量键音乐控制</string>
+  <string name="volbtn_music_controls_title">播放控制</string>
   <string name="volbtn_music_controls_summary">屏幕关闭时，长按音量键将改变音乐曲目</string>
   <string name="volbtn_cursor_control_title">键盘光标控制</string>
   <string name="volbtn_cursor_control_off">禁用</string>
@@ -1018,4 +1018,9 @@
   <string name="no_triggers_configured">没有配置触发器。轻按以添加更多。</string>
   <string name="no_triggers_configured_nfc">轻按以设置一个新的 NFC 触发器。</string>
   <string name="sound_ringtone_multisim_options">改变默认铃声</string>
+  <string name="lock_to_cyanogen_title">设备保护</string>
+  <string name="lock_to_cyanogen_summary">即使设备被恢复出厂设置，也要求输入 Cyanogen OS 帐户密码</string>
+  <string name="lock_to_cyanogen_create_account_msg">即使设备被恢复出厂设置，也可以被 Cyanogen OS 帐户密码所保护。您将需要创建一个 Cyanogen OS 帐户。</string>
+  <string name="lock_to_cyanogen_disable_msg">如果您的手机被盗，禁用此功能将会使得未经授权的用户重置您的手机为出厂默认值。您的个人数据可能无法被保护。您确定要禁用此功能？</string>
+  <string name="lock_to_cyanogen_master_clear_warning">设备保护已启用。请在重设您的设备前先将其禁用。</string>
 </resources>

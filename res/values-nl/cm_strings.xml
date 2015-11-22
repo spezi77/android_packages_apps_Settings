@@ -18,7 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="wifi_setting_countrycode_title">Wifi-regiocode</string>
   <string name="wifi_setting_countrycode_summary">Regiocode opgeven voor wifi</string>
-  <string name="wifi_setting_countrycode_error">Kan regiocode niet instellen</string>
+  <string name="wifi_setting_countrycode_error">Kan regiocode niet instellen.</string>
   <string name="wifi_setting_priority_title">Wifi-prioriteit</string>
   <string name="wifi_setting_priority_summary">Prioriteit instellen van wifi-netwerken</string>
   <string name="wifi_ssid_input_limit">SSID te lang</string>
@@ -381,8 +381,8 @@ Extra opties zijn beschikbaar door een regel lang aan te raken. Door \'Aanpassen
   <string name="quiet_hours_still_summary">Trillen uitschakelen</string>
   <string name="quiet_hours_dim">Meldingsled</string>
   <string name="quiet_hours_dim_summary">Meldingsled uitschakelen</string>
-  <string name="quiet_hours_haptic">Haptische feedback</string>
-  <string name="quiet_hours_haptic_summary">Haptische feedback uitschakelen</string>
+  <string name="quiet_hours_haptic">Trillen</string>
+  <string name="quiet_hours_haptic_summary">Trillen uitschakelen</string>
   <string name="quiet_hours_active_period">Actief van <xliff:g id="start">%1$s</xliff:g> tot <xliff:g id="end">%2$s</xliff:g></string>
   <string name="quiet_hours_ringer_allow_all">Beltoon bij alle oproepen</string>
   <string name="quiet_hours_ringer_allow_contacts">Beltoon bij oproepen van contacten</string>
@@ -507,7 +507,7 @@ Extra opties zijn beschikbaar door een regel lang aan te raken. Door \'Aanpassen
   <string name="adb_notify">USB-foutopsporingsmodus melden</string>
   <string name="adb_notify_summary">Melding tonen indien USB-foutopsporingmodus is ingeschakeld</string>
   <string name="adb_over_network">ADB over netwerk</string>
-  <string name="adb_over_network_summary">TCP/IP-foutopsporing inschakelen over netwerkinterfaces (wifi, USB-netwerken). Wordt hersteld bij opstarten</string>
+  <string name="adb_over_network_summary">TCP/IP-foutopsporing inschakelen over netwerkinterfaces (wifi, USB-netwerken). Wordt gereset bij opstarten</string>
   <string name="adb_over_network_warning">Let op: als ADB over netwerk is ingeschakeld, kan op uw apparaat worden ingebroken via alle aangesloten netwerken, inclusief via uw GSM-gegevensnetwerk!\n\nGebruik deze functie alleen indien u verbonden bent met vertrouwde netwerken.\n\nWeet u zeker dat u deze functie wilt inschakelen?</string>
   <string name="device_hostname">Hostnaam apparaat</string>
   <string name="notification_drawer_title">Meldingenpaneel</string>
@@ -667,7 +667,7 @@ Extra opties zijn beschikbaar door een regel lang aan te raken. Door \'Aanpassen
   <string name="home_answer_call_title">Oproep beantwoorden</string>
   <string name="home_answer_call_summary">Inkomende oproep beantwoorden door op de thuisknop te drukken</string>
   <string name="camera_wake_summary">Apparaat ontwaken door op de cameraknop te drukken</string>
-  <string name="camera_sleep_on_release_title">Scherm</string>
+  <string name="camera_sleep_on_release_title">Scherm kort aan</string>
   <string name="camera_sleep_on_release_summary">Scherm aan tijdens half indrukken knop</string>
   <string name="camera_music_controls_title">Muziek beheren</string>
   <string name="camera_music_controls_summary">Bij scherm uit huidig nummer afspelen/pauzeren door cameraknop lang in te drukken</string>
@@ -1019,4 +1019,9 @@ Extra opties zijn beschikbaar door een regel lang aan te raken. Door \'Aanpassen
   <string name="no_triggers_configured">Geen triggers ingesteld. Tik om toe te voegen.</string>
   <string name="no_triggers_configured_nfc">Tik om nieuwe NFC-trigger in te stellen.</string>
   <string name="sound_ringtone_multisim_options">Standaardbeltoon wijzigen</string>
+  <string name="lock_to_cyanogen_title">Apparaatbeveiliging</string>
+  <string name="lock_to_cyanogen_summary">Uw Cyanogen OS-accountwachtwoord vereisen, zelfs na een herstel naar fabrieksinstellingen</string>
+  <string name="lock_to_cyanogen_create_account_msg">Uw apparaat gebruikt het wachtwoord van uw Cyanogen OS-account om zich te beschermen, zelfs wanneer de fabrieksinstellingen hersteld zijn. U dient hiervoor een Cyanogen OS-account aan te maken.</string>
+  <string name="lock_to_cyanogen_disable_msg">Door deze functie uit te schakelen kunnen onbevoegde gebruikers uw telefoon herstellen naar fabrieksinstellingen wanneer deze gestolen is. Uw persoonlijke gegevens zijn mogelijk niet beschermd. Wilt u deze functie toch uitschakelen?</string>
+  <string name="lock_to_cyanogen_master_clear_warning">Apparaatbeveiliging is ingeschakeld. Schakel dit uit als u door wilt gaan met het opnieuw instellen van uw apparaat.</string>
 </resources>
