@@ -91,6 +91,17 @@
         android:fragment="com.android.settings.HomeSettings"
         android:title="@string/home_settings" />
 
+    <!-- Kernel Tweaker -->
+    <header
+        android:id="@+id/kernel_tweaker"
+        android:title="@string/kernel_tweaker_title"
+        android:icon="@drawable/ic_liquid_performance" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.dsht.kerneltweaker.MainActivity"
+            android:targetPackage="com.dsht.kerneltweaker" />
+	</header>
+
     <!-- Lock screen -->
     <header
         settings:includeXmlForSearch="@xml/lockscreen_interface_settings"
