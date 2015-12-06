@@ -2047,7 +2047,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     
     <!-- Preference label trackball wake -->
-    <string name="pref_trackball_wake_toggle_title">Trackball Wake</string>
-    <string name="pref_trackball_wake_toggle_summary">Trackball Betätigung schaltet das Gerät ein</string>
+    <string name="trackball_wake_screen_title">Trackball Wake</string>
+    <string name="trackball_wake_screen_summary">Trackball Betätigung schaltet das Gerät ein</string>
     
 </resources>

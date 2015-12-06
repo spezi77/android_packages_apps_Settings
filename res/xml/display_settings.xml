@@ -160,9 +160,9 @@
 		
 	<!-- Add trackball wake -->
 	<CheckBoxPreference
-		android:key="pref_trackball_wake_toggle"
-		android:title="@string/pref_trackball_wake_toggle_title"
-		android:summary="@string/pref_trackball_wake_toggle_summary"
+		android:key="trackball_wake_screen"
+		android:title="@string/trackball_wake_screen_title"
+		android:summary="@string/trackball_wake_screen_summary"
 		android:defaultValue="true" />
 
         </PreferenceCategory>

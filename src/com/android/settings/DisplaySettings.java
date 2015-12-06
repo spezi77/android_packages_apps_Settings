@@ -91,7 +91,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SUNLIGHT_ENHANCEMENT = "sunlight_enhancement";
     private static final String KEY_COLOR_ENHANCEMENT = "color_enhancement";
     private static final String KEY_TAP_TO_WAKE = "double_tap_wake_gesture";
-    private static final String TRACKBALL_WAKE_TOGGLE = "pref_trackball_wake_toggle";
+    private static final String TRACKBALL_WAKE_SCREEN = "trackball_wake_screen";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -304,7 +304,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 	
 	//Trackball wake
 	mTrackballWake = (CheckBoxPreference)
-	    prefSet.findPreference(TRACKBALL_WAKE_TOGGLE);
+	    prefSet.findPreference(TRACKBALL_WAKE_SCREEN);
 	mTrackballWake.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
 
         // respect device default configuration

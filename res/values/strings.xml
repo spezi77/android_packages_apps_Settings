@@ -4939,7 +4939,7 @@
     <string name="adb_notify_summary">Display a notification when USB debugging is connected</string>
 
     <!-- Preference label trackball wake -->
-    <string name="pref_trackball_wake_toggle_title">Trackball wake</string>
-    <string name="pref_trackball_wake_toggle_summary">Trackball press wakes device</string>
+    <string name="trackball_wake_screen_title">Trackball wake</string>
+    <string name="trackball_wake_screen_summary">Trackball press wakes device</string>
 
 </resources>
