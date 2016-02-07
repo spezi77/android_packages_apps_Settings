@@ -71,7 +71,7 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
             mTitleTextView.setSingleLine(true);
         }
         mStatusTextView = (TextView) view.findViewById(R.id.status);
-        mDivider = view.findViewById(R.id.tile_divider);
+        mDivider = (View) view.findViewById(R.id.tile_divider);
         if (Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.DASHBOARD_TILEVIEW_DIVIDERS, 0, UserHandle.USER_CURRENT) == 1) {
             mDivider.setVisibility(View.GONE);
@@ -82,6 +82,15 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
 
         setOnClickListener(this);
         setBackgroundResource(R.drawable.dashboard_tile_background);
+        setBackgroundColor(Settings.System.getInt(context.getContentResolver(),
+            Settings.System.SETTINGS_BG_COLOR, 0xff000000));
+        mDivider.setBackgroundResource(R.drawable.dashboard_tile_background);
+        mDivider.setBackgroundColor(Settings.System.getInt(context.getContentResolver(),
+            Settings.System.SETTINGS_BG_COLOR, 0xff000000));
+        mTitleTextView.setTextColor(Settings.System.getInt(context.getContentResolver(),
+            Settings.System.SETTINGS_TITLE_TEXT_COLOR, 0xff1976D2));
+        mStatusTextView.setTextColor(Settings.System.getInt(context.getContentResolver(),
+            Settings.System.SETTINGS_CATEGORY_TEXT_COLOR, 0xff1976D2));
         setFocusable(true);
         updateDashFont();
     }
@@ -138,7 +147,7 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
     }
 
     public void setDividerVisibility(boolean visible) {
-        mDivider.setVisibility(visible ? View.VISIBLE : View.GONE);
+        mDivider.setVisibility(visible ? View.GONE : View.GONE);
     }
 
     void setColumnSpan(int span) {
