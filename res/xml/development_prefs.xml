@@ -195,6 +195,17 @@
             android:title="@string/legacy_dhcp_client"
             android:summary="@string/legacy_dhcp_client_summary"/>
 
+        <com.android.settings.CustomDefaultGatewayPreference
+            android:key="custom_default_gateway"
+            android:title="@string/custom_default_gateway"
+            android:dialogTitle="@string/custom_default_gateway"
+            android:positiveButtonText="@string/wifi_save"
+            android:negativeButtonText="@string/wifi_cancel"
+            android:selectAllOnFocus="true"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions"
+            android:persistent="false" />
+
        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
