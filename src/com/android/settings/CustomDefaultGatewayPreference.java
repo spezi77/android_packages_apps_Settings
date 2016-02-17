@@ -123,7 +123,6 @@ public class CustomDefaultGatewayPreference extends EditTextPreference {
     public void onSetInitialValue(boolean restoreValue, Object defaultValue) {
         String gateway = getText();
         persistGateway(gateway);
-        setNewGateway(gateway);
     }
 
     public void persistGateway(String gateway) {
@@ -131,7 +130,4 @@ public class CustomDefaultGatewayPreference extends EditTextPreference {
                 Settings.Secure.DEFAULT_GATEWAY, gateway);
     }
 
-    public void setNewGateway(String gateway) {
-        new CMDProcessor().su.run("busybox route add default gw " + gateway);
-    }
 }
