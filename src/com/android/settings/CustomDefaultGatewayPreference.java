@@ -24,7 +24,6 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.AttributeSet;
 import android.util.Log;
-import com.android.settings.utils.CMDProcessor;
 
 import cyanogenmod.providers.CMSettings;
 
