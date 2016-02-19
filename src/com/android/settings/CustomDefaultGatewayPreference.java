@@ -109,7 +109,6 @@ public class CustomDefaultGatewayPreference extends EditTextPreference {
         }
         SystemProperties.set(PROP_DEFAULT_GATEWAY, text);
         persistGateway(text);
-        setNewGateway(text);
         setSummary(text);
     }
 
