@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Typeface;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.os.UserHandle;
 import android.util.AttributeSet;
@@ -50,6 +51,7 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
     private Switch mSwitch;
     private GenericSwitchToggle mSwitchToggle;
     private int mIconColor;
+    private int mDashTextSize = 14;
 
     private int mColSpan = DEFAULT_COL_SPAN;
 
@@ -93,6 +95,13 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
             Settings.System.SETTINGS_TITLE_TEXT_COLOR, 0xff1976D2));
         mStatusTextView.setTextColor(Settings.System.getInt(context.getContentResolver(),
             Settings.System.SETTINGS_CATEGORY_TEXT_COLOR, 0xff1976D2));
+        mStatusTextView.setTextSize(Settings.System.getIntForUser(context.getContentResolver(),
+            Settings.System.SETTINGS_TITLE_TEXT_SIZE, 14,
+               UserHandle.USER_CURRENT));
+        mTitleTextView.setTextSize(Settings.System.getIntForUser(context.getContentResolver(),
+            Settings.System.SETTINGS_TITLE_TEXT_SIZE, 18,
+               UserHandle.USER_CURRENT));
+
         setFocusable(true);
         updateDashFont();
         updateIconColor();
