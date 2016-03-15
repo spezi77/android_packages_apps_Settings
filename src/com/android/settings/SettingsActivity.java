@@ -72,6 +72,9 @@ import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.applications.DrawOverlayDetails;
+import com.android.settings.cyanogenmod.Navbar;
+import com.android.settings.cyanogenmod.FlingSettings;
+import com.android.settings.cyanogenmod.SmartbarSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
@@ -378,7 +381,10 @@ public class SettingsActivity extends Activity
             ProfilesSettings.class.getName(),
             ContributorsCloudFragment.class.getName(),
             NotificationManagerSettings.class.getName(),
-	    com.android.settings.cyanogenmod.WakelockBlocker.class.getName()
+	    com.android.settings.cyanogenmod.WakelockBlocker.class.getName(),
+            Navbar.class.getName(),
+            FlingSettings.class.getName(),
+            SmartbarSettings.class.getName()
     };
 
 

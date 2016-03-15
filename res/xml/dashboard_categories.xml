@@ -93,6 +93,14 @@
         </dashboard-tile>
     </dashboard-category>
 
+        <!-- Data Usage -->
+        <dashboard-tile
+                android:id="@+id/navbar"
+                android:title="@string/fling_navbar_settings"
+                android:fragment="com.android.settings.cyanogenmod.Navbar"
+                android:icon="@drawable/fling_navbar_icon"
+                />
+
     <!-- DEVICE -->
     <dashboard-category
             android:id="@+id/device_section"
