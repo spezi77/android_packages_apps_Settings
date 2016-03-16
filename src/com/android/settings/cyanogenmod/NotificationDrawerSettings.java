@@ -32,6 +32,7 @@ import com.android.internal.logging.MetricsLogger;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.SeekBarPreferenceCham;
 
 import cyanogenmod.providers.CMSettings;
 
@@ -44,6 +45,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
     private static final String PREF_STATUS_BAR_HEADER_FONT_STYLE = "status_bar_header_font_style";
+    private static final String CUSTOM_HEADER_IMAGE_SHADOW = "status_bar_custom_header_shadow";
 
     private SwitchPreference mCustomHeader;
     private SwitchPreference mCustomHeaderDefault;
@@ -53,6 +55,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     private ListPreference mStatusBarHeaderFontStyle;
     private ListPreference mNumColumns;
     private ListPreference mNumRows;
+    private SeekBarPreferenceCham mHeaderShadow;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -96,6 +99,12 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
         mNumRows.setValue(String.valueOf(numRows));
         updateNumRowsSummary(numRows);
         mNumRows.setOnPreferenceChangeListener(this);
+
+	mHeaderShadow = (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
+        final int headerShadow = Settings.System.getInt(resolver,
+                Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
+        mHeaderShadow.setValue(headerShadow);
+        mHeaderShadow.setOnPreferenceChangeListener(this);
 
 	// Status bar header font style
         mStatusBarHeaderFontStyle = (ListPreference) findPreference(PREF_STATUS_BAR_HEADER_FONT_STYLE);
@@ -171,6 +180,11 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT,
                     (Boolean) newValue ? 1 : 0);
             return true;
+	} else if (preference == mHeaderShadow) {
+           int headerShadow = (Integer) newValue;
+           Settings.System.putInt(getActivity().getContentResolver(),
+                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, headerShadow);
+           return true;
         } else if (preference == mSmartPulldown) {
             int smartPulldown = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
