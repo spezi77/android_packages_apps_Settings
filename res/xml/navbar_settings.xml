@@ -51,7 +51,7 @@
 	 <PreferenceScreen
             android:key="pulse_settings"
             android:title="@string/pulse_settings"
-            android:fragment="com.android.settings.cyanogemod.PulseSettings" />   
+            android:fragment="com.android.settings.cyanogenmod.PulseSettings" />   
 	    
 
     <com.android.settings.cyanogenmod.NavbarSizePreference

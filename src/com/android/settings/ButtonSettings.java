@@ -136,7 +136,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mSwapVolumeButtons;
     private SwitchPreference mPowerEndCall;
     private SwitchPreference mHomeAnswerCall;
-    private SwitchPreference mCameraDoubleTapPowerGesture;	
+    private SwitchPreference mCameraDoubleTapPowerGesture;
+    private SwitchPreference mDisableNavigationKeys;
 
     private Handler mHandler;
 

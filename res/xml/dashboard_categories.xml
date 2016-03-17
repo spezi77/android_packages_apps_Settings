@@ -93,19 +93,18 @@
         </dashboard-tile>
     </dashboard-category>
 
-        <!-- Data Usage -->
+    <!-- DEVICE -->
+    <dashboard-category
+            android:id="@+id/device_section"
+            android:key="@string/category_key_device"
+            android:title="@string/header_category_device" >
+
         <dashboard-tile
                 android:id="@+id/navbar"
                 android:title="@string/fling_navbar_settings"
                 android:fragment="com.android.settings.cyanogenmod.Navbar"
                 android:icon="@drawable/fling_navbar_icon"
                 />
-
-    <!-- DEVICE -->
-    <dashboard-category
-            android:id="@+id/device_section"
-            android:key="@string/category_key_device"
-            android:title="@string/header_category_device" >
 
 	<dashboard-tile
                 android:id="@+id/kernel_adiutor"
