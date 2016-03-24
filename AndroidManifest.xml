@@ -2390,7 +2390,7 @@
 	<!-- Heads up settings activity. -->
         <activity android:name="Settings$HeadsUpSettingsActivity"
                 android:uiOptions="splitActionBarWhenNarrow"
-                android:label="@string/category_heads_up"
+                android:label="@string/heads_up_notifications"
                 android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -2398,8 +2398,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.headsup.HeadsUpSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/dirtytweaks" />
         </activity>
 
         <!-- CyanogenMod activities End -->
