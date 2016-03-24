@@ -2387,21 +2387,6 @@
                 android:value="com.android.settings.cyanogenmod.FlingSettings" />
         </activity>
 
-	<!-- Heads up settings activity. -->
-        <activity android:name="Settings$HeadsUpSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
-                android:label="@string/category_heads_up"
-                android:excludeFromRecents="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.headsup.HeadsUpSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/dirtytweaks" />
-        </activity>
-
         <!-- CyanogenMod activities End -->
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
