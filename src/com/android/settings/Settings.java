@@ -802,7 +802,7 @@ public class Settings extends PreferenceActivity
                 // Embedding into Settings only if app exists (user could manually remove it)
                 boolean supported = false;
                 try {
-                    supported = (getPackageManager().getPackageInfo("com.dsht.kerneltweaker", 0).versionCode >= 18);
+                    supported = (getPackageManager().getPackageInfo("com.grarak.kerneladiutor", 0).versionCode >= 0);
                 } catch (PackageManager.NameNotFoundException e) {
                 }
                 if (!supported) {

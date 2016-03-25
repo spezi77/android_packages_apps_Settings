@@ -98,8 +98,8 @@
         android:icon="@drawable/ic_liquid_performance" >
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetClass="com.dsht.kerneltweaker.MainActivity"
-            android:targetPackage="com.dsht.kerneltweaker" />
+            android:targetClass="com.grarak.kerneladiutor.MainActivity"
+            android:targetPackage="com.grarak.kerneladiutor" />
 	</header>
 
     <!-- Lock screen -->
