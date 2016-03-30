@@ -87,6 +87,7 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.contributors.ContributorsCloudFragment;
 import com.android.settings.cyanogenmod.DisplayRotation;
 import com.android.settings.cyanogenmod.WakelockBlocker; 
+import com.android.settings.cyanogenmod.LiveLockScreenSettings;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
@@ -384,7 +385,8 @@ public class SettingsActivity extends Activity
 	    com.android.settings.cyanogenmod.WakelockBlocker.class.getName(),
             Navbar.class.getName(),
             FlingSettings.class.getName(),
-            SmartbarSettings.class.getName()
+            SmartbarSettings.class.getName(),
+            LiveLockScreenSettings.class.getName()
     };
 
 
