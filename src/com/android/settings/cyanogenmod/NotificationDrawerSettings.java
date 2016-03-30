@@ -129,9 +129,9 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
          mDaylightHeaderPack.setOnPreferenceChangeListener(this);
          
 	mHeaderShadow = (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
-        final int headerShadow = Settings.System.getInt(getContentResolver(),
+        final int headerShadow = Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
-        mHeaderShadow.setValue((int)((headerShadow / 255) * 100));
+        mHeaderShadow.setValue(headerShadow);
         mHeaderShadow.setOnPreferenceChangeListener(this);
 
 	// Status bar header font style
@@ -194,10 +194,9 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
              mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntries()[valueIndex]);
              return true;
 	} else if (preference == mHeaderShadow) {
-            Integer headerShadow = (Integer) newValue;
-            int realHeaderValue = (int) (((double) headerShadow / 100) * 255);
-            Settings.System.putInt(getContentResolver(),
-              Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, realHeaderValue);
+            int headerShadow = (Integer) newValue;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, headerShadow);
 	    return true;
 	} else if (preference == mNumColumns) {
             int numColumns = Integer.valueOf((String) newValue);
