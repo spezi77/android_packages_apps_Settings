@@ -2387,6 +2387,9 @@
                 android:value="com.android.settings.cyanogenmod.FlingSettings" />
         </activity>
 
+	<!-- Hide Apps from Recents (HAFR) -->
+        <activity android:name=".cyanogenmod.HAFRAppListActivity" />
+
         <!-- CyanogenMod activities End -->
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
