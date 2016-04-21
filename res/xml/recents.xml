@@ -72,9 +72,8 @@
         android:defaultValue="true"
         android:dependency="show_clear_all_recents" />
 
-    <PreferenceScreen
+    <Preference
         android:key="hide_app_from_recents"
-        android:fragment="com.android.settings.cyanogenmod.HAFRAppListActivity"
         android:title="@string/hide_apps_from_recents_title"
         android:summary="@string/hide_apps_from_recents_summary" />
 
