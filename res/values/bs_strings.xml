@@ -1145,6 +1145,17 @@
     <string name="smartbar_config_backup_error_toast">Error saving Smartbar profile</string>
     <string name="smartbar_config_restore_error_toast">Error restoring Smartbar profile</string>
 
+    <!-- Floating Windows -->
+    <string name="shortcut_action_floating_windows">Floating Windows</string>
+    <string name="floating_master_switch">Master Switch</string>
+    <string name="floating_additional_options">Additional Float Options</string>
+    <string name="floating_windows">Floating Windows</string>
+    <string name="floating_windows_switch">Whether to allow global use of float mode, if this is off none of the below options will work DUH!!!</string>
+    <string name="slim_action_floats">Slim Actions &amp; Pie</string>
+    <string name="slim_action_floats_summary">Launch Slim &amp; Pie Actions in Floating Window Mode</string>
+    <string name="gesture_anywhere_floating">Gesture Anywhere</string>
+    <string name="gesture_anywhere_floating_summary">Launch Gesture Anywhere shortcuts in float mode</string>
+
     <!-- Heads Up Timeout -->
     <string name="heads_up_time_out_title">Time out</string>
     <string name="heads_up_time_out_summary">Notification will show for <xliff:g id="number">%d</xliff:g> seconds</string>

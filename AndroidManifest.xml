@@ -2870,6 +2870,8 @@
 	<activity android:name=".cyanogenmod.gestureanywhere.GestureAnywhereBuilderActivity" />
         <activity android:name=".cyanogenmod.gestureanywhere.GestureAnywhereCreateGestureActivity" />
 
+        <activity android:name=".cyanogenmod.FloatingWindows" />
+
         <activity android:name=".Settings$LiveLockScreenSettingsActivity"
                   android:label="@string/live_lock_screen_title"
                   android:taskAffinity="">
