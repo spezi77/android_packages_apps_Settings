@@ -906,7 +906,9 @@
     <string name="smart_pulldown_all">No dismissable or persistent</string>
 
     <!-- Dashboard settings -->
-    <string name="dashboard_category">Dashboard settings</string>
+    <string name="dashboard_category">Dashboard</string>
+    <string name="dashboard_settings_title">Dashboard options</string>
+    <string name="dashboard_settings_summary">Options to select different colors, fonts for various dashboard items</string>
     <string name="dashboard_columns_title">Columns</string>
     <string name="dashboard_columns_summary">Change the number of columns displayed in the dashboard</string>
     <string name="dashboard_columns_dialog_title">Select dashboard columns</string>
@@ -963,7 +965,7 @@
     <string name="icons_title">Icons</string>
     <string name="background_title">Background</string>
     <string name="text_title">Text</string>
-    <string name="toolbar_title">Toolbar</string>
+    <string name="toolbar_title">Toolbar text</string>
 
     <!-- Dashboard Text Size -->
     <string name="dash_title_text_size">Title text size</string>
