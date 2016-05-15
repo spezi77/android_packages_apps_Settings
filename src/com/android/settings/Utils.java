@@ -1451,6 +1451,11 @@ public final class Utils {
         }
     }
 
+    public static boolean isSwitchesEnabled(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.DASHBOARD_SWITCHES, 0) != 1;
+    }
+
     public static boolean isAirplaneModeEnabled(Context context) {
         return Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
