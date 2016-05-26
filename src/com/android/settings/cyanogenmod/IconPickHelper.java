@@ -32,8 +32,6 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.settings.R;
-
 public class IconPickHelper {
     private static final String TAG = "IconPickHelper";
     public static final int REQUEST_PICK_ICON_PACK = 100;
