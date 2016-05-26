@@ -30,8 +30,6 @@ import android.os.Environment;
 import android.os.UserHandle;
 import android.widget.Toast;
 
-import com.android.settings.R;
-
 /**
  * So we can capture image selection in DUSystemReceiver
  */
