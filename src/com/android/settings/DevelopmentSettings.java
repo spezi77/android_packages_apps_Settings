@@ -871,10 +871,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         if (Integer.valueOf(newValue.toString()) < 2 && !oldValue.equals(newValue)
                 && "1".equals(SystemProperties.get("service.adb.root", "0"))) {
             SystemProperties.set("service.adb.root", "0");
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 0);
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 1);
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.ADB_ENABLED, 0);
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.ADB_ENABLED, 1);
         }
         updateRootAccessOptions();
     }
@@ -884,10 +884,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         SystemProperties.set(ROOT_ACCESS_PROPERTY, "0");
         if (!oldValue.equals("0") && "1".equals(SystemProperties.get("service.adb.root", "0"))) {
             SystemProperties.set("service.adb.root", "0");
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 0);
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 1);
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.ADB_ENABLED, 0);
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.ADB_ENABLED, 1);
         }
         updateRootAccessOptions();
     }
@@ -1772,10 +1772,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void confirmEnableOemUnlock() {
-        DialogInterface.OnClickListener onConfirmListener = new DialogInterface.OnClickListener() {
+        DialogInterface.OnClickListener onEnableOemListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.setOemUnlockEnabled(getActivity(), true);
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    Utils.setOemUnlockEnabled(getActivity(), true);
+                }
                 updateAllOptions();
             }
         };
@@ -1783,8 +1785,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.confirm_enable_oem_unlock_title)
                 .setMessage(R.string.confirm_enable_oem_unlock_text)
-                .setPositiveButton(R.string.enable_text, onConfirmListener)
-                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.enable_text, onEnableOemListener)
+                .setNegativeButton(android.R.string.cancel, onEnableOemListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -1803,6 +1806,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 .setMessage(R.string.confirm_enable_multi_window_text)
                 .setPositiveButton(R.string.enable_text, onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, onConfirmListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }

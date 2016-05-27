@@ -68,11 +68,16 @@
     <string name="battery_bar">Battery bar location</string>
     <string name="battery_bar_no_navbar">Battery bar location</string>
     <string name="battery_bar_color">Battery bar color</string>
+    <string name="battery_bar_charging_color">Battery bar charging color</string>
+    <string name="battery_bar_battery_low_color">Battery bar low battery color</string>
     <string name="battery_bar_cat">Battery bar style</string>
     <string name="battery_bar_style_title">Battery bar alignment</string>
     <string name="battery_bar_thickness_title">Battery bar thickness</string>
     <string name="battery_bar_animate_title">Charging animation</string>
     <string name="battery_bar_animate_summary">The charging animation may result in a poor user experience. Enable at your own discretion.</string>
+    <string name="battery_bar_style_regular">Regular</string>
+    <string name="battery_bar_style_center_mirrored">Center-mirrored</string>
+    <string name="battery_bar_style_reversed">Reversed</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
@@ -751,6 +756,7 @@
     <string name="clock_font_notoserif_bold">NotoSerif Bold</string>
     <string name="clock_font_notoserif_bold_italic">NotoSerif Bold Italic</string>
     <string name="clock_font_size_title">Font size</string>
+    <string name="status_bar_show_clock_second_title">Clock seconds</string>
     <string name="clock_font_size_4">4</string>
     <string name="clock_font_size_5">5</string>
     <string name="clock_font_size_6">6</string>
@@ -1037,6 +1043,8 @@
     <string name="fling_short_swipe_left">Left short swipe</string>
     <string name="fling_long_swipe_right">Right long swipe</string>
     <string name="fling_long_swipe_left">Left long swipe</string>
+    <string name="fling_right_up_swipe">Right side swipe up</string>
+    <string name="fling_left_up_swipe">Left side swipe up</string>
     <string name="fling_single_tap">Single tap right</string>
     <string name="fling_double_tap">Double tap right</string>
     <string name="fling_long_press">Long press right</string>
@@ -1074,7 +1082,7 @@
 
     <!-- Pulse navigation bar music visualizer -->
     <string name="pulse_help_policy_notice_title">About Pulse</string>
-    <string name="pulse_help_policy_notice_summary">Pulse is brilliant equalizer bar style audio visualization on the navigation bar when music plays. Pulse does not work with some audio sources when listening on device speaker</string>
+    <string name="pulse_help_policy_notice_summary">Pulse is brilliant equalizer bar style audio visualization on the navigation bar when music plays. Pulse does not work with some audio sources when listening on device speaker. Be Sure To Play/Pause Track again After Resetting Pulse Dimension.</string>
     <string name="pulse_settings">Pulse</string>
     <string name="pulse_settings_summary">Navigation bar audio visualization</string>
     <string name="fling_show_pulse_title">Show Pulse</string>
@@ -1082,6 +1090,57 @@
     <string name="fling_pulse_color">Pulse color</string>
     <string name="eos_fling_lavalamp_title">Turn on Lava Lamp</string>
     <string name="eos_fling_lavalamp_summary">Pulse animates a smooth lava lamp style color blend</string>
+    <string name="pulse_custom_dimen">Pulse Bar Width</string>
+    <string name="pulse_dimen0">Default</string>
+    <string name="pulse_dimen1">7dp</string>
+    <string name="pulse_dimen2">8dp</string>
+    <string name="pulse_dimen3">9dp</string>
+    <string name="pulse_dimen4">10dp</string>
+    <string name="pulse_dimen5">11dp</string>
+    <string name="pulse_dimen6">12dp</string>
+    <string name="pulse_dimen7">13dp</string>
+    <string name="pulse_dimen8">15dp</string>
+    <string name="pulse_dimen9">16dp</string>
+    <string name="pulse_dimen10">17dp</string>
+    <string name="pulse_dimen11">18dp</string>
+    <string name="pulse_dimen12">19dp</string>
+    <string name="pulse_dimen13">20dp</string>
+    <string name="pulse_dimen14">21dp</string>
+    <string name="pulse_dimen15">22dp</string>
+    <string name="pulse_dimen16">23dp</string>
+    <string name="pulse_dimen17">24dp</string>
+    <string name="pulse_dimen18">25dp</string>
+    <string name="pulse_dimen19">26dp</string>
+    <string name="pulse_custom_div">Pulse Bar Spacing</string>
+    <string name="default_div">Default</string>
+    <string name="div1">18</string>
+    <string name="div2">20</string>
+    <string name="div3">22</string>
+    <string name="div4">24</string>
+    <string name="div5">26</string>
+    <string name="div6">28</string>
+    <string name="div7">30</string>
+    <string name="div8">32</string>
+    <string name="default_fill">4dp(default)</string>
+    <string name="pulse_bar_style">Pulse Bar Style</string>
+    <string name="default_pulse_empty">1dp(default)</string>	
+    <string name="pulse_filled_block_size">Block Size</string>
+    <string name="pulse_empty_block_size">Block Spacing</string>
+    <string name="pulse_fill1">5dp</string>
+    <string name="pulse_fill2">6dp</string>
+    <string name="pulse_fill3">7dp</string>
+    <string name="pulse_fill4">8dp</string>
+    <string name="pulse_empty1">2dp</string>
+    <string name="pulse_empty2">3dp</string>
+    <string name="pulse_empty3">4dp</string>
+    <string name="pulse_empty4">0(no spacing)</string>
+
+    <string name="factor0">Normal</string>
+    <string name="factor1">Relaxed</string>
+    <string name="factor2">Slow</string>
+    <string name="factor3">Hyper</string>
+    <string name="factor4">Insane</string>
+    <string name="pulse_custom_fudge_factor">Visualizer Sanity Level</string>
 
     <!-- Navbar height -->
     <string name="navigation_bar_size_title">Bar size</string>
@@ -1123,7 +1182,8 @@
 
     <!-- Heads Up Snooze -->
     <string name="heads_up_snooze">Snooze</string>
-    <string name="heads_up_snooze_summary">Notifications will NOT be shown for the next <xliff:g id="number">%d</xliff:g> minutes</string>
+    <string name="heads_up_snooze_disabled_summary">Snooze timer is disabled</string>
+    <string name="heads_up_snooze_summary">Swiping up on the heads up notification will snooze heads up from that application for <xliff:g id="number">%d</xliff:g> minutes</string>
     <string name="heads_up_snooze_1min">1 minute</string>
     <string name="heads_up_snooze_5min">5 minutes</string>
     <string name="heads_up_snooze_10min">10 minutes</string>
@@ -1139,4 +1199,13 @@
     <string name="doze_wakeup_doubletap_title">Double-tap to wake on doze</string>
     <string name="doze_wakeup_doubletap_summary_on">Require a double-tap to wake the device on a doze pulse screen</string>
     <string name="doze_wakeup_doubletap_summary_off">Require a simple-tap to wake the device on a doze pulse screen (default)</string>
+
+    <!-- Hide apps from recents -->
+    <string name="hide_from_recents_add_app">Add App</string>
+    <string name="hide_apps_from_recents_title">Hidden Apps</string>
+    <string name="hide_apps_from_recents_summary">Pick which apps to exclude from the recents panel.</string>
+
+    <!-- Current on Lockscreen -->
+    <string name="lock_screen_show_current">Charging Current</string>
+    <string name="lock_screen_show_current_summary">Show Charging Current rate on lock screen</string>
 </resources>

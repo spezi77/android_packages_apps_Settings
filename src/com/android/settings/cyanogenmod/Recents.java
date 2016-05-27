@@ -18,6 +18,7 @@ package com.android.settings.cyanogenmod;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +53,14 @@ public class Recents extends SettingsPreferenceFragment implements
     private static final String KEY_OMNISWITCH = "omniswitch";
     public static final String OMNISWITCH_PACKAGE_NAME = "org.omnirom.omniswitch";
 
+    private static final String PREF_HIDDEN_RECENTS_APPS_START = "hide_app_from_recents";
+    // Package name of the hidden recetns apps activity
+    public static final String HIDDEN_RECENTS_PACKAGE_NAME = "com.android.settings";
+    // Intent for launching the hidden recents actvity
+    public static Intent INTENT_HIDDEN_RECENTS_SETTINGS = new Intent(Intent.ACTION_MAIN)
+            .setClassName(HIDDEN_RECENTS_PACKAGE_NAME,
+            HIDDEN_RECENTS_PACKAGE_NAME + ".cyanogenmod.HAFRAppListActivity");
+
     private Preference mOmniSwitch;
     private SwitchPreference mRecentsClearAll;
     private ListPreference mRecentsClearAllLocation;
@@ -61,6 +70,7 @@ public class Recents extends SettingsPreferenceFragment implements
     private ListPreference mImmersiveRecents;
     private SwitchPreference mRecentsFullScreenClock;
     private SwitchPreference mRecentsFullScreenDate;
+    private Preference mHiddenRecentsApps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +108,8 @@ public class Recents extends SettingsPreferenceFragment implements
         mImmersiveRecents.setSummary(mImmersiveRecents.getEntry());
         mImmersiveRecents.setOnPreferenceChangeListener(this);
 
+	mHiddenRecentsApps = (Preference) prefSet.findPreference(PREF_HIDDEN_RECENTS_APPS_START);
+
         updateSettingsVisibility();
     }
 
@@ -129,6 +141,16 @@ public class Recents extends SettingsPreferenceFragment implements
             mImmersiveRecents.setValue(String.valueOf(newValue));
             mImmersiveRecents.setSummary(mImmersiveRecents.getEntry());
 	    enabledateandtime();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mHiddenRecentsApps) {
+            getActivity().startActivity(INTENT_HIDDEN_RECENTS_SETTINGS);
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return false;
     }

@@ -72,6 +72,11 @@
         android:defaultValue="true"
         android:dependency="show_clear_all_recents" />
 
+    <Preference
+        android:key="hide_app_from_recents"
+        android:title="@string/hide_apps_from_recents_title"
+        android:summary="@string/hide_apps_from_recents_summary" />
+
     <!-- OmniSwitch -->
     <PreferenceScreen
         android:id="@+id/omniswitch"

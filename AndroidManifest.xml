@@ -86,6 +86,7 @@
     <uses-permission android:name="cyanogenmod.permission.MODIFY_PROFILES" />
     <uses-permission android:name="cyanogenmod.permission.PROTECTED_APP" />
     <uses-permission android:name="cyanogenmod.permission.PERFORMANCE_ACCESS" />
+    <uses-permission android:name="cyanogenmod.permission.MANAGE_LIVEDISPLAY" />
 
     <application android:label="@string/settings_label"
             android:icon="@mipmap/ic_launcher_settings"
@@ -527,6 +528,13 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
+
+        <receiver android:name=".DateChangeReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+            </intent-filter>
+        </receiver>
 
         <activity android:name="DateTimeSettingsSetupWizard"
                   android:label="@string/date_and_time"
@@ -2227,8 +2235,7 @@
                 android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.LIVEDISPLAY_SETTINGS" />
-                <action android:name="com.android.settings.LIVEDISPLAY_SETTINGS" />
+                <action android:name="cyanogenmod.settings.LIVEDISPLAY_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.SHORTCUT" />
@@ -2386,6 +2393,9 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.cyanogenmod.FlingSettings" />
         </activity>
+
+	<!-- Hide Apps from Recents (HAFR) -->
+        <activity android:name=".cyanogenmod.HAFRAppListActivity" />
 
         <!-- CyanogenMod activities End -->
 
@@ -2554,7 +2564,7 @@
                        android:resource="@id/sound_settings" />
         </activity>
 
-        <activity android:name="Settings$SoundSettingsActivity"
+        <activity android:name="Settings$CMSoundSettingsActivity"
                 android:label="@string/notification_settings"
                 android:exported="true"
                 android:taskAffinity="">
@@ -2579,7 +2589,7 @@
         <activity-alias android:name="Settings$SoundSettingsActivity"
                 android:label="@string/notification_settings"
                 android:taskAffinity=""
-                android:targetActivity="Settings$SoundSettingsActivity">
+                android:targetActivity="Settings$CMSoundSettingsActivity">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
                 <action android:name="android.settings.SOUND_SETTINGS" />
@@ -2965,18 +2975,28 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".headsup.HeadsUpSettings" />
-
-        <!-- Weather Service Providers settings -->
-        <activity android:name="Settings$WeatherProviderServicesActivity"
-                  android:taskAffinity=""
-                  android:label="@string/weather_settings_title">
+        <activity android:name="Settings$HeadsUpSettingsActivity"
+            android:label="@string/heads_up_notifications"
+            android:excludeFromRecents="true">
             <intent-filter>
-                <action android:name="cyanogenmod.intent.action.MANAGE_WEATHER_PROVIDER_SERVICES" />
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.HEADS_UP_SETTINGS" />
+                <action android:name="com.android.settings.HEADS_UP_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.cyanogenmod.WeatherServiceSettings" />
+                android:value="com.android.settings.headsup.HeadsUpSettings" />
         </activity>
+
+        <activity android:name=".CarrierSelection"
+                  android:label="@string/shortcut_carrier_title"
+                  android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>

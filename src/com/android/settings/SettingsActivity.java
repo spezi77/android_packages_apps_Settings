@@ -41,6 +41,7 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
@@ -88,7 +89,6 @@ import com.android.settings.contributors.ContributorsCloudFragment;
 import com.android.settings.cyanogenmod.DisplayRotation;
 import com.android.settings.cyanogenmod.WakelockBlocker; 
 import com.android.settings.cyanogenmod.LiveLockScreenSettings;
-import com.android.settings.cyanogenmod.WeatherServiceSettings;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
@@ -100,6 +100,7 @@ import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.headsup.HeadsUpSettings;
 import com.android.settings.livedisplay.LiveDisplay;
 import com.android.settings.notification.NotificationManagerSettings;
 import com.android.settings.notification.OtherSoundSettings;
@@ -389,7 +390,7 @@ public class SettingsActivity extends Activity
             FlingSettings.class.getName(),
             SmartbarSettings.class.getName(),
             LiveLockScreenSettings.class.getName(),
-            WeatherServiceSettings.class.getName()
+            HeadsUpSettings.class.getName()
     };
 
 
@@ -651,7 +652,7 @@ public class SettingsActivity extends Activity
                     1 /* one home activity by default */);
         } else {
             if (!mIsShowingDashboard) {
-                mDisplaySearch = true;
+                mDisplaySearch = Process.myUid() == Process.SYSTEM_UID;
                 // UP will be shown only if it is a sub settings
                 if (mIsShortcut) {
                     mDisplayHomeAsUpEnabled = isSubSettings;
@@ -1348,11 +1349,6 @@ public class SettingsActivity extends Activity
                     boolean hasDeviceKeys = getResources().getInteger(
                             com.android.internal.R.integer.config_deviceHardwareKeys) != 0;
                     if (!hasDeviceKeys) {
-                        removeTile = true;
-                    }
-                } else if (id == R.id.weather_settings) {
-                    if (!getPackageManager().hasSystemFeature(
-                            CMContextConstants.Features.WEATHER_SERVICES)) {
                         removeTile = true;
                     }
                 }

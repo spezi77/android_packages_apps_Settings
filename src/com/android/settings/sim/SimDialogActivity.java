@@ -194,7 +194,8 @@ public class SimDialogActivity extends Activity {
                             case SMS_PICK:
                                 boolean isSmsPrompt = false;
                                 if (value < 1) {
-                                    isSmsPrompt = true;
+                                    isSmsPrompt = false; // user knows best
+                                    setDefaultSmsSubId(context, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
                                 } else {
                                     sir = smsSubInfoList.get(value);
                                     if ( sir != null) {
@@ -238,7 +239,7 @@ public class SimDialogActivity extends Activity {
                 }
             };
 
-        int currentIndex = -1;
+        int currentIndex = 0;
         ArrayList<SubscriptionInfo> callsSubInfoList = new ArrayList<SubscriptionInfo>();
         if (id == CALLS_PICK) {
             final TelecomManager telecomManager = TelecomManager.from(context);
@@ -295,7 +296,8 @@ public class SimDialogActivity extends Activity {
                 }
             }
         } else {
-            SubscriptionInfo defaultSub = subscriptionManager.getDefaultDataSubscriptionInfo();
+            currentIndex = -1;
+            final int defaultDataSubId = SubscriptionManager.getDefaultDataSubId();
             for (int i = 0; i < selectableSubInfoLength; ++i) {
                 final SubscriptionInfo sir = subInfoList.get(i);
                 CharSequence displayName = sir.getDisplayName();
@@ -303,8 +305,7 @@ public class SimDialogActivity extends Activity {
                     displayName = "";
                 }
                 list.add(displayName.toString());
-                if (defaultSub != null && defaultSub.getSubscriptionId()
-                        == sir.getSubscriptionId()) {
+                if (defaultDataSubId == sir.getSubscriptionId()) {
                     currentIndex = list.size() - 1;
                 }
             }
