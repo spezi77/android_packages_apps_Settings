@@ -75,10 +75,10 @@
         android:title="@string/status_bar_custom_header_shadow_title"
         android:summary="@string/status_bar_custom_header_shadow_summary"
         android:defaultValue="0"
-        android:max="255"
+        android:max="100"
         settings:minChOS="0"
         settings:unitsLeft=""
-        settings:unitsRight=""
+        settings:unitsRight="@string/unit_percent"
         android:persistent="false"
         android:dependency="status_bar_custom_header" />
 
