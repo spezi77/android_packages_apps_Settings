@@ -81,6 +81,7 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
+import com.android.settings.applications.RunningServices;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.blacklist.BlacklistSettings;
@@ -392,7 +393,8 @@ public class SettingsActivity extends Activity
             SmartbarSettings.class.getName(),
             LiveLockScreenSettings.class.getName(),
             HeadsUpSettings.class.getName(),
-            DozeSettingsFragment.class.getName()
+            DozeSettingsFragment.class.getName(),
+            RunningServices.class.getName()
     };
 
 
@@ -934,7 +936,6 @@ public class SettingsActivity extends Activity
         if (intentClass.equals(getClass().getName())) return null;
 
         if ("com.android.settings.ManageApplications".equals(intentClass)
-                || "com.android.settings.RunningServices".equals(intentClass)
                 || "com.android.settings.applications.StorageUse".equals(intentClass)) {
             // Old names of manage apps.
             intentClass = com.android.settings.applications.ManageApplications.class.getName();
