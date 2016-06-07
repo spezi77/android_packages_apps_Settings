@@ -133,6 +133,7 @@ import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.Index;
 import com.android.settings.privacyguard.PrivacyGuardPrefs;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.cyanogenmod.fragments.DozeSettingsFragment;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
@@ -390,7 +391,8 @@ public class SettingsActivity extends Activity
             FlingSettings.class.getName(),
             SmartbarSettings.class.getName(),
             LiveLockScreenSettings.class.getName(),
-            HeadsUpSettings.class.getName()
+            HeadsUpSettings.class.getName(),
+            DozeSettingsFragment.class.getName()
     };
 
 
