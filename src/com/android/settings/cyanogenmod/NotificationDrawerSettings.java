@@ -102,7 +102,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
 	mHeaderShadow = (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
         final int headerShadow = Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
-        mHeaderShadow.setValue(headerShadow);
+        mHeaderShadow.setValue((int)((headerShadow / 255) * 100));
         mHeaderShadow.setOnPreferenceChangeListener(this);
 
 	// Status bar header font style
@@ -219,9 +219,10 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
                     (Boolean) newValue ? 1 : 0);
             return true;
 	} else if (preference == mHeaderShadow) {
-           int headerShadow = (Integer) newValue;
-           Settings.System.putInt(getActivity().getContentResolver(),
-                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, headerShadow);
+           Integer headerShadow = (Integer) newValue;
+           int realHeaderValue = (int) (((double) headerShadow / 100) * 255);
+           Settings.System.putInt(resolver,
+                   Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, realHeaderValue);
            return true;
         } else if (preference == mSmartPulldown) {
             int smartPulldown = Integer.valueOf((String) newValue);
