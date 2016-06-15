@@ -19,47 +19,6 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/notification_drawer_title">
 
-    <PreferenceCategory
-        android:key="quicksettings_tiles_category"
-        android:title="@string/quicksettings_tiles_category">
-
-        <ListPreference
-            android:key="sysui_qs_num_rows"
-            android:title="@string/qs_num_rows_title"
-            android:entries="@array/qs_num_rows_entries"
-            android:entryValues="@array/qs_num_rows_values"
-            android:persistent="false" />
-
-        <ListPreference
-            android:key="sysui_qs_num_columns"
-            android:title="@string/qs_num_columns_title"
-            android:entries="@array/qs_num_columns_entries"
-            android:entryValues="@array/qs_num_columns_values"
-            android:persistent="false" />
-
-        <ListPreference
-            android:key="qs_tile_animation_style"
-            android:title="@string/qs_tile_animation_style_title"
-            android:entries="@array/qs_tile_animation_style_entries"
-            android:entryValues="@array/qs_tile_animation_style_values"
-            android:persistent="false" />
-
-        <ListPreference
-            android:key="qs_tile_animation_duration"
-            android:title="@string/qs_tile_animation_duration_title"
-            android:entries="@array/qs_tile_animation_duration_entries"
-            android:entryValues="@array/qs_tile_animation_duration_values"
-            android:persistent="false" />
-
-        <ListPreference
-            android:key="qs_tile_animation_interpolator"
-            android:title="@string/qs_tile_animation_interpolator_title"
-            android:entries="@array/qs_tile_animation_interpolator_entries"
-            android:entryValues="@array/qs_tile_animation_interpolator_values"
-            android:persistent="false" />
-
-    </PreferenceCategory>
-
     <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
         android:key="force_expanded_notifications"
         android:title="@string/force_expanded_notifications_title"
@@ -107,10 +66,45 @@
         android:entryValues="@array/clock_font_style_values"
         android:title="@string/status_bar_header_font_style_title" />
 
-    <!-- Notification colors -->
-    <PreferenceScreen
-            android:id="@+id/notification_colors"
-            android:title="@string/cat_colors_title"
-            android:fragment="com.android.settings.cyanogenmod.NotificationColorSettings" />
+    <PreferenceCategory
+        android:key="quicksettings_tiles_category"
+        android:title="@string/quicksettings_tiles_category">
+
+        <ListPreference
+            android:key="sysui_qs_num_rows"
+            android:title="@string/qs_num_rows_title"
+            android:entries="@array/qs_num_rows_entries"
+            android:entryValues="@array/qs_num_rows_values"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="sysui_qs_num_columns"
+            android:title="@string/qs_num_columns_title"
+            android:entries="@array/qs_num_columns_entries"
+            android:entryValues="@array/qs_num_columns_values"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="qs_tile_animation_style"
+            android:title="@string/qs_tile_animation_style_title"
+            android:entries="@array/qs_tile_animation_style_entries"
+            android:entryValues="@array/qs_tile_animation_style_values"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="qs_tile_animation_duration"
+            android:title="@string/qs_tile_animation_duration_title"
+            android:entries="@array/qs_tile_animation_duration_entries"
+            android:entryValues="@array/qs_tile_animation_duration_values"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="qs_tile_animation_interpolator"
+            android:title="@string/qs_tile_animation_interpolator_title"
+            android:entries="@array/qs_tile_animation_interpolator_entries"
+            android:entryValues="@array/qs_tile_animation_interpolator_values"
+            android:persistent="false" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
