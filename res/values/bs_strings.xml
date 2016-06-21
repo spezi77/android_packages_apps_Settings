@@ -1198,4 +1198,12 @@
     <string name="qs_set_animation_style">%1$s</string>
     <string name="qs_set_animation_duration">%1$s</string>
     <string name="qs_set_animation_interpolator">%1$s</string>
+
+    <!-- Volume dialog stroke settings -->
+    <string name="volume_dialog_stroke_title">Volume dialog stroke</string>
+    <string name="volume_dialog_stroke_disabled">Disabled</string>
+    <string name="volume_dialog_stroke_accent">Accent color</string>
+    <string name="volume_dialog_stroke_custom">Custom color</string>
+    <string name="volume_dialog_stroke_color_title">Volume dialog stroke color</string>
+    <string name="volume_dialog_stroke_thickness_title">Volume dialog stroke thickness</string>
 </resources>
