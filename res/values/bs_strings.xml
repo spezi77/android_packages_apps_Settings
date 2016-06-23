@@ -890,7 +890,7 @@
     <string name="volume_dialog_transparency">Volume dialog transparency</string>
     <string name="power_menu_transparency">Power/reboot menu transparency</string>
     <string name="power_menu_dialog_dim">Power/reboot dialog dim background amount</string>
-    <string name="transparency_title">Transparency</string>
+    <string name="transparency_title">Panel transparency</string>
 
     <!-- Hide Lockscreen clock, date & alarm -->
     <string name="hide_lockscreen_items_title">Lockscreen items</string>
