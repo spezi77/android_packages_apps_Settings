@@ -138,7 +138,7 @@ public class Transparency extends SettingsPreferenceFragment implements
             mVolumeDialogCornerRadius =
                     (SeekBarPreferenceCham) findPreference(PREF_VOLUME_DIALOG_CORNER_RADIUS);
             int volumeDialogCornerRadius = Settings.System.getInt(resolver,
-                    Settings.System.VOLUME_DIALOG_CORNER_RADIUS, 2);
+                    Settings.System.VOLUME_DIALOG_CORNER_RADIUS, 10);
             mVolumeDialogCornerRadius.setValue(volumeDialogCornerRadius / 1);
             mVolumeDialogCornerRadius.setOnPreferenceChangeListener(this);
 
@@ -174,7 +174,7 @@ public class Transparency extends SettingsPreferenceFragment implements
             mQSCornerRadius =
                     (SeekBarPreferenceCham) findPreference(PREF_QS_CORNER_RADIUS);
             int qSCornerRadius = Settings.System.getInt(resolver,
-                    Settings.System.QS_CORNER_RADIUS, 0);
+                    Settings.System.QS_CORNER_RADIUS, 5);
             mQSCornerRadius.setValue(qSCornerRadius / 1);
             mQSCornerRadius.setOnPreferenceChangeListener(this);
 
