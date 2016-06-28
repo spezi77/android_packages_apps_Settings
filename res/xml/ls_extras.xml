@@ -114,6 +114,28 @@
 	android:dependency="hide_lockscreen_clock"
         android:persistent="false" />
 
+    <com.android.settings.widget.SeekBarPreferenceCham
+        android:key="lockscreen_clock_font_size"
+        android:title="@string/lockscreen_clock_font_size_title"
+        android:max="150"
+        settings:minChOS="1"
+        settings:unitsLeft=""
+        settings:unitsRight="sp"
+        settings:defaultVal="88"
+        android:persistent="false"
+        android:dependency="hide_lockscreen_clock" />
+
+    <com.android.settings.widget.SeekBarPreferenceCham
+        android:key="lockscreen_date_font_size"
+        android:title="@string/lockscreen_date_font_size_title"
+        android:max="25"
+        settings:minChOS="1"
+        settings:unitsLeft=""
+        settings:unitsRight="sp"
+        settings:defaultVal="14"
+        android:persistent="false"
+        android:dependency="hide_lockscreen_date" />
+
     <!-- Lockscreen colors -->
     <PreferenceCategory
         android:key="lockscreen_colors_category"
