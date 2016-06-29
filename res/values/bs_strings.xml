@@ -1161,6 +1161,12 @@
     <string name="status_bar_custom_header_shadow_summary">For better visibility on bright images</string>
     <string name="unit_percent">\u0025</string>
 
+    <!-- Header text shadow and color -->
+    <string name="status_bar_custom_header_text_shadow_title">Header text shadow</string>
+    <string name="status_bar_custom_header_text_shadow_summary">For better visibility on themed headers</string>
+    <string name="status_bar_custom_header_text_shadow_color_title">Header text shadow color</string>
+    <string name="unit_percent">\u0025</string>
+
     <!-- DoubleTap2Wake Doze -->
     <string name="doze_wakeup_doubletap_title">Double-tap to wake on doze</string>
     <string name="doze_wakeup_doubletap_summary_on">Require a double-tap to wake the device on a doze pulse screen</string>
