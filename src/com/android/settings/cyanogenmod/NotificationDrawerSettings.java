@@ -33,6 +33,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SeekBarPreferenceCham;
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import cyanogenmod.providers.CMSettings;
 

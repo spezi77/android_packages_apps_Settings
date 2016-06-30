@@ -146,7 +146,7 @@ public class LSExtras extends SettingsPreferenceFragment
 	// Lockscreen clock font size
         mLockClockFontSize =
                 (SeekBarPreferenceCham) findPreference(PREF_LOCKSCREEN_CLOCK_FONT_SIZE);
-        int lockClockFontSize = Settings.System.getInt(resolver,
+        int lockClockFontSize = Settings.System.getInt(mResolver,
                 Settings.System.LOCKSCREEN_CLOCK_FONT_SIZE, 88);
         mLockClockFontSize.setValue(lockClockFontSize / 1);
         mLockClockFontSize.setOnPreferenceChangeListener(this);
@@ -154,7 +154,7 @@ public class LSExtras extends SettingsPreferenceFragment
         // Lockscreen date font size
         mLockDateFontSize =
                 (SeekBarPreferenceCham) findPreference(PREF_LOCKSCREEN_DATE_FONT_SIZE);
-        int lockDateFontSize = Settings.System.getInt(resolver,
+        int lockDateFontSize = Settings.System.getInt(mResolver,
                 Settings.System.LOCKSCREEN_DATE_FONT_SIZE, 14);
         mLockDateFontSize.setValue(lockDateFontSize / 1);
         mLockDateFontSize.setOnPreferenceChangeListener(this);

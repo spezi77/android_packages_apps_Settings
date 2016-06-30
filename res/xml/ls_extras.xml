@@ -121,7 +121,7 @@
         settings:minChOS="1"
         settings:unitsLeft=""
         settings:unitsRight="sp"
-        settings:defaultVal="88"
+        settings:defaultValue="88"
         android:persistent="false"
         android:dependency="hide_lockscreen_clock" />
 
@@ -132,7 +132,7 @@
         settings:minChOS="1"
         settings:unitsLeft=""
         settings:unitsRight="sp"
-        settings:defaultVal="14"
+        settings:defaultValue="14"
         android:persistent="false"
         android:dependency="hide_lockscreen_date" />
 
