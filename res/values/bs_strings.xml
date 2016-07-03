@@ -1230,4 +1230,8 @@
     <!-- Lockscreen clock and date font size -->
     <string name="lockscreen_clock_font_size_title">Lock clock font size</string>
     <string name="lockscreen_date_font_size_title">Lock date font size</string>
+
+    <!-- Lockscreen alpha -->
+    <string name="lockscreen_alpha">Alpha setting</string>
+    <string name="lockscreen_security_alpha">Bouncer alpha setting</string>
 </resources>

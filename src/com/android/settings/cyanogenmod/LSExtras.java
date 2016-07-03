@@ -71,6 +71,8 @@ public class LSExtras extends SettingsPreferenceFragment
     private static final String LOCKSCREEN_CLOCK_DATE_COLOR = "lockscreen_clock_date_color";
     private static final String PREF_LOCKSCREEN_CLOCK_FONT_SIZE = "lockscreen_clock_font_size";
     private static final String PREF_LOCKSCREEN_DATE_FONT_SIZE = "lockscreen_date_font_size";
+    private static final String PREF_LOCKSCREEN_ALPHA = "lockscreen_alpha";
+    private static final String PREF_LOCKSCREEN_SECURITY_ALPHA = "lockscreen_security_alpha";
  
     static final int DEFAULT = 0xffffffff;
 
@@ -86,6 +88,8 @@ public class LSExtras extends SettingsPreferenceFragment
     private ColorPickerPreference mLockscreenClockDateColorPicker;
     private SeekBarPreferenceCham mLockClockFontSize;
     private SeekBarPreferenceCham mLockDateFontSize;
+    private SeekBarPreferenceCham mLsAlpha;
+    private SeekBarPreferenceCham mLsSecurityAlpha;
 
     private ContentResolver mResolver;
 
@@ -176,6 +180,21 @@ public class LSExtras extends SettingsPreferenceFragment
         } else if (mBlockOnSecureKeyguard != null) {
             prefSet.removePreference(mBlockOnSecureKeyguard);
         }
+
+	// LS alpha
+        mLsAlpha =
+                (SeekBarPreferenceCham) findPreference(PREF_LOCKSCREEN_ALPHA);
+        float alpha = Settings.System.getFloat(mResolver,
+                Settings.System.LOCKSCREEN_ALPHA, 0.45f);
+        mLsAlpha.setValue((int)(100 * alpha));
+        mLsAlpha.setOnPreferenceChangeListener(this);
+
+        mLsSecurityAlpha =
+                (SeekBarPreferenceCham) findPreference(PREF_LOCKSCREEN_SECURITY_ALPHA);
+        float alpha2 = Settings.System.getFloat(mResolver,
+                Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f);
+        mLsSecurityAlpha.setValue((int)(100 * alpha2));
+        mLsSecurityAlpha.setOnPreferenceChangeListener(this);
         
     }
 
@@ -249,14 +268,24 @@ public class LSExtras extends SettingsPreferenceFragment
             return true;
 	} else if (preference == mLockClockFontSize) {
             int val = (Integer) newValue;
-            Settings.System.putInt(resolver,
+            Settings.System.putInt(mResolver,
                     Settings.System.LOCKSCREEN_CLOCK_FONT_SIZE, val * 1);
             return true;
         } else if (preference == mLockDateFontSize) {
             int val = (Integer) newValue;
-            Settings.System.putInt(resolver,
+            Settings.System.putInt(mResolver,
                     Settings.System.LOCKSCREEN_DATE_FONT_SIZE, val * 1);
            return true;
+	} else if (preference == mLsAlpha) {
+            int alpha = (Integer) newValue;
+            Settings.System.putFloat(mResolver,
+                    Settings.System.LOCKSCREEN_ALPHA, alpha / 100.0f);
+            return true;
+        } else if (preference == mLsSecurityAlpha) {
+            int alpha2 = (Integer) newValue;
+            Settings.System.putFloat(mResolver,
+                    Settings.System.LOCKSCREEN_SECURITY_ALPHA, alpha2 / 100.0f);
+            return true;
         }
         return false;
     }
