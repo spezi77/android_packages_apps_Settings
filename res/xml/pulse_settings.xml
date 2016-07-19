@@ -58,7 +58,7 @@
                 android:key="pulse_custom_dimen"
                 android:title="@string/pulse_custom_dimen"
                 android:max="19"
-                settings:minimum="0"
+                settings:minChOS="0"
                 settings:unitsLeft=""
                 settings:unitsRight="px"
                 android:persistent="false" />
@@ -67,7 +67,7 @@
                 android:key="pulse_custom_div"
                 android:title="@string/pulse_custom_div"
                 android:max="8"
-                settings:minimum="0"
+                settings:minChOS="0"
                 settings:unitsLeft=""
                 settings:unitsRight="px"
                 android:persistent="false" />
@@ -76,7 +76,7 @@
                 android:key="pulse_filled_block_size"
                 android:title="@string/pulse_filled_block_size"
                 android:max="4"
-                settings:minimum="0"
+                settings:minChOS="0"
                 settings:unitsLeft=""
                 settings:unitsRight="px"
                 android:persistent="false" />
@@ -85,7 +85,7 @@
                 android:key="pulse_empty_block_size"
                 android:title="@string/pulse_empty_block_size"
                 android:max="4"
-                settings:minimum="0"
+                settings:minChOS="0"
                 settings:unitsLeft=""
                 settings:unitsRight="px"
                 android:persistent="false" />
@@ -94,7 +94,7 @@
                 android:key="pulse_custom_fudge_factor"
                 android:title="@string/pulse_custom_fudge_factor"
                 android:max="4"
-                settings:minimum="0"
+                settings:minChOS="0"
                 settings:unitsLeft=""
                 settings:unitsRight=""
                 android:persistent="false" />
@@ -103,7 +103,7 @@
                 android:key="fling_pulse_lavalamp_speed"
                 android:title="@string/lavamp_solid_speed_title"
                 android:max="30000"
-                settings:minimum="200"
+                settings:minChOS="200"
                 settings:unitsLeft=""
                 settings:unitsRight="ms"
                 android:persistent="false" />
@@ -117,7 +117,7 @@
             android:key="pulse_solid_fudge_factor"
             android:title="@string/pulse_custom_fudge_factor"
             android:max="7"
-            settings:minimum="0"
+            settings:minChOS="0"
             settings:unitsLeft=""
             settings:unitsRight=""
             android:persistent="false" />
@@ -126,7 +126,7 @@
             android:key="lavamp_solid_speed"
             android:title="@string/lavamp_solid_speed_title"
             android:max="30000"
-            settings:minimum="200"
+            settings:minChOS="200"
             settings:unitsLeft=""
             settings:unitsRight="ms"
             android:persistent="false" />
