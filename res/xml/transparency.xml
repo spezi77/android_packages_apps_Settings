@@ -159,4 +159,13 @@
         settings:unitsRight="px"
         android:persistent="false" />
 
+    <com.android.settings.widget.SeekBarPreferenceCham
+        android:key="notification_alpha"
+        android:title="@string/notifications_transparency"
+        android:max="255"
+        settings:minChOS="0"
+        settings:unitsLeft=""
+        settings:unitsRight=""
+        android:persistent="false" />
+
 </PreferenceScreen>
