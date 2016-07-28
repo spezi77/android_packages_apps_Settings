@@ -24,13 +24,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import com.android.settings.R;
 
-public class SeekBarPreferenceCham extends Preference implements OnSeekBarChangeListener {
+public class SeekBarPreferenceCham extends Preference implements SeekBar.OnSeekBarChangeListener {
 
     private final String TAG = getClass().getName();
 
@@ -46,6 +46,9 @@ public class SeekBarPreferenceCham extends Preference implements OnSeekBarChange
     private String mUnitsRight = "";
     private SeekBar mSeekBar;
     private TextView mTitle;
+    private ImageView mImagePlus;
+    private ImageView mImageMinus;
+
     private TextView mStatusText;
 
     public SeekBarPreferenceCham(Context context, AttributeSet attrs) {
@@ -107,21 +110,54 @@ public class SeekBarPreferenceCham extends Preference implements OnSeekBarChange
         this.setShouldDisableView(true);
         if (mTitle != null) {
             mTitle.setEnabled(!disableDependent);
-        }
         if (mSeekBar != null) {
             mSeekBar.setEnabled(!disableDependent);
-        }
+        if (mImagePlus != null)
+            mImagePlus.setEnabled(!disableDependent);
+        if (mImageMinus != null)
+            mImageMinus.setEnabled(!disableDependent);
     }
 
     @Override
     protected View onCreateView(ViewGroup parent){
+        super.onCreateView(parent);
 
         RelativeLayout layout =  null;
         try {
             LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             layout = (RelativeLayout)mInflater.inflate(R.layout.seek_bar_preference, parent, false);
             mTitle = (TextView) layout.findViewById(android.R.id.title);
-        } catch(Exception e) {
+            mImagePlus = (ImageView) layout.findViewById(R.id.imagePlus);
+            mImagePlus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mSeekBar.setProgress((mCurrentValue + 1) - mMinValue);
+                }
+            });
+            mImagePlus.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mSeekBar.setProgress((mCurrentValue + 10) - mMinValue);
+                    return true;
+                }
+            });
+            mImageMinus = (ImageView) layout.findViewById(R.id.imageMinus);
+            mImageMinus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mSeekBar.setProgress((mCurrentValue - 1) - mMinValue);
+                }
+            });
+            mImageMinus.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mSeekBar.setProgress((mCurrentValue - 10) - mMinValue);
+                    return true;
+                }
+            });
+        }
+        catch(Exception e)
+        {
             Log.e(TAG, "Error creating seek bar preference", e);
         }
         return layout;
