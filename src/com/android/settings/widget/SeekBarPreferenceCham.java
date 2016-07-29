@@ -17,6 +17,8 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -48,6 +50,7 @@ public class SeekBarPreferenceCham extends Preference implements SeekBar.OnSeekB
     private TextView mTitle;
     private ImageView mImagePlus;
     private ImageView mImageMinus;
+    private Drawable mProgressThumb;
 
     private TextView mStatusText;
 
@@ -155,6 +158,7 @@ public class SeekBarPreferenceCham extends Preference implements SeekBar.OnSeekB
                     return true;
                 }
             });
+            mProgressThumb = mSeekBar.getThumb();
         }
         catch(Exception e)
         {
@@ -229,7 +233,14 @@ public class SeekBarPreferenceCham extends Preference implements SeekBar.OnSeekB
 
         // change accepted, store it
         mCurrentValue = newValue;
-        mStatusText.setText(String.valueOf(newValue));
+        if (mCurrentValue == mDefaultValue && mDefaultValue != -1) {
+            mStatusText.setText(R.string.default_string);
+            int redColor = getContext().getResources().getColor(R.color.seekbar_dot_color);
+            mProgressThumb.setColorFilter(redColor, PorterDuff.Mode.SRC_IN);
+        } else {
+            mStatusText.setText(String.valueOf(newValue));
+            mProgressThumb.clearColorFilter();
+        }
         persistInt(newValue);
     }
 
