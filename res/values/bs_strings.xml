@@ -1324,4 +1324,7 @@
     <string name="themes_tile_mods_notification_value" translatable="false">mods_notifications</string>
     <string name="themes_tile_mods_alarm_value" translatable="false">mods_alarms</string>
     <string name="themes_tile_mods_ringtone_value" translatable="false">mods_ringtones</string>
+
+    <!-- Phone info shortcut -->
+    <string name="device_info_title">Phone info</string>
 </resources>
