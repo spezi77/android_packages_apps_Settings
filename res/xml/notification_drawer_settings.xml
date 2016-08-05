@@ -50,7 +50,7 @@
         android:max="25"
         settings:minChOS="0"
         settings:unitsLeft=""
-        settings:unitsRight="@string/unit_percent"
+        settings:unitsRight="%"
         android:persistent="false" />
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
@@ -71,7 +71,7 @@
          android:max="100"
          settings:minChOS="0"
          settings:unitsLeft=""
-         settings:unitsRight="@string/unit_percent"
+         settings:unitsRight="%"
          android:persistent="false"
          android:dependency="status_bar_custom_header" />
 

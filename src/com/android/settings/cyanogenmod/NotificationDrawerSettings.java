@@ -107,10 +107,11 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
         mNumRows.setOnPreferenceChangeListener(this);
 
 	// Status Bar header text shadow
-        mTextShadow = (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_TEXT_SHADOW);
-        final float textShadow = Settings.System.getFloat(resolver,
+        mTextShadow =
+                (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_TEXT_SHADOW);
+        int textShadow = Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_TEXT_SHADOW, 0);
-        mTextShadow.setValue((int)(textShadow));
+        mTextShadow.setValue(textShadow / 1);
         mTextShadow.setOnPreferenceChangeListener(this);
 
         //Status Bar header text shadow color
@@ -123,10 +124,11 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
         mTShadowColor.setSummary(HexColor);
         mTShadowColor.setNewPreviewColor(shadowColor);
 
-	mHeaderShadow = (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
-        final int headerShadow = Settings.System.getInt(resolver,
+	mHeaderShadow =
+                (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
+        int headerShadow = Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
-        mHeaderShadow.setValue((int)((headerShadow / 255) * 100));
+        mHeaderShadow.setValue(headerShadow / 1);
         mHeaderShadow.setOnPreferenceChangeListener(this);
 
 	// Status bar header font style
@@ -243,11 +245,10 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
                     (Boolean) newValue ? 1 : 0);
             return true;
 	} else if (preference == mTextShadow) {
-            float textShadow = (Integer) newValue;
-            float realHeaderValue = (float) ((double) textShadow);
-            Settings.System.putFloat(resolver,
-                  Settings.System.STATUS_BAR_CUSTOM_HEADER_TEXT_SHADOW, realHeaderValue);
-             return true;
+            int textShadow = (Integer) newValue;
+            Settings.System.putInt(resolver,
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_TEXT_SHADOW, textShadow * 1);
+            return true;
         } else if (preference == mTShadowColor) {
             String hex = ColorPickerPreference.convertToARGB(
                     Integer.valueOf(String.valueOf(newValue)));
@@ -257,10 +258,9 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_TEXT_SHADOW_COLOR, intHex);
             return true;
 	} else if (preference == mHeaderShadow) {
-           Integer headerShadow = (Integer) newValue;
-           int realHeaderValue = (int) (((double) headerShadow / 100) * 255);
+           int headerValue = (Integer) newValue;
            Settings.System.putInt(resolver,
-                   Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, realHeaderValue);
+                   Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, headerValue * 1);
            return true;
         } else if (preference == mSmartPulldown) {
             int smartPulldown = Integer.valueOf((String) newValue);
