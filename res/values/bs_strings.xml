@@ -1275,6 +1275,9 @@
     <string name="toggle_package_install_overlay_check_title">Disable permission overlay check</string>
     <string name="toggle_package_install_overlay_check_summary">WARNING\u003A this disables a security check to prevent possible tapjacking! Use only if you understand the consequences.</string>
 
+    <string name="toast_text_color">Toast Text Color</string>
+    <string name="toast_icon_color">Toast Icon Color</string>
+
     <!-- Halo -->
     <string name="rr_halo_enable_title">Enable Halo</string>
     <string name="rr_halo_enable_summary">Enable Halo Button in extended statusbar</string>
