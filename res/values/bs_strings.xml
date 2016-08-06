@@ -1218,4 +1218,7 @@
 
     <!-- Navbar buttons transparency -->
     <string name="navbar_buttons_alpha_title">Buttons transparency</string>
+
+    <string name="toggle_package_install_overlay_check_title">Disable permission overlay check</string>
+    <string name="toggle_package_install_overlay_check_summary">WARNING\u003A this disables a security check to prevent possible tapjacking! Use only if you understand the consequences.</string>
 </resources>
