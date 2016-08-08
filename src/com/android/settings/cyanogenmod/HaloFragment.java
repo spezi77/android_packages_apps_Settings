@@ -24,7 +24,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import com.android.internal.logging.MetricsLogger;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -41,12 +40,6 @@ public class HaloFragment extends SettingsPreferenceFragment implements
         private ListPreference mHaloMsgAnimate;
 
         private Context mContext;
-
-    @Override
-    protected int getMetricsCategory() {
-        // todo add a constant in MetricsLogger.java
-        return MetricsLogger.MAIN_SETTINGS;
-    }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
