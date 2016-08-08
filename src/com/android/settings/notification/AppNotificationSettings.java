@@ -61,7 +61,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private static final String KEY_APP_SETTINGS = "app_settings";
     private static final String KEY_SHOW_ON_KEYGUARD = "show_on_keyguard";
     private static final String KEY_NO_ONGOING_ON_KEYGUARD = "no_ongoing_on_keyguard";
-    private static final String KEY_HALO = "halo";
 
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
             = new Intent(Intent.ACTION_MAIN)
@@ -76,7 +75,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private SwitchPreference mSensitive;
     private SwitchPreference mShowOnKeyguard;
     private SwitchPreference mShowNoOngoingOnKeyguard;
-    private SwitchPreference mHalo;
     private AppRow mAppRow;
     private boolean mCreated;
     private boolean mIsSystemPackage;
@@ -145,7 +143,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
         mShowOnKeyguard = (SwitchPreference) findPreference(KEY_SHOW_ON_KEYGUARD);
         mShowNoOngoingOnKeyguard = (SwitchPreference) findPreference(KEY_NO_ONGOING_ON_KEYGUARD);
-        mHalo = (SwitchPreference) findPreference(KEY_HALO);
 
         mAppRow = mBackend.loadAppRow(pm, info.applicationInfo);
 
@@ -159,7 +156,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mPriority.setChecked(mAppRow.priority);
         mPeekable.setChecked(mAppRow.peekable);
         mSensitive.setChecked(mAppRow.sensitive);
-        mHalo.setChecked(mAppRow.halo);
 
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
@@ -189,14 +185,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean peekable = (Boolean) newValue;
                 return mBackend.setPeekable(pkg, mUid, peekable);
-            }
-        });
-
-        mHalo.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean halo = (Boolean) newValue;
-                return mBackend.setHalo(pkg, mUid, halo);
             }
         });
 
@@ -283,7 +271,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         setVisible(mBlock, !mIsSystemPackage);
         setVisible(mPriority, mIsSystemPackage || !banned);
         setVisible(mPeekable, mIsSystemPackage || !banned && headsUpEnabled);
-        setVisible(mHalo, mIsSystemPackage || !banned);
         setVisible(mSensitive, mIsSystemPackage || !banned && lockscreenSecure
                 && lockscreenNotificationsEnabled && allowPrivate);
         setVisible(mShowOnKeyguard, mIsSystemPackage || !banned);
