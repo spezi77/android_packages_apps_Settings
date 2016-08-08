@@ -149,11 +149,6 @@
             android:title="@string/category_interface">
 
     	<PreferenceScreen
-        	android:key="nav_halo"
-        	android:fragment="com.android.settings.cyanogenmod.HaloFragment"
-        	android:title="@string/halo_settings_title"/>
-
-    	<PreferenceScreen
         	android:key="app_circle_bar"
         	android:fragment="com.android.settings.cyanogenmod.AppCircleBar"
         	android:title="@string/app_circle_bar_title"/>
