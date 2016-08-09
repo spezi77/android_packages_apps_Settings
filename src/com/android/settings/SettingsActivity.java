@@ -76,6 +76,7 @@ import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.cyanogenmod.Navbar;
 import com.android.settings.cyanogenmod.FlingSettings;
 import com.android.settings.cyanogenmod.SmartbarSettings;
+import com.android.settings.cyanogenmod.Halo;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
@@ -303,6 +304,7 @@ public class SettingsActivity extends Activity
             R.id.accessibility_settings,
             R.id.print_settings,
             R.id.home_settings,
+	    R.id.rr_halo,
             R.id.dashboard,
             R.id.privacy_settings_cyanogenmod,
 	    R.id.kernel_adiutor,
@@ -395,7 +397,8 @@ public class SettingsActivity extends Activity
             LiveLockScreenSettings.class.getName(),
             HeadsUpSettings.class.getName(),
             DozeSettingsFragment.class.getName(),
-            RunningServices.class.getName()
+            RunningServices.class.getName(),
+	    Halo.class.getName()
     };
 
 
