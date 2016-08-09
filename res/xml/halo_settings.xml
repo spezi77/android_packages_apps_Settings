@@ -55,13 +55,6 @@ limitations under the License.
         android:entryValues="@array/values_halo_notification_count"
 	android:dependency="halo_enable" />
 
-    <com.android.settings.cyanogenmod.SecureSettingSwitchPreference
-        android:key="halo_float_notifications"
-        android:title="@string/halo_floating_notifications_title"
-        android:summary="@string/halo_floating_notifications_summary"
-        android:defaultValue="false"
-        android:dependency="halo_enable" />
-
     <SwitchPreference
         android:key="halo_msgbox"
         android:title="@string/halo_notification_msgbox_title"
@@ -90,6 +83,13 @@ limitations under the License.
         android:summary="@string/halo_unlock_ping_summary"
         android:defaultValue="false"
 	android:dependency="halo_enable" />
+
+    <com.android.settings.cyanogenmod.SecureSettingSwitchPreference
+        android:key="halo_float_notifications"
+        android:title="@string/halo_floating_notifications_title"
+        android:summary="@string/halo_floating_notifications_summary"
+        android:defaultValue="false"
+        android:dependency="halo_enable" />
 
     <PreferenceScreen
         android:key="floating_windows"
