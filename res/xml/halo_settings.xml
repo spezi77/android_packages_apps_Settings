@@ -35,7 +35,7 @@ limitations under the License.
         android:key="halo_color"
         android:title="@string/halo_color_title"
         android:summary="@string/halo_color_summary"
-        android:defaultValue="#ffbbbbbb" />
+        android:defaultValue="0xffffffff" />
 
     <SwitchPreference
         android:key="halo_hide"
