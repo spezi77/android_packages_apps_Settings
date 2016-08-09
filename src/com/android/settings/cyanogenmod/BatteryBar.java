@@ -151,8 +151,6 @@ public class BatteryBar extends SettingsPreferenceFragment
         mBatteryBarUseGradient = (SwitchPreference) findPreference(STATUS_BAR_USE_GRADIENT_COLOR);
         mBatteryBarUseGradient.setChecked(Settings.System.getInt(resolver,
                 Settings.System.STATUSBAR_BATTERY_BAR_USE_GRADIENT_COLOR, 0) == 1);
-          
-    }
 
         mBatteryBarChargingAnimation = (SwitchPreference) findPreference(PREF_BATT_ANIMATE);
         mBatteryBarChargingAnimation.setChecked(Settings.System.getInt(resolver,
