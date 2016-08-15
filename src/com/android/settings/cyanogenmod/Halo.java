@@ -37,7 +37,6 @@ import com.android.settings.SettingsPreferenceFragment;
 public class Halo extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_HALO_ACTIVE = "halo_active";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_SIZE = "halo_size";
     private static final String KEY_HALO_COLOR = "halo_color";
@@ -48,7 +47,6 @@ public class Halo extends SettingsPreferenceFragment
     private static final String KEY_HALO_UNLOCK_PING = "halo_unlock_ping";
     private static final String KEY_HALO_FLOAT_NOTIFICATIONS = "halo_float_notifications";
 
-    private SwitchPreference mHaloActive;
     private ListPreference mHaloSize;
     private ColorPickerPreference mHaloColor;
     private SwitchPreference mHaloHide;
@@ -73,11 +71,6 @@ public class Halo extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.halo_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
         mContext = getActivity();
-
-        mHaloActive = (SwitchPreference) prefSet.findPreference(KEY_HALO_ACTIVE);
-        mHaloActive.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.HALO_ACTIVE, 0) == 1);
-        mHaloActive.setOnPreferenceChangeListener(this);
 
         mHaloHide = (SwitchPreference) prefSet.findPreference(KEY_HALO_HIDE);
         mHaloHide.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
@@ -160,12 +153,7 @@ public class Halo extends SettingsPreferenceFragment
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mHaloActive) {
-            boolean haloActive = (boolean) newValue;
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.HALO_ACTIVE, haloActive ? 1 : 0);
-            return true;
-        } else if (preference == mHaloSize) {
+        if (preference == mHaloSize) {
             float haloSize = Float.valueOf((String) newValue);
             Settings.Secure.putFloat(getActivity().getContentResolver(),
                     Settings.Secure.HALO_SIZE, haloSize);
