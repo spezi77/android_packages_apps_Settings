@@ -29,8 +29,6 @@ import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
 
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -39,7 +37,6 @@ public class Halo extends SettingsPreferenceFragment
 
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_SIZE = "halo_size";
-    private static final String KEY_HALO_COLOR = "halo_color";
     private static final String KEY_HALO_PAUSE = "halo_pause";
     private static final String KEY_HALO_MSGBOX = "halo_msgbox";
     private static final String KEY_HALO_MSGBOX_ANIMATION = "halo_msgbox_animation";
@@ -48,7 +45,6 @@ public class Halo extends SettingsPreferenceFragment
     private static final String KEY_HALO_FLOAT_NOTIFICATIONS = "halo_float_notifications";
 
     private ListPreference mHaloSize;
-    private ColorPickerPreference mHaloColor;
     private SwitchPreference mHaloHide;
     private SwitchPreference mHaloPause;
     private ListPreference mHaloNotifyCount;
@@ -90,9 +86,6 @@ public class Halo extends SettingsPreferenceFragment
             // So what
         }
         mHaloSize.setOnPreferenceChangeListener(this);
-
-        mHaloColor = (ColorPickerPreference) prefSet.findPreference(KEY_HALO_COLOR);
-        mHaloColor.setOnPreferenceChangeListener(this);
 
         mHaloMsgBox = (SwitchPreference) prefSet.findPreference(KEY_HALO_MSGBOX);
         mHaloMsgBox.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
@@ -157,11 +150,6 @@ public class Halo extends SettingsPreferenceFragment
             float haloSize = Float.valueOf((String) newValue);
             Settings.Secure.putFloat(getActivity().getContentResolver(),
                     Settings.Secure.HALO_SIZE, haloSize);
-            return true;
-	} else if (preference == mHaloColor) {
-            int haloColor = Integer.valueOf(String.valueOf(newValue));
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.HALO_COLOR, haloColor);
             return true;
         } else if (preference == mHaloMsgAnimate) {
             int haloMsgAnimation = Integer.valueOf((String) newValue);
