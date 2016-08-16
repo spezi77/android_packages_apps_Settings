@@ -943,6 +943,9 @@
     <string name="power_menu_dialog_dim">Power/reboot dialog dim background amount</string>
     <string name="transparency_title">Panel transparency</string>
 
+    <!-- Notifications transparency -->
+    <string name="notifications_transparency">Notifications transparency</string>
+
     <!-- Hide Lockscreen clock, date & alarm -->
     <string name="hide_lockscreen_items_title">Lockscreen items</string>
     <string name="hide_lockscreen_clock_title">Show lockscreen clock</string>
@@ -1283,53 +1286,4 @@
 
     <string name="toast_text_color">Toast Text Color</string>
     <string name="toast_icon_color">Toast Icon Color</string>
-
-    <!-- Halo -->
-    <string name="rr_halo_enable_title">Enable Halo</string>
-    <string name="rr_halo_enable_summary">Enable Halo Button in extended statusbar. Tap on halo icon in Statusbar Header to enable halo.  This will disable HeadsUp until you manually enable it again.</string>
-    <string name="halo_settings_title">Halo</string>
-    <string name="halo_behavior_title">Halo Behavior</string>
-    <string name="halo_hide_title">Hide Halo after activity</string>
-    <string name="halo_hide_summary">Halo will appear for incoming tasks and scroll out of sight after a while</string>
-    <string name="halo_pause_title">Pause active app</string>
-    <string name="halo_pause_summary">When opening an app with Halo the underlying app will get paused</string>
-    <string name="halo_notification_msgbox_title">Enable message pop-up</string>
-    <string name="halo_notification_msgbox_summary">Show message box for incoming notifications</string>
-    <string name="halo_unlock_ping_title">Ping on unlock</string>
-    <string name="halo_unlock_ping_summary">Halo will ping when device is unlocked if new notifications were received</string>
-    <string name="halo_size_title">Halo size</string>
-    <string name="halo_size_summary">Defines how big Halo is going to be</string>
-    <string name="halo_size_miniscule">Miniscule</string>
-    <string name="halo_size_small">Small</string>
-    <string name="halo_size_default">Normal (default)</string>
-    <string name="halo_size_large">Large</string>
-    <string name="halo_size_gigantic">Gigantic</string>
-    <string name="halo_size_monster">Monster</string>
-    <string name="halo_notification_count_title">Notification count</string>
-    <string name="halo_notification_count_summary">Display notification counts on Halo</string>
-    <string name="halo_notification_count_none">None</string>
-    <string name="halo_notification_count_total">Total</string>
-    <string name="halo_notification_count_individual">Per app</string>
-    <string name="halo_notification_count_both">Both</string>
-    <string name="halo_msgbox_animation_title">Message box animation</string>
-    <string name="halo_msgbox_animation_summary">Halo message box animation for incoming notifications</string>
-    <string name="halo_msgbox_animation_none">None</string>
-    <string name="halo_msgbox_animation_flip">Flip</string>
-    <string name="halo_floating_windows">Floating Windows options</string>
-    <string name="halo_floating_windows_summary">Shortcut to Floating Windows options so you can use or not use with HALO</string>
-    <!-- Label for are-halo-notifications-allowed checkbox in app details [CHAR LIMIT=20] -->
-    <string name="app_halo_label_black">Blacklist from HALO</string>
-    <string name="app_halo_label_white">Whitelist from HALO</string>
-    <!-- Halo blacklist -->
-    <string name="app_notification_halo_title">Show notification in HALO</string>
-    <string name="app_notification_halo_summary">Let this app show notifications in HALO</string>
-    <string name="filter_notif_no_halo">No notifications in HALO</string>
-    <string name="notifications_five_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%3$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%4$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%5$s</xliff:g></string>
-
-    <string name="halo_floating_notifications_title">Use Floating Mode</string>
-    <string name="halo_floating_notifications_summary">Always launch activities from notifications in Float Mode.</string>
-    <string name="halo_enable_float_summary">Enable floating mode first.</string>
-
-    <!-- Notifications transparency -->
-    <string name="notifications_transparency">Notifications transparency</string>
 </resources>
