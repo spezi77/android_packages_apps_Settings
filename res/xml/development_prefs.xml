@@ -419,7 +419,7 @@
             android:title="@string/hold_back_to_kill_timeout_title"
             android:max="2000"
             settings:minChOS="100"
-            settings:defaultValue="750"
+            settings:defaultVal="750"
             settings:unitsRight="ms"
             android:dependency="kill_app_longpress_back" />
 

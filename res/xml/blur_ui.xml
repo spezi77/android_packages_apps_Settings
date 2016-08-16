@@ -42,7 +42,7 @@
             android:max="35"
             settings:minChOS="1"
             android:dependency="blurred_status_bar_expanded_enabled_pref"
-            settings:defaultValue="10" />
+            settings:defaultVal="10" />
 
     	<com.android.settings.widget.SeekBarPreferenceCham
             android:key="statusbar_blur_radius"
@@ -51,7 +51,7 @@
             android:max="25"
             settings:minChOS="1"
             android:dependency="blurred_status_bar_expanded_enabled_pref"
-            settings:defaultValue="5" />
+            settings:defaultVal="5" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -71,7 +71,7 @@
             android:max="100"
             settings:minChOS="0"
             android:dependency="translucent_notifications_pref"
-            settings:defaultValue="60" />
+            settings:defaultVal="60" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -91,7 +91,7 @@
             android:max="100"
             settings:minChOS="0"
             android:dependency="translucent_header_pref"
-            settings:defaultValue="60" />
+            settings:defaultVal="60" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -111,7 +111,7 @@
             android:max="100"
             settings:minChOS="0"
             android:dependency="translucent_quick_settings_pref"
-            settings:defaultValue="60" />
+            settings:defaultVal="60" />
     </PreferenceCategory>
 
     <PreferenceCategory

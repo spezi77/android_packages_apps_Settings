@@ -17,22 +17,26 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/transparency_title" >
 
+    <PreferenceCategory
+		android:title="@string/qs">
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="qs_transparent_header"
         android:title="@string/qs_transparent_header"
         android:max="255"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight=""
+        settings:defaultVal="255"
         android:persistent="false" />
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="qs_transparent_shade"
         android:title="@string/qs_transparent_shade"
         android:max="255"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight=""
+        settings:defaultVal="255"
         android:persistent="false" />
 
     <ListPreference
@@ -51,63 +55,55 @@
         android:key="qs_stroke_thickness"
         android:title="@string/qs_stroke_thickness_title"
         android:max="25"
-        settings:minChOS="1"
+        settings:min="1"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="4"
         android:persistent="false" />
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="qs_corner_radius"
         android:title="@string/qs_corner_radius_title"
         android:max="50"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="5"
         android:persistent="false" />
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="qs_dash_width"
         android:title="@string/qs_dash_width_title"
         android:max="50"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="0"
         android:persistent="false" />
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="qs_dash_gap"
         android:title="@string/qs_dash_gap_title"
         android:max="50"
-        settings:minChOS="1"
+        settings:min="1"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="10"
         android:persistent="false" />
 
-    <com.android.settings.widget.SeekBarPreferenceCham
-        android:key="transparent_power_menu"
-        android:title="@string/power_menu_transparency"
-        android:max="100"
-        settings:minChOS="0"
-        settings:unitsLeft=""
-        settings:unitsRight="%"
-        android:persistent="false" />
+   </PreferenceCategory>
 
-    <com.android.settings.widget.SeekBarPreferenceCham
-        android:key="transparent_power_dialog_dim"
-        android:title="@string/power_menu_dialog_dim"
-        android:max="100"
-        settings:minChOS="0"
-        settings:unitsLeft=""
-        settings:unitsRight="%"
-        android:persistent="false" />
+   <PreferenceCategory
+        android:title="@string/vol_diag">
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="transparent_volume_dialog"
         android:title="@string/volume_dialog_transparency"
         android:max="255"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight=""
+        settings:defaultVal="255"
         android:persistent="false" />
 
     <ListPreference
@@ -117,7 +113,7 @@
         android:entries="@array/volume_dialog_stroke_entries"
         android:entryValues="@array/volume_dialog_stroke_values"
         android:defaultValue="1" />
- 
+
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="volume_dialog_stroke_color"
         android:title="@string/volume_dialog_stroke_color_title"
@@ -127,45 +123,75 @@
         android:key="volume_dialog_stroke_thickness"
         android:title="@string/volume_dialog_stroke_thickness_title"
         android:max="25"
-        settings:minChOS="1"
+        settings:min="1"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="4"
         android:persistent="false" />
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="volume_dialog_corner_radius"
         android:title="@string/volume_dialog_corner_radius_title"
         android:max="50"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="10"
         android:persistent="false" />
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="volume_dialog_dash_width"
         android:title="@string/volume_dialog_dash_width_title"
         android:max="50"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="0"
         android:persistent="false" />
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="volume_dialog_dash_gap"
         android:title="@string/volume_dialog_dash_gap_title"
         android:max="50"
-        settings:minChOS="1"
+        settings:min="1"
         settings:unitsLeft=""
         settings:unitsRight="px"
+        settings:defaultVal="10"
         android:persistent="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/power">
+
+    <com.android.settings.widget.SeekBarPreferenceCham
+        android:key="transparent_power_menu"
+        android:title="@string/power_menu_transparency"
+        android:max="100"
+        settings:min="0"
+        settings:unitsLeft=""
+        settings:unitsRight="%"
+        settings:defaultVal="100"
+        android:persistent="false" />
+
+    <com.android.settings.widget.SeekBarPreferenceCham
+        android:key="transparent_power_dialog_dim"
+        android:title="@string/power_menu_dialog_dim"
+        android:max="100"
+        settings:min="0"
+        settings:unitsLeft=""
+        settings:unitsRight="%"
+        settings:defaultVal="50"
+        android:persistent="false" />
+    </PreferenceCategory>
 
     <com.android.settings.widget.SeekBarPreferenceCham
         android:key="notification_alpha"
         android:title="@string/notifications_transparency"
         android:max="255"
-        settings:minChOS="0"
+        settings:min="0"
         settings:unitsLeft=""
         settings:unitsRight=""
+        settings:defaultVal="255"
         android:persistent="false" />
 
 </PreferenceScreen>
