@@ -222,7 +222,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
             boolean value = ((SwitchPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ENABLE_TASK_MANAGER, value ? 1:0);
-		    Helpers.restartSystemUI();
             return true;
 	} else if (preference == mThemesTile) {
             Set<String> vals = (Set<String>) newValue;
