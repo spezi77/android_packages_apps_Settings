@@ -155,11 +155,6 @@
             android:title="@string/category_interface">
 
     	<PreferenceScreen
-        	android:key="blur_personalizations"
-        	android:fragment="com.android.settings.cyanogenmod.BlurPersonalizations"
-        	android:title="@string/blur_ui_title"/>
-
-    	<PreferenceScreen
         	android:key="floating_windows"
         	android:fragment="com.android.settings.cyanogenmod.FloatingWindows"
         	android:title="@string/floating_windows"/>
