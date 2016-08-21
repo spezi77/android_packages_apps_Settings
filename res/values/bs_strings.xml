@@ -911,6 +911,7 @@
     <string name="keyguard_torch_summary">Longpress power button with screen off turns on torch</string>
 
     <!-- Notification drawer -->
+    <string name="notification_drawer_qs_title">Notification &amp; QS drawer</string>
     <string name="notification_drawer_title">Notification drawer</string>
     <string name="qs_category_title">Quick Settings</string>
 

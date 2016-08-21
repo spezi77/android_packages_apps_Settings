@@ -46,8 +46,8 @@ import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import cyanogenmod.providers.CMSettings;
 
-public class NotificationDrawerSettings extends SettingsPreferenceFragment  implements Preference.OnPreferenceChangeListener{
-    private static final String TAG = NotificationDrawerSettings.class.getSimpleName();
+public class NotificationDrawerQsSettings extends SettingsPreferenceFragment  implements Preference.OnPreferenceChangeListener{
+    private static final String TAG = NotificationDrawerQsSettings.class.getSimpleName();
 
     private static final String ENABLE_TASK_MANAGER = "enable_task_manager";
 
@@ -83,7 +83,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.notification_drawer_settings);
+        addPreferencesFromResource(R.xml.notification_drawer_qs_settings);
         
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
