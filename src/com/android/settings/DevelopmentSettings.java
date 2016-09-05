@@ -551,6 +551,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             removePreference(COLOR_TEMPERATURE_KEY);
             mColorTemperaturePreference = null;
         }
+
+	// make sure we dont leave an unremovable bugreport in power menu
+        final ContentResolver cr = getActivity().getContentResolver();
+        if (Settings.Secure.getInt(cr,
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) == 1) {
+            Settings.Secure.putInt(cr, Settings.Secure.BUGREPORT_IN_POWER_MENU, 0);
+        }
     }
 
     private ListPreference addListPreference(String prefKey) {
