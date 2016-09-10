@@ -52,7 +52,7 @@
 	    settings:interval="1"
             settings:unitsLeft=""
             settings:unitsRight=" * 15ms"
-            android:defaultValue="0" />
+            settings:defaultVal="0" />
 
         <Preference
             android:key="ime_anim_reset"

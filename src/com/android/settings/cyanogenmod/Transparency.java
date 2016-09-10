@@ -42,6 +42,7 @@ public class Transparency extends SettingsPreferenceFragment implements
         private static final String PREF_QS_CORNER_RADIUS = "qs_corner_radius";
         private static final String PREF_QS_STROKE_DASH_WIDTH = "qs_dash_width";
         private static final String PREF_QS_STROKE_DASH_GAP = "qs_dash_gap";
+        private static final String PREF_NOTIFICATION_ALPHA = "notification_alpha";
 
         private SeekBarPreferenceCham mQSShadeAlpha;
         private SeekBarPreferenceCham mQSHeaderAlpha;
@@ -60,6 +61,7 @@ public class Transparency extends SettingsPreferenceFragment implements
         private SeekBarPreferenceCham mQSCornerRadius;
         private SeekBarPreferenceCham mQSDashWidth;
         private SeekBarPreferenceCham mQSDashGap;
+        private SeekBarPreferenceCham mNotificationsAlpha;
 
         static final int DEFAULT_VOLUME_DIALOG_STROKE_COLOR = 0xFF80CBC4;
         static final int DEFAULT_QS_STROKE_COLOR = 0xFF80CBC4;
@@ -226,6 +228,14 @@ public class Transparency extends SettingsPreferenceFragment implements
             mQSDashGap.setValue(qSDialogDashGap / 1);
             mQSDashGap.setOnPreferenceChangeListener(this);
 
+            // Notifications alpha
+            mNotificationsAlpha =
+                    (SeekBarPreferenceCham) prefSet.findPreference(PREF_NOTIFICATION_ALPHA);
+            int notificationsAlpha = Settings.System.getInt(resolver,
+                    Settings.System.NOTIFICATION_ALPHA, 255);
+            mNotificationsAlpha.setValue(notificationsAlpha / 1);
+            mNotificationsAlpha.setOnPreferenceChangeListener(this);
+
             VolumeDialogSettingsDisabler(volumeDialogStroke);
             QSSettingsDisabler(qSStroke);
 
@@ -335,6 +345,11 @@ public class Transparency extends SettingsPreferenceFragment implements
                 int val = (Integer) newValue;
                 Settings.System.putInt(resolver,
                         Settings.System.QS_STROKE_DASH_GAP, val * 1);
+                return true;
+            } else if (preference == mNotificationsAlpha) {
+                int alpha = (Integer) newValue;
+                Settings.System.putInt(resolver,
+                        Settings.System.NOTIFICATION_ALPHA, alpha * 1);
                 return true;
             }
             return false;

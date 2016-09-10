@@ -211,10 +211,14 @@ public class SeekBarPreferenceCham extends Preference implements SeekBar.OnSeekB
         if (mCurrentValue == mDefaultValue && mDefaultValue != -1) {
             mStatusText.setText(R.string.default_string);
             int redColor = getContext().getResources().getColor(R.color.seekbar_dot_color);
-            mProgressThumb.setColorFilter(redColor, PorterDuff.Mode.SRC_IN);
+	    if (mProgressThumb !=null) {
+            	mProgressThumb.setColorFilter(redColor, PorterDuff.Mode.SRC_IN);
+	    }
         } else {
             mStatusText.setText(String.valueOf(newValue));
-            mProgressThumb.clearColorFilter();
+	    if (mProgressThumb !=null) {
+            	mProgressThumb.clearColorFilter();
+	    }
         }
         persistInt(newValue);
     }

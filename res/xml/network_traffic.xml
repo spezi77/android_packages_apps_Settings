@@ -36,6 +36,7 @@
         android:dependency="network_traffic_autohide"
         android:key="network_traffic_autohide_threshold"
         android:max="100"
+	settings:defaultVal="10"
         android:persistent="false"
         android:title="@string/network_traffic_autohide_threshold"
         settings:minChOS="0"

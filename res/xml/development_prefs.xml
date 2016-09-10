@@ -80,6 +80,11 @@
         android:title="@string/root_access"
         android:persistent="false" />
 
+    <Preference
+        android:key="root_appops"
+        android:title="@string/root_appops_title"
+        android:summary="@string/root_appops_summary" />
+
     <com.android.settings.ColorModePreference
         android:key="color_mode"
         android:title="@string/picture_color_mode"
@@ -414,7 +419,7 @@
             android:title="@string/hold_back_to_kill_timeout_title"
             android:max="2000"
             settings:minChOS="100"
-            settings:defaultValue="750"
+            settings:defaultVal="750"
             settings:unitsRight="ms"
             android:dependency="kill_app_longpress_back" />
 
